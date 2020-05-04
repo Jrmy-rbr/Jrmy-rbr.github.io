@@ -4,11 +4,21 @@ icon: fa-user
 order: 3
 ---
 
-<a href="#" class="image featured"><img src="assets/images/pic08.jpg" alt="" /></a>
+<a href="#" class="image featured"><img src="assets/images/Me_cat.jpg" alt="" /></a>
 
-<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
-ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae
-laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem
-parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper
-dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec
-ornare iaculis.</p>
+<p>Hello, I am Jeremy, I am <a id="my age"></a>, and I am a doctor in quantum information 
+  theory who recently got interested in data science and statistical inference. </p>
+
+<script>
+	var d = new Date();
+  	var month = d.getMonth();
+    var year = d.getFullYear();
+    var day = d.getDate();
+    var myAge = year - 1992;
+    
+    if(month <6 || (month === 6 && day<5)){
+    myAge-=1;
+    }
+    
+  	document.getElementById("my age").innerHTML = myAge;
+</script>
