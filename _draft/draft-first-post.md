@@ -1,5 +1,6 @@
 ---
 title: COVID19 the missing ones
+subtitle: What does it take to estimate the number of non-detected infected people?
 author: Jeremy
 layout: post
 ---
