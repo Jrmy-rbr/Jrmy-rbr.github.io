@@ -4,7 +4,7 @@ author: Jeremy
 layout: post
 ---
 
-In the COVID pandemic, one interesting quantity one might want to estimate is the proportion p_nd of 
+In the COVID pandemic, one interesting quantity one might want to estimate is the proportion $$p_nd$$ of 
 infected people that are not detected by the tests. There are many reasons why not all infected 
 persons are detected: For example, it is possible that many people only have mild symptoms, and 
 therefore do not try to get tested. Another reason is that we simply do not have enough test to 
@@ -18,5 +18,5 @@ related to the size of the sample). Knowing this and the number of detected infe
 we can deduce the proportion of non-detected infected people.
 
 However, when the number of test per day, or per week, is limited one cannot necessarily 
-test a random sample of the population. Moreover, if we want to estimate p_nd at the 
+test a random sample of the population. Moreover, if we want to estimate $$p_nd$$ at the 
 beginning of the pandemic one cannot use tests performed to day to infer this quantity. 
