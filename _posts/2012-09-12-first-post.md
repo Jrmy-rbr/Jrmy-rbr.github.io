@@ -45,7 +45,7 @@ link here**). It represents the evolution of the following quantities through ti
 |  5. the daily new deaths   | 6. the total new deaths  |
 |    7. the active cases.    |                          |
 
-{% include image.html url="assets/images/Post_COVID19/plt_data.png" description="The data" %}
+{% include image.html url="/assets/images/Post_COVID19/plt_data.png" description="The data" %}
 
 ## The Models
 
