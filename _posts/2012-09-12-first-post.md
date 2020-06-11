@@ -45,9 +45,7 @@ link here**). It represents the evolution of the following quantities through ti
 |  5. the daily new deaths   | 6. the total new deaths  |
 |    7. the active cases.    |                          |
 
-*add figure*
 **add figure**
-***add figure***
 
 ## The Models
 
@@ -107,15 +105,49 @@ infected people recover from the COVID-19, and $$\mu$$ is the rate at which they
 
 #### Modifications
 
-**First ingredient: slpit categories**
+##### *First ingredient: slpit categories*
+
+In my cases I need to make the distinction between the infected people that have been tested and
+detected, and the infected people that have not been detected. Therefore, I will
+split the infected category into two subcategories $$I_d$$ and $$I_{nd}$$, and similarly split
+the recovered category into two subcategories $$R_d$$ and $$R_{nd}$$, and the deaths category into
+$$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
+
+**Figure**
 
 
-**Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)**
+##### *Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)*
 
+From the above model we can extract one of particular interest. This particular equation describes the evolution of the total number of cases of COVID-19. As for other quantity, part of these cases
+remains undetected. Therefore I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
+$$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest since it is a quantity we can
+actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equations in (2) that $$T_d = p_d T$$, and therefore $$T_{nd} = T - p_d T_d = (1-p_d) T$$.
 
-**Last ingredient: split $$\beta$$**
+**Figure**
+
+##### *Last ingredient: split $$\beta$$*
+
+Finally the last ingredient for the model is to split $$\beta$$ into $$\beta_d$$ for the population $$I_d$$, and $$\beta_{nd}$$ for the population $$I_{nd}$$ so that
+$\beta I = \beta_d I_d + \beta_{nd} I_{nd}$. From **XX** one can deduce that
+$$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$. 
 
 ### The model used in [https://science.sciencemag.org/content/368/6490/489.full]
+
+In [https://science.sciencemag.org/content/368/6490/489.full] the authors a variation of the SIERD
+model. The SIERD model has one more category than the SIRD model, namely it considers the category
+exposed (E) of exposed people, i.e. of people that have been contaminated by the virus but that are not
+yet infectious. The model used by the authors is different in three ways from the traditional SIERD
+model:
+1. The model does not consider only one population split in 5 categories. It actually considers
+  several cities, and split the population of each of these cities into the five categories of the
+  SIERD. Each city’s population is modelled by a system of equations similar to the one for the SIRD
+  model above. Furthermore, their model allows for population exchanges between the cities, which
+  couples each city’s system of equations with each other.
+2. The authors consider a stochastic version of the model of the SIERD model, meaning that they
+  introduce some randomness in the model. This allows to more carefully account for statistical
+  fluctuations and uncertainties.
+3. For every city, the Infected category is split into two subcategories: detected and
+  undetected.
 
 ## Using the model
 ### Some intuition
