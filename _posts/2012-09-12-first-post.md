@@ -60,7 +60,14 @@ link here**). It represents the evolution of:
   $$\frac{dD}{dt}= \mu I$$\\
 \end{cases}
 
-
+$$
+\begin{cases}
+  \frac{dS}{dt}= -\beta I \frac{S}{N}\\
+  \frac{dI}{dt}= \beta I \frac{S}{N} - \gamma I - \mu I\\
+  \frac{dR}{dt}= \gamma I\\
+  \frac{dD}{dt}= \mu I\\
+\end{cases}
+$$
 
 ### Some explanations on the traditional SIRD model
 
