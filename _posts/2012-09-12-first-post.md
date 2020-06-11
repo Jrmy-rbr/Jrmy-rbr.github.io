@@ -43,7 +43,7 @@ link here**). It represents the evolution of:
     |1. the daily new cases | 2. the total cases |
     |3. the daily new recoveries | 4. the total recoveries |
     |5. the daily new deaths | 6. the total new deaths  |
-    |7. the active cases| |
+    |7. the active cases| smth |
 
 
 # The Models
