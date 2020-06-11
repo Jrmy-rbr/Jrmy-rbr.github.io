@@ -152,6 +152,33 @@ model:
 ## Using the model
 ### Some intuition
 
+In this section we will assume that $$\beta$$ can be extracted from the data so that it is considered
+as a known parameter.
+
+Remember that $$\beta = p_d \beta_d + (1-p_d) \beta_{nd}$$. Let us say that at the beginning
+no measures are taken against the pandemic, and therefore both the detected cases and the undetected
+cases can contaminate new people, i.e. $$\beta_d, \beta_{nd} >0$$.
+
+What would happen if we suddenly decided to strictly quarantine the detected cases, so that they cannot
+contaminate anyone anymore (i.e.~$$\beta_d = 0$$)?\\
+
+Assuming that this is the only measure taken against the pandemic (i.e. no measures are taken
+for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
+to a smaller value. The extend by which the value of $$\beta$$ diminishes depends on $$p_d$$.
+This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.<br>
+
+**Take-home message:** The observable repercussions of the difference of treatment between the
+detected and not detected subcategories allow to extract some information about $p_d$.
+
+This is a key point of [https://science.sciencemag.org/content/368/6490/489.full]. Indeed
+in there model, the detected infected people cannot travel from city to city, while the other people
+(including the undetected infected people) can. The consequence is that the speed at which
+the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
+1. temize}
+  \item If $$p_d$$ is very high,
+  i.e. most of the infected people are detected, then very few infected people can travel, and the COVID-19 should 
+  spread slowly to other cities.
+2. On the contrary if $$p_d$$ is small, then many infected people can travel, and the COVID-19 should spread faster.
 
 ### Key observation
 
