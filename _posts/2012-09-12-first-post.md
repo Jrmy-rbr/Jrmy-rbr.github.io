@@ -215,7 +215,14 @@ beyond mobility data from Apple and Google (**add link**),
 so I have let these parameters free, and you can play with them in the following interactive figure.
 
 <center> 
-{% include /assets/images/Post_COVID19/Fraction_detect.html %}  
+<iframe src="/assets/images/Post_COVID19/Fraction_detect.html"
+    sandbox="allow-same-origin allow-scripts"
+    width="100%"
+    height="500"
+    scrolling="no"
+    seamless="seamless"
+    frameborder="0">
+</iframe>
 </center>
 
 **Note:** In [https://science.sciencemag.org/content/368/6490/489.full]  they
