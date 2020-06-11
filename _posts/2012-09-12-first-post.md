@@ -33,24 +33,24 @@ possible to draw parallels between my simplified approach and the work done in [
 science.sciencemag.org/content/368/6490/489.full].
 
 
-# The Data
+## The Data
 
 I have taken the data from worldometer.com (for France) from which I have made a csv file (**add
-link here**). It represents the evolution of:
+link here**). It represents the evolution of the following quantities through time:
 
 
 |:---------------------------|:-------------------------|
 |   1. the daily new cases   | 2. the total cases       |
 |3. the daily new recoveries | 4.  the total recoveries |
 |  5. the daily new deaths   | 6. the total new deaths  |
-|    7. the active cases                                |
+|    7. the active cases.    |                          |
 
     
 
 
-# The Models
+## The Models
 
-## The model I have used
+### The model I have used
 
 $$
 \begin{cases}
@@ -61,28 +61,28 @@ $$
 \end{cases}
 $$
 
-### Some explanations on the traditional SIRD model
+#### Some explanations on the traditional SIRD model
 
-### Modifications
+#### Modifications
 
-#### First ingredient: slpit categories
-
-
-#### Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)
+##### First ingredient: slpit categories
 
 
-#### Last ingredient: split $$\beta$$
-
-## The model used in [https://science.sciencemag.org/content/368/6490/489.full]
-
-# Using the model
-## Some intuition
+##### Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)
 
 
-## Key observation
+##### Last ingredient: split $$\beta$$
+
+### The model used in [https://science.sciencemag.org/content/368/6490/489.full]
+
+## Using the model
+### Some intuition
 
 
-# Conclusion
+### Key observation
+
+
+## Conclusion
 
 
 
