@@ -1,7 +1,7 @@
 ---
 title: COVID-19 the missing ones
 subtitle : What does it take to estimate the number of undetected infected people
-author: Chris
+author: Jeremy
 published: true
 layout: post
 ---
