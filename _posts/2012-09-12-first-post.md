@@ -38,23 +38,30 @@ science.sciencemag.org/content/368/6490/489.full].
 I have taken the data from worldometer.com (for France) from which I have made a csv file (**add
 link here**). It represents the evolution of:
 
-    | one | two |
-    |----|----|
-    |1. the daily new cases | 2. the total cases |
-    |3. the daily new recoveries | 4. the total recoveries |
-    |5. the daily new deaths | 6. the total new deaths  |
-    |7. the active cases| smth |
-    
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+|||
+|:---------------------------|:-------------------------|
+|   1. the daily new cases   | 2. the total cases       |
+|3. the daily new recoveries | 4.  the total recoveries |
+|  5. the daily new deaths   | 6. the total new deaths  |
+|    7. the active cases     |                          |
+
     
 
 
 # The Models
 
 ## The model I have used
+
+
+\begin{cases}
+  $$\frac{dS}{dt}= -\beta I \frac{S}{N}$$\\
+  $$\frac{dI}{dt}= \beta I \frac{S}{N} - \gamma I - \mu I$$\\
+  $$\frac{dR}{dt}= \gamma I$$\\
+  $$\frac{dD}{dt}= \mu I$$\\
+\end{cases}
+
+
+
 ### Some explanations on the traditional SIRD model
 
 ### Modifications
