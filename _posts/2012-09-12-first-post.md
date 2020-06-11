@@ -1,15 +1,33 @@
 ---
-title: First Post
+title: COVID-19 the missing ones
+subtitle : What does it take to estimate the number of undetected infected people
 author: Chris
 published: false
 layout: post
 ---
-Lorem ipsum dolor sit amet, iusto ridens dictas te sed. Error latine vis et. Ex cum munere definitiones, ne quas debitis contentiones cum, epicurei constituam ea sit. Dicant aeterno dolorum ex eum, qui everti iisque consectetuer ea! Duo in falli similique, nec tritani accusam te. Enim sapientem intellegat te pri, nam at atqui accumsan vituperata.
 
-Sed id graeci feugiat. No meis summo consequat vel! Albucius phaedrum omittantur eos an, ex sit lorem possim perpetua. Usu et sumo posidonium, ut qui dicat sapientem tincidunt, et has consul oporteat torquatos! In qui fabulas facilisis, justo nonumes an his, quo vidisse nusquam facilisis no. Eam iriure mediocrem suavitate an?
 
-Quo te solum malorum prompta, porro oblique senserit cum et! Pro wisi cetero periculis ei, nam ullum dicit accusam ne, ad quo apeirian principes dissentiunt. An mea mucius vocent iisque? Vel eu altera consetetur, clita perfecto mea ad. Eos in vero ullum regione, ei veniam disputando pro, nam et iuvaret detracto voluptua.
+In the COVID-19 pandemic, one interesting quantity one might want to estimate is the proportion $p_{nd}$
+of infected people that are *not detected* by the tests (on a given date or period of time). There are
+many reasons why not all infected persons are detected: For example,  many people might
+only have mild symptoms, and therefore do not try to get tested. Another reason is that we simply do
+not have enough tests to test all the infected people, and therefore we need to prioritize by choosing who gets
+to be tested and who does not. In the first case, and if the tests were cheap and abundant, then a
+relatively easy solution exists to estimate the proportion of undetected infected people: We can pick
+a random sample of the population that we get tested. From this, we can measure the proportion of
+infected people within the sample, and by the law of large-numbers this proportion should equal the
+proportion of infected people in the whole population (up to statistical fluctuations related to the
+size of the sample). Knowing this and the number of detected infected people we can deduce the
+proportion of undetected infected people.
 
-Ad tritani deleniti sit, ne per ubique habemus singulis. Pro at integre alienum mediocritatem, mea ad libris adipisci necessitatibus, nostro constituam sit te. Recusabo oportere et mea, case minimum deleniti no quo, deseruisse conclusionemque vis te. Nam ex iudicabit constituam accommodare, dicam singulis ex eos! Eu mea viderer ceteros repudiandae, id erat voluptatum mea, ut consul omittam convenire quo. Id justo ipsum mei, modus contentiones per et! At mel omnium lucilius instructior, vel quando graeco in, eos docendi periculis eloquentiam ut.
+However, when the number of test per day, or per week, is limited one cannot necessarily test a
+sufficiently large random sample of the population. Moreover, if today we want to estimate what was  $p_{nd}$ at
+the beginning of the pandemic, i.e. several weeks ago, one needs to have access to the results of tests
+that would have been performed on a random sample of the population at the time for which we wish to
+make our estimation. If no test has been performed on such a random sample, the technique fails by lack
+of available data, and we need to use other data and ways of estimating $p_{nd}$.
 
-Eam habemus aliquando ut. Id idque virtute antiopam duo, et idque falli incorrupte eos, in sea omnium instructior. Mei ex nostrud moderatius cotidieque, cu sea partiendo euripidis, eam no tollit doming! Has ne facilisi vulputate, aliquando disputationi mel eu. Ex pri diceret delectus intellegam, regione definiebas pro ex.
+This is what the authors of [https://science.sciencemag.org/content/368/6490/489.full] have done. In this post I will
+explain the principles underlying such an estimation method for $p_{nd}$ through an analogue but simpler analysis using data about the total number of confirmed COVID-19 cases. I will try as much as
+possible to draw parallels between my simplified approach and the work done in [https://
+science.sciencemag.org/content/368/6490/489.full].
