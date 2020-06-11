@@ -31,3 +31,38 @@ This is what the authors of [https://science.sciencemag.org/content/368/6490/489
 explain the principles underlying such an estimation method for $$p_{nd}$$ through an analogue but simpler analysis using data about the total number of confirmed COVID-19 cases. I will try as much as
 possible to draw parallels between my simplified approach and the work done in [https://
 science.sciencemag.org/content/368/6490/489.full].
+
+
+# The Data
+
+# The Models
+
+## The model I have used
+### Some explanations on the traditional SIRD model
+
+### Modifications
+
+#### First ingredient: slpit categories
+
+
+#### Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)
+
+
+#### Last ingredient: split $$\beta$$
+
+## The model used in [https://science.sciencemag.org/content/368/6490/489.full]
+
+# Using the model
+## Some intuition
+
+
+## Key observation
+
+
+# Conclusion
+
+
+
+
+
+
