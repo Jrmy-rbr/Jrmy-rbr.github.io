@@ -46,7 +46,7 @@ link here**). It represents the evolution of the following quantities through ti
 |    7. the active cases.    |                          |
 
 <center>
-{% include image.html url="/assets/images/Post_COVID19/plt_data.png" description="The data" %}
+{% include image.html url="/assets/images/Post_COVID19/plt_data.png" description="Plot of the data 2. 4. 6. and 7.  of the above table" %}
 </center>
 
 ## The Models
@@ -185,12 +185,16 @@ the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
 Let us try to fit the model to the data we have. More precisely I will fit $$T_d$$, $$D_d$$, and $$R_d$$
 to the collected data over 50 days, and we get the following:
 
-**plot**
+<center>
+{% include image.html url="/assets/images/Post_COVID19/PlotFit_50_days.png" description="Regession performed over 50 days" %}
+</center>
 
 As we can see, on the top left figure, the fit is not really good. This suggests that the model
-cannot explain the data, at least not over a period of 50 days. Indeed if we do the same thing over a shorter period, e.g 20 days, the fit looks better.
+cannot explain the data, at least not over a period of 50 days. Indeed if we do the same thing over a shorter period, e.g 18 days, the fit looks better.
 
-**Plot**
+<center>
+{% include image.html url="/assets/images/Post_COVID19/PlotFit_18_days.png" description="Regression performed over 18 days" %}
+</center>
 
 From this we can make the hypothesis that the rate $$\beta$$ is not constant, but slowly changes
 through time. This make sense considering that measures, like social distancing, have been taken to
@@ -210,7 +214,9 @@ the influence of social distancing and the increase of hygiene. However, I could
 beyond mobility data from Apple and Google (**add link**),
 so I have let these parameters free, and you can play with them in the following interactive figure.
 
-**Interactive Figure**
+<center>
+{% include image.html url="/assets/images/Post_COVID19/Fraction_detect.html" description="temp" %}  
+</center>
 
 **Note:** In [https://science.sciencemag.org/content/368/6490/489.full]  they
 also need some extra information to recover the value of $$p_d$$. But in their case this extra
