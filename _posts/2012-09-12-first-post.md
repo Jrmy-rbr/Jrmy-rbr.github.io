@@ -76,7 +76,7 @@ varies by an amount $$dS = -\beta I \frac{S}{N} dt$$. This means that if at time
 $$S(t_0)$$ susceptible people, at time $$t_0+dt$$ there are $$S(t_0+dt)=S(t_0)+dS = S(t_0)-\beta I
 \frac{S}{N}$$. Since $$dS$$ is negative, the population $$S$$ decreases with time, i.e. there are less and
 less not-infected people through time. The quantity $$|dS|$$ represents the number
-of new cases of COVID-19 that have occurred during the duration $dt$.
+of new cases of COVID-19 that have occurred during the duration $$dt$$.
 
 Let us see why we have $$dS = -\beta I \frac{S}{N} dt$$. Let us say that
 each infected person infects on average a fraction $$f_{\rm inf}$$ of the susceptible
