@@ -219,7 +219,7 @@ so I have let these parameters free, and you can play with them in the following
     sandbox="allow-same-origin allow-scripts"
     scrolling="no"
     width="100%"
-    height="100%"
+    height=600
     seamless="seamless"
     frameborder="0">
 </iframe>
