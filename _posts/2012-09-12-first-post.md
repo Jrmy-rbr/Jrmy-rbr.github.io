@@ -215,7 +215,7 @@ beyond mobility data from Apple and Google (**add link**),
 so I have let these parameters free, and you can play with them in the following interactive figure.
 
 <center>
-{% include image.html url="/assets/images/Post_COVID19/Fraction_detect.html" description="temp" %}  
+{% include /assets/images/Post_COVID19/Fraction_detect.html %}  
 </center>
 
 **Note:** In [https://science.sciencemag.org/content/368/6490/489.full]  they
