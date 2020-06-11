@@ -211,7 +211,7 @@ so I have let these parameters free, and you can play with them in the following
 **Interactive Figure**
 
 **Note:** In [https://science.sciencemag.org/content/368/6490/489.full]  they
-also need some extra information to recover the value of $p_d$. But in their case this extra
+also need some extra information to recover the value of $$p_d$$. But in their case this extra
 information is the number of people between any pair of cities for each day of the period of time on which they run their model.
 
 ## Conclusion
