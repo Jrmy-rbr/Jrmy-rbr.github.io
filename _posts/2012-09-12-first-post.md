@@ -217,7 +217,7 @@ so I have let these parameters free, and you can play with them in the following
 <center> 
 <iframe src="/assets/images/Post_COVID19/Fraction_detect.html"
     sandbox="allow-same-origin allow-scripts"
-    width="300"
+    width="400"
     height="600"
     scrolling="no"
     seamless="seamless"
