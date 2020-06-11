@@ -221,7 +221,8 @@ so I have let these parameters free, and you can play with them in the following
     height="100%"
     scrolling="no"
     seamless="seamless"
-    frameborder="0">
+    frameborder="0"
+    margin="auto">
 </iframe>
 </center>
 
