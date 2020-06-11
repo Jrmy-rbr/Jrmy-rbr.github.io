@@ -79,16 +79,16 @@ less not-infected people through time. The quantity $$|dS|$$ represents the numb
 of new cases of COVID-19 that have occurred during the duration $dt$.
 
 Let us see why we have $$dS = -\beta I \frac{S}{N} dt$$. Let us say that
-each infected person infects on average a fraction $$f_{{\rm inf}}$$ of the susceptible
+each infected person infects on average a fraction $$f_{\rm inf}$$ of the susceptible
 person they meet, and that on average they meet $$\kappa \times dt$$ persons during the time
 $$dt$$. Importantly, not all the met people are susceptible. If we assume that people meet each other in
 a sufficiently random way, then there should be a fraction $$\frac{S}{N}$$  (where $$N$$ is the total size
 of the studied population) of the met people that are susceptible.
 In other words, each of the infected people meets on average $$\kappa \times dt \times \frac{S}{N}$$ {\bf
-susceptible} persons and infects a fraction $$f_{inf}$$ of them, i.e. they infect on average $$f_{inf}
+susceptible} persons and infects a fraction $$f_{\rm inf}$$ of them, i.e. they infect on average $$f_{\rm inf}
 \times \kappa \times dt \times \frac{S}{N}$$ people. Since there are $$I$$ infected people, each of them
-infecting on average $$f_{inf} \times \kappa \times dt \times \frac{S}{N}$$ people, there are in total
-$$|dS| = I\times f_{inf} \times \kappa \times dt \times \frac{S}{N}$$ new infections during the time
+infecting on average $$f_{\rm inf} \times \kappa \times dt \times \frac{S}{N}$$ people, there are in total
+$$|dS| = I\times f_{\rm inf} \times \kappa \times dt \times \frac{S}{N}$$ new infections during the time
 $$dt$$.
 By defining $$\beta := f_{\rm inf} \times \kappa$$ we get the desired result: $$dS = -\beta I \frac{S}{N}
 dt$$ (remember that $$dS$$ must be negative since $$S$$ must decrease). The parameter $$\beta$$ is the rate a
