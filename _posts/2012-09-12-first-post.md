@@ -128,7 +128,7 @@ actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equat
 ##### *Last ingredient: split $$\beta$$*
 
 Finally the last ingredient for the model is to split $$\beta$$ into $$\beta_d$$ for the population $$I_d$$, and $$\beta_{nd}$$ for the population $$I_{nd}$$ so that
-$\beta I = \beta_d I_d + \beta_{nd} I_{nd}$. From **XX** one can deduce that
+$$\beta I = \beta_d I_d + \beta_{nd} I_{nd}$$. From **XX** one can deduce that
 $$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$. 
 
 ### The model used in [https://science.sciencemag.org/content/368/6490/489.full]
@@ -165,11 +165,10 @@ contaminate anyone anymore (i.e.~$$\beta_d = 0$$)?
 Assuming that this is the only measure taken against the pandemic (i.e. no measures are taken
 for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
 to a smaller value. The extend by which the value of $$\beta$$ diminishes depends on $$p_d$$.
-This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.<br>
+This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.
 
 **Take-home message:** The observable repercussions of the difference of treatment between the
-detected and not detected subcategories allow to extract some information about $p_d$.
-
+detected and not detected subcategories allow to extract some information about $$p_d$$.
 This is a key point of [https://science.sciencemag.org/content/368/6490/489.full]. Indeed
 in there model, the detected infected people cannot travel from city to city, while the other people
 (including the undetected infected people) can. The consequence is that the speed at which
@@ -199,7 +198,7 @@ Moreover, we still have that $$\beta^{(1)} = p_d \beta_d^{(1)} +(1-p_d) \beta_{n
 $$\beta^{(2)} = p_d \beta_d^{(2)} +(1-p_d) \beta_{nd}^{(2)}$$.
 
 In the previous section we said that a difference in the variation of the rate of
-the detected and not detected subcategories provoke a variation on the rate $\beta$ that depends on
+the detected and not detected subcategories provoke a variation on the rate $$\beta$$ that depends on
 the parameter $$p_d$$.
 
 To extract all the information about $$p_d$$ I would need extra information about the values
