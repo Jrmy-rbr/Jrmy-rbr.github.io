@@ -65,13 +65,13 @@ $$
 
 #### Modifications
 
-##### First ingredient: slpit categories
+**First ingredient: slpit categories**
 
 
-##### Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)
+**Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)**
 
 
-##### Last ingredient: split $$\beta$$
+**Last ingredient: split $$\beta$$**
 
 ### The model used in [https://science.sciencemag.org/content/368/6490/489.full]
 
