@@ -45,9 +45,9 @@ link here**). It represents the evolution of the following quantities through ti
 |  5. the daily new deaths   | 6. the total new deaths  |
 |    7. the active cases.    |                          |
 
-
+*add figure*
 **add figure**
-
+***add figure***
 
 ## The Models
 
