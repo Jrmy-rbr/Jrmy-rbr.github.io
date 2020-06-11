@@ -160,7 +160,7 @@ no measures are taken against the pandemic, and therefore both the detected case
 cases can contaminate new people, i.e. $$\beta_d, \beta_{nd} >0$$.
 
 What would happen if we suddenly decided to strictly quarantine the detected cases, so that they cannot
-contaminate anyone anymore (i.e.~$$\beta_d = 0$$)?\\
+contaminate anyone anymore (i.e.~$$\beta_d = 0$$)?
 
 Assuming that this is the only measure taken against the pandemic (i.e. no measures are taken
 for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
@@ -174,13 +174,40 @@ This is a key point of [https://science.sciencemag.org/content/368/6490/489.full
 in there model, the detected infected people cannot travel from city to city, while the other people
 (including the undetected infected people) can. The consequence is that the speed at which
 the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
-1. temize}
-  \item If $$p_d$$ is very high,
+1.  If $$p_d$$ is very high,
   i.e. most of the infected people are detected, then very few infected people can travel, and the COVID-19 should 
   spread slowly to other cities.
 2. On the contrary if $$p_d$$ is small, then many infected people can travel, and the COVID-19 should spread faster.
 
 ### Key observation
+
+Let us try to fit the model to the data we have. More precisely I will fit $$T_d$$, $$D_d$$, and $$R_d$$
+to the collected data over 50 days, and we get the following:
+
+**plot**
+
+As we can see, on the top left figure, the fit is not really good. This suggests that the model
+cannot explain the data, at least not over a period of 50 days. Indeed if we do the same thing over a shorter period, e.g 20 days, the fit looks better.
+
+**Plot**
+
+From this we can make the hypothesis that the rate $$\beta$$ is not constant, but slowly changes
+through time. This make sense considering that measures, like social distancing, have been taken to
+precisely decrease this rate $$\beta$$. Therefore, if we fit the model at two different moments in time,
+we should be able to extract two different values for $$\beta$$: $$\beta^{(1)}$$ and $$\beta^{(2)}$$.
+Moreover, we still have that $$\beta^{(1)} = p_d \beta_d^{(1)} +(1-p_d) \beta_{nd}^{(1)}$$ and
+$$\beta^{(2)} = p_d \beta_d^{(2)} +(1-p_d) \beta_{nd}^{(2)}$$.
+
+In the previous section we said that a difference in the variation of the rate of
+the detected and not detected subcategories provoke a variation on the rate $\beta$ that depends on
+the parameter $$p_d$$.
+
+To extract all the information about $$p_d$$ I would need extra information about the values
+of $$\beta_d^{(1)}$$, $$\beta_d^{(2)}$$ and over the ratio
+$$\alpha:=\frac{\beta_{nd}^{(2)}}{\beta^{(1)}_{nd}}$$. A priori they could be inferred from studies on
+the influence of social distancing and the increase of hygiene. However, I couldn't find data on this,
+beyond mobility data from Apple and Google (**add link**),
+so I have let these parameters free, and you can play with them in the following interactive figure.
 
 
 ## Conclusion
