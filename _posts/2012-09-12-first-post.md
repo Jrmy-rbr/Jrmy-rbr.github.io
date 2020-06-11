@@ -9,7 +9,7 @@ layout: post
 
 In the COVID-19 pandemic, one interesting quantity one might want to estimate is the proportion $$p_{nd}$$
 of infected people that are *not detected* by the tests (on a given date or period of time). There are
-many reasons why not all infected persons are detected: For example,  many people might
+many reasons why not all infected persons are detected: For example,  many people might 
 only have mild symptoms, and therefore do not try to get tested. Another reason is that we simply do
 not have enough tests to test all the infected people, and therefore we need to prioritize by choosing who gets
 to be tested and who does not. In the first case, and if the tests were cheap and abundant, then a
