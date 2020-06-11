@@ -44,6 +44,12 @@ link here**). It represents the evolution of:
     |3. the daily new recoveries | 4. the total recoveries |
     |5. the daily new deaths | 6. the total new deaths  |
     |7. the active cases| smth |
+    
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+    
 
 
 # The Models
