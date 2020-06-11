@@ -35,6 +35,18 @@ science.sciencemag.org/content/368/6490/489.full].
 
 # The Data
 
+I have taken the data from worldometer.com (for France) from which I have made a csv file (**add
+link here**). It represents the evolution of:
+
+\begin{center}
+  \begin{tabular}{l  l}
+    1. the daily new cases & 2. the total cases \\
+     3. the daily new recoveries & 4. the total recoveries \\
+     5. the daily new deaths & 6. the total new deaths  \\
+     7. the active cases\\
+  \end{tabular}
+\end{center}
+
 # The Models
 
 ## The model I have used
