@@ -53,6 +53,8 @@ link here**). It represents the evolution of the following quantities through ti
 
 ### The model I have used
 
+#### Some explanations on the traditional SIRD model
+
 In order to analyse the data of the COVID-19 I will use a variation of the SIRD model. SIRD stands for
 Susceptible Infected Recovered Dead.  It is a simple model for epidemiology that works as follows: The
 studied population, comprised of N individuals, is divided into four categories: susceptible (S),
@@ -98,8 +100,10 @@ Similarly, the three other equations respectively describe how the numbers $$I$$
 of recovered people, and $$D$$ of dead evolve through time. The parameter $$\gamma$$ is the rate at which
 infected people recover from the COVID-19, and $$\mu$$ is the rate at which they die from COVID-19.
 
+(**add plot**)
 
-#### Some explanations on the traditional SIRD model
+
+
 
 #### Modifications
 
