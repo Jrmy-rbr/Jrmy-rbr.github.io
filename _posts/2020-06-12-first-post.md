@@ -106,7 +106,7 @@ To avoid the use of equations, I will, from now on, graphically represent the SI
 <center>
   {% include image.html url="/assets/images/Post_COVID19/SIRD.png" description="SIRD Model. To each box corresponds a   
   category of the SIRD model. The arrows represent the flux of people between categories. On top of the arrows you find
-  the amount of people that change category per units of time" %}
+  the amount of people that change category per unit of time" %}
 </center>
 
 
@@ -136,7 +136,7 @@ $$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest since i
 actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equations in (2) that $$T_d = p_d T$$, and therefore $$T_{nd} = T - p_d T_d = (1-p_d) T$$.
 
 <center>
-  {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="Here we regroup the categories correponding to the detected Infectious, Recovered and Deaed into the category of the Total detected cases." %}
+  {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="Here we regroup the categories corresponding to the detected Infectious, Recovered and Dead into the category of the Total detected cases." %}
 </center>
 
 ##### *Last ingredient: split $$\beta$$*
@@ -182,7 +182,7 @@ contaminate anyone anymore (i.e.~$$\beta_d = 0$$)?
 
 Assuming that this is the only measure taken against the pandemic (i.e. no measures are taken
 for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
-to a smaller value. The extend by which the value of $$\beta$$ diminishes depends on $$p_d$$.
+to a smaller value. The extent by which the value of $$\beta$$ diminishes depends on $$p_d$$.
 This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.
 
 **Preliminary conclusion 1:** The observable repercussions of the difference of treatment between the
@@ -257,7 +257,7 @@ In this post we have seen two key ingredients on the estimation of $$p_d$$:
 1. Include in the model include the distinction between the detected cases and the undetected case (subcategories with 
    subscripts $$_d$$ and $$_{nd}$$ respectively). Include in the model something that will influence differently the  
    infection rate of each subcategory ($$\beta_d$$ and $$\beta_{nd}$$).
-2. Use extra information, not necessarily directly related to the desease, but that will influence the srpead of the virus.
+2. Use extra information, not necessarily directly related to the disease, but that will influence the spread of the virus.
 
 **NB:** Both in my simplified model and in the model used in [[LPJ*]](#1) many 
 implicit assumptions are made. In general, they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
