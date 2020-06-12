@@ -1,6 +1,6 @@
 ---
 title: COVID-19 the missing ones
-subtitle : What does it take to estimate the number of undetected infected people?
+subtitle : What does it take to estimate the number of undetected infectious people?
 author: Jeremy
 published: true
 layout: post
@@ -8,17 +8,17 @@ layout: post
 
 
 In the COVID-19 pandemic, one interesting quantity one might want to estimate is the proportion $$p_{nd}$$
-of infected people that are *not detected* by the tests (on a given date or period of time). There are
-many reasons why not all infected persons are detected: For example,  many people might 
+of infectioys people that are *not detected* by the tests (on a given date or period of time). There are
+many reasons why not all infectious persons are detected: For example,  many people might 
 only have mild symptoms, and therefore do not try to get tested. Another reason is that we simply do
-not have enough tests to test all the infected people, and therefore we need to prioritize by choosing who gets
+not have enough tests to test all the infectious people, and therefore we need to prioritize by choosing who gets
 to be tested and who does not. In the first case, and if the tests were cheap and abundant, then a
-relatively easy solution exists to estimate the proportion of undetected infected people: We can pick
+relatively easy solution exists to estimate the proportion of undetected infectious people: We can pick
 a random sample of the population that we get tested. From this, we can measure the proportion of
-infected people within the sample, and by the law of large-numbers this proportion should equal the
-proportion of infected people in the whole population (up to statistical fluctuations related to the
-size of the sample). Knowing this and the number of detected infected people we can deduce the
-proportion of undetected infected people.
+infectious people within the sample, and by the law of large-numbers this proportion should equal the
+proportion of infectious people in the whole population (up to statistical fluctuations related to the
+size of the sample). Knowing this and the number of detected infectious people we can deduce the
+proportion of undetected infectious people.
 
 However, when the number of test per day, or per week, is limited one cannot necessarily test a
 sufficiently large random sample of the population. Moreover, if today we want to estimate what was  $$p_{nd}$$ at
@@ -56,9 +56,9 @@ link here**). It represents the evolution of the following quantities through ti
 #### Some explanations on the traditional SIRD model
 
 In order to analyse the data of the COVID-19 I will use a variation of the SIRD model. SIRD stands for
-Susceptible Infected Recovered Dead.  It is a simple model for epidemiology that works as follows: The
+Susceptible Infectious Recovered Dead.  It is a simple model for epidemiology that works as follows: The
 studied population, comprised of N individuals, is divided into four categories: susceptible (S),
-infected (I), recovered (R), dead (D). For each of these categories the model describes the evolution
+infectious (I), recovered (R), dead (D). For each of these categories the model describes the evolution
 of the number of members belonging to these categories as a function of time. To do so the model uses
 the following system of four differential equations,
 
@@ -73,34 +73,38 @@ $$
 $$
 
 The first line intuitively reads as follows: during a small amount of time $$dt$$
-the susceptible population $$S$$ (i.e. the not-infected part population that still be infected)
+the susceptible population $$S$$ (i.e. the not-infectious part population that still be infectious)
 varies by an amount $$dS = -\beta I \frac{S}{N} dt$$. This means that if at time $$t_0$$ there are
 $$S(t_0)$$ susceptible people, at time $$t_0+dt$$ there are $$S(t_0+dt)=S(t_0)+dS = S(t_0)-\beta I
 \frac{S}{N}$$. Since $$dS$$ is negative, the population $$S$$ decreases with time, i.e. there are less and
-less not-infected people through time. The quantity $$|dS|$$ represents the number
+less not-infectious people through time. The quantity $$|dS|$$ represents the number
 of new cases of COVID-19 that have occurred during the duration $$dt$$.
 
 Let us see why we have $$dS = -\beta I \frac{S}{N} dt$$. Let us say that
-each infected person infects on average a fraction $$f_{\rm inf}$$ of the susceptible
+each infectious person infects on average a fraction $$f_{\rm inf}$$ of the susceptible
 person they meet, and that on average they meet $$\kappa \times dt$$ persons during the time
 $$dt$$. Importantly, not all the met people are susceptible. If we assume that people meet each other in
 a sufficiently random way, then there should be a fraction $$\frac{S}{N}$$  (where $$N$$ is the total size
 of the studied population) of the met people that are susceptible.
-In other words, each of the infected people meets on average $$\kappa \times dt \times \frac{S}{N}$$ {\bf
+In other words, each of the infectious people meets on average $$\kappa \times dt \times \frac{S}{N}$$ {\bf
 susceptible} persons and infects a fraction $$f_{\rm inf}$$ of them, i.e. they infect on average $$f_{\rm inf}
-\times \kappa \times dt \times \frac{S}{N}$$ people. Since there are $$I$$ infected people, each of them
+\times \kappa \times dt \times \frac{S}{N}$$ people. Since there are $$I$$ infectious people, each of them
 infecting on average $$f_{\rm inf} \times \kappa \times dt \times \frac{S}{N}$$ people, there are in total
 $$|dS| = I\times f_{\rm inf} \times \kappa \times dt \times \frac{S}{N}$$ new infections during the time
 $$dt$$.
 By defining $$\beta := f_{\rm inf} \times \kappa$$ we get the desired result: $$dS = -\beta I \frac{S}{N}
 dt$$ (remember that $$dS$$ must be negative since $$S$$ must decrease). The parameter $$\beta$$ is the rate a
-which each of the infected people infects other people.
+which each of the infectious people infects other people.
 
-Similarly, the three other equations respectively describe how the numbers $$I$$ of infected people, $$R$$
+Similarly, the three other equations respectively describe how the numbers $$I$$ of infectious people, $$R$$
 of recovered people, and $$D$$ of dead evolve through time. The parameter $$\gamma$$ is the rate at which
-infected people recover from the COVID-19, and $$\mu$$ is the rate at which they die from COVID-19.
+infectious people recover from the COVID-19, and $$\mu$$ is the rate at which they die from COVID-19.
 
-(**add plot**)
+TO avoid equation in the following,  we can graphically visualise the SIRD model as follows.
+
+<center>
+  {% include image.html url="/assets/images/Post_COVID19/SIRD.png" description="" %}
+</center>
 
 
 
@@ -109,13 +113,15 @@ infected people recover from the COVID-19, and $$\mu$$ is the rate at which they
 
 ##### *First ingredient: slpit categories*
 
-In my cases I need to make the distinction between the infected people that have been tested and
-detected, and the infected people that have not been detected. Therefore, I will
-split the infected category into two subcategories $$I_d$$ and $$I_{nd}$$, and similarly split
+In my cases I need to make the distinction between the infectious people that have been tested and
+detected, and the infectious people that have not been detected. Therefore, I will
+split the infectious category into two subcategories $$I_d$$ and $$I_{nd}$$, and similarly split
 the recovered category into two subcategories $$R_d$$ and $$R_{nd}$$, and the deaths category into
 $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 
-**Figure**
+<center>
+  {% include image.html url="/assets/images/Post_COVID19/SIRD_d_nd.png" description="" %}
+</center>
 
 
 ##### *Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)*
@@ -125,13 +131,19 @@ remains undetected. Therefore, I will use the quantity $$T_d$$, $$T_{nd}$$, and 
 $$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest since it is a quantity we can
 actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equations in (2) that $$T_d = p_d T$$, and therefore $$T_{nd} = T - p_d T_d = (1-p_d) T$$.
 
-**Figure**
+<center>
+  {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="" %}
+</center>
 
 ##### *Last ingredient: split $$\beta$$*
 
 Finally, the last ingredient for the model is to split $$\beta$$ into $$\beta_d$$ for the population $$I_d$$, and $$\beta_{nd}$$ for the population $$I_{nd}$$ so that
 $$\beta I = \beta_d I_d + \beta_{nd} I_{nd}$$. From **XX** one can deduce that
 $$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$. 
+
+<center>
+  {% include image.html url="/assets/images/Post_COVID19/SIRD_split_beta.png" description="" %}
+</center>
 
 ### The model used in [https://science.sciencemag.org/content/368/6490/489.full]
 
@@ -148,7 +160,7 @@ model:
 2. The authors consider a stochastic version of the model of the SIERD model, meaning that they
   introduce some randomness in the model. This allows to more carefully account for statistical
   fluctuations and uncertainties.
-3. For every city, the Infected category is split into two subcategories: detected and
+3. For every city, the Infectious category is split into two subcategories: detected and
   undetected.
 
 ## Using the model
@@ -172,13 +184,13 @@ This means that if one measures the new value of $$\beta$$ and compares it with 
 **Preliminary conclsion 1:** The observable repercussions of the difference of treatment between the
 detected and not detected subcategories allow to extract some information about $$p_d$$.
 This is a key point of [https://science.sciencemag.org/content/368/6490/489.full]. A,
-in their model, the detected infected people cannot travel from city to city, while the other people
-(including the undetected infected people) can. The consequence is that the speed at which
+in their model, the detected infectious people cannot travel from city to city, while the other people
+(including the undetected infectious people) can. The consequence is that the speed at which
 the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
 1.  If $$p_d$$ is very high,
-  i.e. most of the infected people are detected, then very few infected people can travel, and the COVID-19 should 
+  i.e. most of the infectious people are detected, then very few infectious people can travel, and the COVID-19 should 
   spread slowly to other cities.
-2. On the contrary, if $$p_d$$ is small, then many infected people can travel, and the COVID-19 should spread faster.
+2. On the contrary, if $$p_d$$ is small, then many infectious people can travel, and the COVID-19 should spread faster.
 
 ### Key observation
 
