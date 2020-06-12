@@ -249,7 +249,7 @@ In [[LPJ*]](#1)  they
 also need some extra information to recover the value of $$p_d$$. But in their case this extra
 information is the number of people between any pair of cities for each day of the period of time on which they run their model.
 
-## Conclusion
+## Conclusion 
 
 
 In this post we have seen two key ingredients on the estimation of $$p_d$$:
