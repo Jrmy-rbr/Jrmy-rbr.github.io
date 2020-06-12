@@ -8,8 +8,9 @@ layout: post
 
 
 In the COVID-19 pandemic, one interesting quantity one might want to estimate is the proportion $$p_{nd}$$
-of infectioys people that are *not detected* by the tests (on a given date or period of time). There are
-many reasons why not all infectious persons are detected: For example,  many people might 
+of infected people that are *not detected* by the tests (on a given date or period of time). We can for that
+estimate the proportion of infected people $$p_d:= 1-p_{nd} $$ that have been detected. There are
+many reasons why not all infectious persons are detected: For example, many people might 
 only have mild symptoms, and therefore do not try to get tested. Another reason is that we simply do
 not have enough tests to test all the infectious people, and therefore we need to prioritize by choosing who gets
 to be tested and who does not. In the first case, and if the tests were cheap and abundant, then a
@@ -100,10 +101,12 @@ Similarly, the three other equations respectively describe how the numbers $$I$$
 of recovered people, and $$D$$ of dead evolve through time. The parameter $$\gamma$$ is the rate at which
 infectious people recover from the COVID-19, and $$\mu$$ is the rate at which they die from COVID-19.
 
-TO avoid equation in the following,  we can graphically visualise the SIRD model as follows.
+To avoid the use of equations,  I will, from now on, graphically represent the SIRD model as follows.
 
 <center>
-  {% include image.html url="/assets/images/Post_COVID19/SIRD.png" description="" %}
+  {% include image.html url="/assets/images/Post_COVID19/SIRD.png" description="SIRD Model. To each box corresponds a   
+  category of the SIRD model. The arrows represent the flux of people between categories. On top of the arrows you find
+  the amount of people that change category per units of time" %}
 </center>
 
 
@@ -120,11 +123,12 @@ the recovered category into two subcategories $$R_d$$ and $$R_{nd}$$, and the de
 $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 
 <center>
-  {% include image.html url="/assets/images/Post_COVID19/SIRD_d_nd.png" description="" %}
+  {% include image.html url="/assets/images/Post_COVID19/SIRD_d_nd.png" description="The categories Infectious (I), Recovered 
+  (R), and Dead (D) are split into two subcategories: detected $$_d$$ and not detected $$_{nd}$$" %}
 </center>
 
 
-##### *Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)*
+##### *Second ingredient: Aggregate several categories into one of particular interest ($$T_d$$)*
 
 From the above model we can extract one of particular interest. This particular equation describes the evolution of the total number of cases of COVID-19. As for other quantity, part of these cases
 remains undetected. Therefore, I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
@@ -132,14 +136,14 @@ $$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest since i
 actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equations in (2) that $$T_d = p_d T$$, and therefore $$T_{nd} = T - p_d T_d = (1-p_d) T$$.
 
 <center>
-  {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="" %}
+  {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="Here we regroup $$I_d, R_d$$, and $$D_d$$, into the categorie $$T_d$$ of the Total detected cases." %}
 </center>
 
 ##### *Last ingredient: split $$\beta$$*
 
 Finally, the last ingredient for the model is to split $$\beta$$ into $$\beta_d$$ for the population $$I_d$$, and $$\beta_{nd}$$ for the population $$I_{nd}$$ so that
-$$\beta I = \beta_d I_d + \beta_{nd} I_{nd}$$. From **XX** one can deduce that
-$$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$. 
+$$\beta I = \beta_d I_d + \beta_{nd} I_{nd}$$. From the equations of the SIRD model one can deduce that
+$$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$, which implies that $$\beta=p_d \beta_d +(1-p_d) \beta_{nd}$$.
 
 <center>
   {% include image.html url="/assets/images/Post_COVID19/SIRD_split_beta.png" description="" %}
@@ -181,7 +185,7 @@ for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$
 to a smaller value. The extend by which the value of $$\beta$$ diminishes depends on $$p_d$$.
 This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.
 
-**Preliminary conclsion 1:** The observable repercussions of the difference of treatment between the
+**Preliminary conclusion 1:** The observable repercussions of the difference of treatment between the
 detected and not detected subcategories allow to extract some information about $$p_d$$.
 This is a key point of [https://science.sciencemag.org/content/368/6490/489.full]. A,
 in their model, the detected infectious people cannot travel from city to city, while the other people
@@ -239,7 +243,7 @@ beyond the mobility data from [Apple](https://www.apple.com/covid19/mobility) an
 </iframe>
 </center>
 
-**Preliminary conclision 2:** If one wants to extract the value of $$p_d$$, one needs extra information, not immediately 
+**Preliminary conclusion 2:** If one wants to extract the value of $$p_d$$, one needs extra information, not immediately 
 related to $$p_d$$ itself, but on parameters that influence the variation of $$\beta_d$$ and $$\beta_{nd}$$.
 
 In [https://science.sciencemag.org/content/368/6490/489.full]  they
