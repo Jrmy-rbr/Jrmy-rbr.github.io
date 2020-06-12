@@ -265,7 +265,7 @@ estimation of $$p_d$$ can be inacurate. This is why a model is not reliable on i
 different data, and different technics to estimate a parameter like $$p_d$$. If all these technics converge to the same value 
 of the parameter, then we can be confident in the accuracy of these estimations.<br>
 For example in my model I implicitly assume that $$p_d$$ is the same over the two period of time I used to extract its value.
-In [[LPJ*]](#1), the authors assume that $$p_d$$ is the same in all the cities, 
+In [[LPJ*]](#1) the authors assume that $$p_d$$ is the same in all the cities, 
 they assume that the infection rate $$\beta$$ is the same in all the cities etc.
 
 ## References
