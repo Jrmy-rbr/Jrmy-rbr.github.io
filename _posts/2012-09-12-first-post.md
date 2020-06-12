@@ -212,7 +212,7 @@ To extract all the information about $$p_d$$ I would need extra information abou
 of $$\beta_d^{(1)}$$, $$\beta_d^{(2)}$$ and over the ratio
 $$\alpha:=\frac{\beta_{nd}^{(2)}}{\beta^{(1)}_{nd}}$$. A priori they could be inferred from studies on
 the influence of social distancing and the increase of hygiene. However, I couldn't find data on this,
-beyond mobility data from {Apple](https://www.apple.com/covid19/mobility) and [Google](https://www.google.com/covid19
+beyond the mobility data from [Apple](https://www.apple.com/covid19/mobility) and [Google](https://www.google.com/covid19
 /mobility/), so I have let these parameters free, and you can play with them in the following interactive figure.
 
 <center> 
