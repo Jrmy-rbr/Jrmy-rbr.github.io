@@ -42,7 +42,7 @@ link here**). It represents the evolution of the following quantities through ti
 |:---------------------------|:-------------------------|
 |   1. the daily new cases   | 2. the total cases       |
 |3. the daily new recoveries | 4.  the total recoveries |
-|  5. the daily new deaths   | 6. the total new deaths  |
+|  5. the daily new deaths   | 6. the total deaths      |
 |    7. the active cases.    |                          |
 
 <center>
@@ -121,7 +121,7 @@ $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 ##### *Second ingredient: Agglomerate several categories into one of interest ($$T_d$$)*
 
 From the above model we can extract one of particular interest. This particular equation describes the evolution of the total number of cases of COVID-19. As for other quantity, part of these cases
-remains undetected. Therefore I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
+remains undetected. Therefore, I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
 $$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest since it is a quantity we can
 actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equations in (2) that $$T_d = p_d T$$, and therefore $$T_{nd} = T - p_d T_d = (1-p_d) T$$.
 
@@ -129,7 +129,7 @@ actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equat
 
 ##### *Last ingredient: split $$\beta$$*
 
-Finally the last ingredient for the model is to split $$\beta$$ into $$\beta_d$$ for the population $$I_d$$, and $$\beta_{nd}$$ for the population $$I_{nd}$$ so that
+Finally, the last ingredient for the model is to split $$\beta$$ into $$\beta_d$$ for the population $$I_d$$, and $$\beta_{nd}$$ for the population $$I_{nd}$$ so that
 $$\beta I = \beta_d I_d + \beta_{nd} I_{nd}$$. From **XX** one can deduce that
 $$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$. 
 
@@ -169,16 +169,16 @@ for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$
 to a smaller value. The extend by which the value of $$\beta$$ diminishes depends on $$p_d$$.
 This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.
 
-**Take-home message:** The observable repercussions of the difference of treatment between the
+**Preliminary conclsion 1:** The observable repercussions of the difference of treatment between the
 detected and not detected subcategories allow to extract some information about $$p_d$$.
-This is a key point of [https://science.sciencemag.org/content/368/6490/489.full]. Indeed
-in there model, the detected infected people cannot travel from city to city, while the other people
+This is a key point of [https://science.sciencemag.org/content/368/6490/489.full]. A,
+in their model, the detected infected people cannot travel from city to city, while the other people
 (including the undetected infected people) can. The consequence is that the speed at which
 the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
 1.  If $$p_d$$ is very high,
   i.e. most of the infected people are detected, then very few infected people can travel, and the COVID-19 should 
   spread slowly to other cities.
-2. On the contrary if $$p_d$$ is small, then many infected people can travel, and the COVID-19 should spread faster.
+2. On the contrary, if $$p_d$$ is small, then many infected people can travel, and the COVID-19 should spread faster.
 
 ### Key observation
 
@@ -188,9 +188,10 @@ to the collected data over 50 days, and we get the following:
 <center>
 {% include image.html url="/assets/images/Post_COVID19/PlotFit_50_days.png" description="Regession performed over 50 days" %}
 </center>
+<br>
 
 As we can see, on the top left figure, the fit is not really good. This suggests that the model
-cannot explain the data, at least not over a period of 50 days. Indeed if we do the same thing over a shorter period, e.g 18 days, the fit looks better.
+cannot explain the data, at least not over a period of 50 days. Indeed, if we do the same thing over a shorter period, e.g. 18 days, the fit looks better.
 
 <center>
 {% include image.html url="/assets/images/Post_COVID19/PlotFit_18_days.png" description="Regression performed over 18 days" %}
@@ -211,8 +212,8 @@ To extract all the information about $$p_d$$ I would need extra information abou
 of $$\beta_d^{(1)}$$, $$\beta_d^{(2)}$$ and over the ratio
 $$\alpha:=\frac{\beta_{nd}^{(2)}}{\beta^{(1)}_{nd}}$$. A priori they could be inferred from studies on
 the influence of social distancing and the increase of hygiene. However, I couldn't find data on this,
-beyond mobility data from Apple and Google (**add link**),
-so I have let these parameters free, and you can play with them in the following interactive figure.
+beyond mobility data from {Apple](https://www.apple.com/covid19/mobility) and [Google](https://www.google.com/covid19
+/mobility/), so I have let these parameters free, and you can play with them in the following interactive figure.
 
 <center> 
 <iframe src="/assets/images/Post_COVID19/Fraction_detect.html"
@@ -226,14 +227,30 @@ so I have let these parameters free, and you can play with them in the following
 </iframe>
 </center>
 
-**Note:** In [https://science.sciencemag.org/content/368/6490/489.full]  they
+**Preliminary conclision 2:** If one wants to extract the value of $$p_d$$, one needs extra information, not immediately 
+related to $$p_d$$ itself, but on parameters that influence the variation of $$\beta_d$$ and $$\beta_{nd}$$.
+
+In [https://science.sciencemag.org/content/368/6490/489.full]  they
 also need some extra information to recover the value of $$p_d$$. But in their case this extra
 information is the number of people between any pair of cities for each day of the period of time on which they run their model.
 
 ## Conclusion
 
 
+In this post we have seen two key ingredients on the estimation of $$p_d$$:
+1. Include in the model include the distinction between the detected cases and the undetected case (subcategories with 
+   subscripts $$_d$$ and $$_{nd}$$ respectively). Include in the model something that will influence differently the  
+   infection rate of each subcategory ($$\beta_d$$ and $$\beta_{nd}$$).
+2. Use extra information, not necessarily directly related to the desease, but that will influence the srpead of the virus.
 
-
+**NB:** Both in my simplified model and in the model used in [https://science.sciencemag.org/content/368/6490/489.full], many 
+implicit assumption are made. In general they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
+they can also influence the value of this estimate. In particular if these assumption are not satisfied in reality, the 
+estimation of $$p_d$$ can be inacurate. This is why a model is not reliable on its own. We need to use different model with 
+different data, and different technics to estimate a parameter like $$p_d$$. If all these technics converge to the same value 
+of the parameter, then we can be confident in the accuracy of these estimations.<br>
+For example in my model I implicitly assume that $$p_d$$ is the same over the two period of time I used to extract its value.
+In [https://science.sciencemag.org/content/368/6490/489.full], the authors assume that $$p_d$$ is the same in all the cities, 
+they assume that the infection rate $$\beta$$ is the same in all the cities etc.
 
 
