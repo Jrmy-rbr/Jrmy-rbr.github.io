@@ -37,8 +37,7 @@ possible to draw parallels between my simplified approach and the work done in [
 
 ## The Data
 
-I have taken the data from worldometer.com (for France) from which I have made a csv file (**add
-link here**). It represents the evolution of the following quantities through time:
+I have taken the data from worldometer.com (for France) from which I have made a [csv file](/assets/documents/Post_COVID19/data_france.csv). It represents the evolution of the following quantities through time:
 
 
 |:---------------------------|:-------------------------|
@@ -102,7 +101,7 @@ Similarly, the three other equations respectively describe how the numbers $$I$$
 of recovered people, and $$D$$ of dead evolve through time. The parameter $$\gamma$$ is the rate at which
 infectious people recover from the COVID-19, and $$\mu$$ is the rate at which they die from COVID-19.
 
-To avoid the use of equations,  I will, from now on, graphically represent the SIRD model as follows.
+To avoid the use of equations, I will, from now on, graphically represent the SIRD model as follows.
 
 <center>
   {% include image.html url="/assets/images/Post_COVID19/SIRD.png" description="SIRD Model. To each box corresponds a   
@@ -127,7 +126,7 @@ $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
   {% include image.html url="/assets/images/Post_COVID19/SIRD_d_nd.png" description="The categories Infectious (I), Recovered 
   (R), and Dead (D) are split into two subcategories: detected (d) and not detected (nd)" %}
 </center>
-
+<br><br>
 
 ##### *Second ingredient: Aggregate several categories into one of particular interest ($$T_d$$)*
 
