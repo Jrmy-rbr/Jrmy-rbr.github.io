@@ -28,10 +28,9 @@ that would have been performed on a random sample of the population at the time 
 make our estimation. If no test has been performed on such a random sample, the technique fails by lack
 of available data, and we need to use other data and ways of estimating $$p_{nd}$$.
 
-This is what the authors of [https://science.sciencemag.org/content/368/6490/489.full] have done. In this post I will
+This is what the authors of [[LPJ*]](#1) have done. In this post I will
 explain the principles underlying such an estimation method for $$p_{nd}$$ through an analogue but simpler analysis using data about the total number of confirmed COVID-19 cases. I will try as much as
-possible to draw parallels between my simplified approach and the work done in [https://
-science.sciencemag.org/content/368/6490/489.full].
+possible to draw parallels between my simplified approach and the work done in [[LPJ*]](#1).
 
 
 ## The Data
@@ -149,9 +148,9 @@ $$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$, which implies that $$\beta=p_d \beta_d
   {% include image.html url="/assets/images/Post_COVID19/SIRD_split_beta.png" description="" %}
 </center>
 
-### The model used in [https://science.sciencemag.org/content/368/6490/489.full]
+### The model used in [[LPJ*]](#1)
 
-In [https://science.sciencemag.org/content/368/6490/489.full] the authors a variation of the SIERD
+In [[LPJ*]](#1) the authors a variation of the SIERD
 model. The SIERD model has one more category than the SIRD model, namely it considers the category
 exposed (E) of exposed people, i.e. of people that have been contaminated by the virus but that are not
 yet infectious. The model used by the authors is different in three ways from the traditional SIERD
@@ -187,7 +186,7 @@ This means that if one measures the new value of $$\beta$$ and compares it with 
 
 **Preliminary conclusion 1:** The observable repercussions of the difference of treatment between the
 detected and not detected subcategories allow to extract some information about $$p_d$$.
-This is a key point of [https://science.sciencemag.org/content/368/6490/489.full]. A,
+This is a key point of [[LPJ*]](#1). A,
 in their model, the detected infectious people cannot travel from city to city, while the other people
 (including the undetected infectious people) can. The consequence is that the speed at which
 the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
@@ -246,7 +245,7 @@ beyond the mobility data from [Apple](https://www.apple.com/covid19/mobility) an
 **Preliminary conclusion 2:** If one wants to extract the value of $$p_d$$, one needs extra information, not immediately 
 related to $$p_d$$ itself, but on parameters that influence the variation of $$\beta_d$$ and $$\beta_{nd}$$.
 
-In [https://science.sciencemag.org/content/368/6490/489.full]  they
+In [[LPJ*]](#1)  they
 also need some extra information to recover the value of $$p_d$$. But in their case this extra
 information is the number of people between any pair of cities for each day of the period of time on which they run their model.
 
@@ -259,14 +258,15 @@ In this post we have seen two key ingredients on the estimation of $$p_d$$:
    infection rate of each subcategory ($$\beta_d$$ and $$\beta_{nd}$$).
 2. Use extra information, not necessarily directly related to the desease, but that will influence the srpead of the virus.
 
-**NB:** Both in my simplified model and in the model used in [https://science.sciencemag.org/content/368/6490/489.full], many 
+**NB:** Both in my simplified model and in the model used in [[LPJ*]](#1), many 
 implicit assumption are made. In general they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
 they can also influence the value of this estimate. In particular if these assumption are not satisfied in reality, the 
 estimation of $$p_d$$ can be inacurate. This is why a model is not reliable on its own. We need to use different model with 
 different data, and different technics to estimate a parameter like $$p_d$$. If all these technics converge to the same value 
 of the parameter, then we can be confident in the accuracy of these estimations.<br>
 For example in my model I implicitly assume that $$p_d$$ is the same over the two period of time I used to extract its value.
-In [https://science.sciencemag.org/content/368/6490/489.full], the authors assume that $$p_d$$ is the same in all the cities, 
+In [[LPJ*]](#1), the authors assume that $$p_d$$ is the same in all the cities, 
 they assume that the infection rate $$\beta$$ is the same in all the cities etc.
 
-
+## References
+<a id=1>[LPJ*]</a> Li, Ruiyun, et al. "Substantial undocumented infection facilitates the rapid dissemination of novel coronavirus (SARS-CoV-2)." Science 368.6490 (2020): 489-493.
