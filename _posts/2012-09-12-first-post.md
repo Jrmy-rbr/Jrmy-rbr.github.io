@@ -124,7 +124,7 @@ $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 
 <center>
   {% include image.html url="/assets/images/Post_COVID19/SIRD_d_nd.png" description="The categories Infectious (I), Recovered 
-  (R), and Dead (D) are split into two subcategories: detected $$_d$$ and not detected $$_{nd}$$" %}
+  (R), and Dead (D) are split into two subcategories: detected (d) and not detected (nd)" %}
 </center>
 
 
@@ -136,7 +136,7 @@ $$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest since i
 actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equations in (2) that $$T_d = p_d T$$, and therefore $$T_{nd} = T - p_d T_d = (1-p_d) T$$.
 
 <center>
-  {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="Here we regroup $$I_d, R_d$$, and $$D_d$$, into the categorie $$T_d$$ of the Total detected cases." %}
+  {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="Here we regroup the categories correponding to the detected Infectious, Recovered and Deaed into the category of the Total detected cases." %}
 </center>
 
 ##### *Last ingredient: split $$\beta$$*
