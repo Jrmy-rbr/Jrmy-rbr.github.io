@@ -269,4 +269,4 @@ In [[LPJ*]](#1), the authors assume that $$p_d$$ is the same in all the cities,
 they assume that the infection rate $$\beta$$ is the same in all the cities etc.
 
 ## References
-<a id=1>[LPJ*]</a> Li, Ruiyun, et al. "Substantial undocumented infection facilitates the rapid dissemination of novel coronavirus (SARS-CoV-2)." Science 368.6490 (2020): 489-493.
+<a id="1">[LPJ*]</a> Li, Ruiyun, et al. "Substantial undocumented infection facilitates the rapid dissemination of novel coronavirus (SARS-CoV-2)." Science 368.6490 (2020): 489-493.
