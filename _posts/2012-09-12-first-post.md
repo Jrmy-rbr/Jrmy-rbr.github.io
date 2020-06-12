@@ -29,7 +29,9 @@ make our estimation. If no test has been performed on such a random sample, the 
 of available data, and we need to use other data and ways of estimating $$p_{nd}$$.
 
 This is what the authors of [[LPJ*]](#1) have done. In this post I will
-explain the principles underlying such an estimation method for $$p_{nd}$$ through an analogue but simpler analysis using data about the total number of confirmed COVID-19 cases. I will try as much as
+explain the principles underlying such an estimation method for $$p_{nd}$$ through an analogue but simpler analysis using data about the total number of confirmed COVID-19 cases. 
+
+I will try as much as
 possible to draw parallels between my simplified approach and the work done in [[LPJ*]](#1).
 
 
