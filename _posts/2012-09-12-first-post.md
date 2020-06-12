@@ -260,7 +260,7 @@ In this post we have seen two key ingredients on the estimation of $$p_d$$:
    infection rate of each subcategory ($$\beta_d$$ and $$\beta_{nd}$$).
 2. Use extra information, not necessarily directly related to the desease, but that will influence the srpead of the virus.
 
-**NB:** Both in my simplified model and in the model used in [[LPJ*]](#1) [ ]() many 
+**NB:** Both in my simplified model and in the model used in [[LPJ*]](#1) [many]() 
 implicit assumptions are made. In general they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
 they can also influence the value of this estimate. In particular if these assumption are not satisfied in reality, the 
 estimation of $$p_d$$ can be inacurate. This is why a model is not reliable on its own. We need to use different model with 
