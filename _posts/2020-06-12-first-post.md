@@ -260,11 +260,11 @@ In this post we have seen two key ingredients on the estimation of $$p_d$$:
 2. Use extra information, not necessarily directly related to the desease, but that will influence the srpead of the virus.
 
 **NB:** Both in my simplified model and in the model used in [[LPJ*]](#1) many 
-implicit assumptions are made. In general they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
-they can also influence the value of this estimate. In particular if these assumption are not satisfied in reality, the 
-estimation of $$p_d$$ can be inacurate. This is why a model is not reliable on its own. We need to use different model with 
-different data, and different technics to estimate a parameter like $$p_d$$. If all these technics converge to the same value 
-of the parameter, then we can be confident in the accuracy of these estimations.
+implicit assumptions are made. In general, they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
+they can also influence the value of this estimate. In particular, if these assumptions are not satisfied in reality, the 
+estimation of $$p_d$$ can be inaccurate. This is why a model is not reliable on its own. We need to use different model with 
+different data, and different techniques to estimate a parameter like $$p_d$$. If all these techniques converge to the same 
+value of the parameter, then we can be confident in the accuracy of these estimations.
 
 For example, in my model I implicitly assume that $$p_d$$ is the same over the two period of time I used to extract its value. In [[LPJ*]](#1) the authors assume that $$p_d$$ is the same in all the cities, 
 they assume that the infection rate $$\beta$$ is the same in all the cities etc.
