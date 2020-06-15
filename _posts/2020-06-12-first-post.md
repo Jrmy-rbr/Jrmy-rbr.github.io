@@ -261,20 +261,21 @@ information is the daily number of people travelling between any pair of cities.
 
 
 In this post we have seen two key ingredients on the estimation of $$p_d$$:
-1. Include in the model include the distinction between the detected cases and the undetected case (subcategories with 
+1. Include in the model a distinction between the detected cases and the undetected case (subcategories with 
    subscripts $$_d$$ and $$_{nd}$$ respectively). Include in the model something that will influence differently the  
    infection rate of each subcategory ($$\beta_d$$ and $$\beta_{nd}$$).
-2. Use extra information, not necessarily directly related to the disease, but that will influence the spread of the virus.
+2. Use extra information, not necessarily directly related to the disease, but that will influence the speed at which the     
+   virus will spread.
 
 **NB:** Both in my simplified model and in the model used in [[LPJ*]](#1) many 
 implicit assumptions are made. In general, they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
-they can also influence the value of this estimate. In particular, if these assumptions are not satisfied in reality, the 
-estimation of $$p_d$$ can be inaccurate. This is why a model is not reliable on its own. We need to use different model with 
-different data, and different techniques to estimate a parameter like $$p_d$$. If all these techniques converge to the same 
-value of the parameter, then we can be confident in the accuracy of these estimations.
+the estimade might be highly dependent on these assumptions. In particular, if these assumptions are not satisfied in 
+reality, the  estimation of $$p_d$$ can be inaccurate. This is why a model is not reliable on its own. We need to use 
+different model with different data, and different techniques to estimate a parameter like $$p_d$$. If all these techniques 
+converge to the same value of the parameter, then we can be confident in the accuracy of these estimations.
 
-For example, in my model I implicitly assume that $$p_d$$ is the same over the two period of time I used to extract its value. In [[LPJ*]](#1) the authors assume that $$p_d$$ is the same in all the cities, 
-they assume that the infection rate $$\beta$$ is the same in all the cities etc.
+For example, in my model I implicitly assume that $$p_d$$ is the same over the two period of time I used to estimate its value. In [[LPJ*]](#1) the authors assume that $$p_d$$ is the same in all the cities, 
+and that the infection rate $$\beta$$ is the same in all the cities etc.
 
 ## References
 <a id="1">[LPJ*]</a> [Li, Ruiyun, et al. "Substantial undocumented infection facilitates the rapid dissemination of novel coronavirus (SARS-CoV-2)." Science 368.6490 (2020): 489-493.](https://science.sciencemag.org/content/368/6490/489.full)
