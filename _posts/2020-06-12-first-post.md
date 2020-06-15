@@ -56,7 +56,7 @@ I have taken the data from worldometer.com (for France) from which I have made a
 
 ### The model I have used
 
-In the following I will modtly describe my model in a graphical way. If you want to have some more mathematical
+In the following I will modtly describe my model in a graphical way. If you want to have a bit more mathematical
 details about my model, you can read the model section of [this](https://github.com/Jrmy-rbr/COVID-19-the-missing-ones/blob/master/final/draft/draft.pdf) document.
 
 
