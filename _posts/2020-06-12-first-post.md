@@ -48,7 +48,7 @@ I have taken the data from worldometer.com (for France) from which I have made a
 |    7. the active cases.    |                          |
 
 <center>
-{% include image.html url="/assets/images/Post_COVID19/plt_data.png" description="Plot of the data 2. 4. 6. and 7.  of the above table" %}
+{% include image.html url="/assets/images/Post_COVID19/plt_data.png" description="Plot of the data corresponding to the items 2, 4, 6, and 7 of the above table" %}
 </center>
 
 ## The Models
@@ -133,7 +133,7 @@ $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 
 From the above model we can extract one etra category of particular interest. This particular category is the category of the  all the cases of COVID-19. As for other categories, part of these cases
 remains undetected. Therefore, I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
-$$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest for two reasons:
+$$T_{nd} := I_{nd} + R_{nd} + D_{nd}$$. $$T_d$$ is of particular interest for two reasons:
 1. $$T_d$$ is a quantity we can
 actually observe as opposed to $$T_{nd}$$ or $$T$$. 
 2. From the equations describing the model presented in the above figure, we can deduce that $$T_d = p_d T$$. An interesting
