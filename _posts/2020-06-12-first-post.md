@@ -134,7 +134,7 @@ $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 From the above model we can extract one etra category of particular interest. This particular category is the category of the  all the cases of COVID-19. As for other categories, part of these cases
 remains undetected. Therefore, I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
 $$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest for two reasons:
-1. $$T_d$$t is a quantity we can
+1. $$T_d$$ is a quantity we can
 actually observe as opposed to $$T_{nd}$$ or $$T$$. 
 2. From the equations describing the model presented in the above figure, we can deduce that $$T_d = p_d T$$. An interesting
 consequence of this is that the rate at which $$T_d$$ evolves is the same as the rate at which $$T$$ evolves, which turns 
@@ -158,17 +158,17 @@ $$I_d=p_d I$$ and $$I_{nd} = (1-p_d) I$$, which implies that $$\beta=p_d \beta_d
 
 ### The model used in [[LPJ*]](#1)
 
-In [[LPJ*]](#1) the authors a variation of the SIERD
+In [[LPJ*]](#1) the authors use a variation of the SIERD
 model. The SIERD model has one more category than the SIRD model, namely it considers the category
 exposed (E) of exposed people, i.e. of people that have been contaminated by the virus but that are not
 yet infectious. The model used by the authors is different in three ways from the traditional SIERD
 model:
 1. The model does not consider only one population split in 5 categories. It actually considers
-  several cities, and split the population of each of these cities into the five categories of the
+  the population of several cities, and split the population of each of these cities into the five categories of the
   SIERD. Each city’s population is modelled by a system of equations similar to the one for the SIRD
   model above. Furthermore, their model allows for population exchanges between the cities, which
   couples each city’s system of equations with each other.
-2. The authors consider a stochastic version of the model of the SIERD model, meaning that they
+2. The authors consider a stochastic version of the SIERD model, meaning that they
   introduce some randomness in the model. This allows to more carefully account for statistical
   fluctuations and uncertainties.
 3. For every city, the Infectious category is split into two subcategories: detected and
@@ -180,22 +180,21 @@ model:
 In this section we will assume that $$\beta$$ can be extracted from the data so that it is considered
 as a known parameter.
 
-Remember that $$\beta = p_d \beta_d + (1-p_d) \beta_{nd}$$. Let us say that at the beginning
-no measures are taken against the pandemic, and therefore both the detected cases and the undetected
+Remember that $$\beta = p_d \beta_d + (1-p_d) \beta_{nd}$$. Let us say that at the beginning of the pandemic
+no measures are taken against it, and therefore both the detected cases and the undetected
 cases can contaminate new people, i.e. $$\beta_d, \beta_{nd} >0$$.
 
 What would happen if we suddenly decided to strictly quarantine the detected cases, so that they cannot
-contaminate anyone anymore (i.e.~$$\beta_d = 0$$)?
+contaminate anyone anymore (i.e. $$\beta_d = 0$$)?
 
-Assuming that this is the only measure taken against the pandemic (i.e. no measures are taken
+Assuming that this is the only measure taken against the pandemic (in particular no measures are taken
 for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
 to a smaller value. The extent by which the value of $$\beta$$ diminishes depends on $$p_d$$.
 This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.
 
 **Preliminary conclusion 1:** The observable repercussions of the difference of treatment between the
 detected and not detected subcategories allow to extract some information about $$p_d$$.
-This is a key point of [[LPJ*]](#1). A,
-in their model, the detected infectious people cannot travel from city to city, while the other people
+This is a key point of [[LPJ*]](#1). In their model, the detected infectious people cannot travel from city to city, while the other people
 (including the undetected infectious people) can. The consequence is that the speed at which
 the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
 1.  If $$p_d$$ is very high,
