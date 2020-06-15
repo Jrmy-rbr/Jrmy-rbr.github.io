@@ -6,6 +6,7 @@ published: true
 layout: post
 ---
 
+The code used for making the plots and the regressions can be found [here](https://github.com/Jrmy-rbr/COVID-19-the-missing-ones/blob/master/final/COVID19_final.ipynb)
 
 In the COVID-19 pandemic, one interesting quantity one might want to estimate is the proportion $$p_{nd}$$
 of infected people that are *not detected* by the tests (on a given date or period of time). We can, for that,
@@ -54,6 +55,10 @@ I have taken the data from worldometer.com (for France) from which I have made a
 ## The Models
 
 ### The model I have used
+
+In the following I will modtly describe my model in a graphical way. If you want to have some more mathematical
+details about my model, you can read the model section of [this](https://github.com/Jrmy-rbr/COVID-19-the-missing-ones/blob/master/final/draft/draft.pdf) document.
+
 
 #### Some explanations on the traditional SIRD model
 
