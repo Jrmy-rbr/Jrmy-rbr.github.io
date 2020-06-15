@@ -185,8 +185,7 @@ no measures are taken against it, and therefore both the detected cases and the 
 cases can contaminate new people, i.e. $$\beta_d, \beta_{nd} >0$$.
 
 What would happen if we suddenly decided to strictly quarantine the detected cases, so that they cannot
-contaminate anyone anymore (i.e. $$\beta_d = 0$$)?
-
+contaminate anyone anymore (i.e. $$\beta_d = 0$$)? <br>
 Assuming that this is the only measure taken against the pandemic (in particular no measures are taken
 for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
 to a smaller value. The extent by which the value of $$\beta$$ diminishes depends on $$p_d$$.
