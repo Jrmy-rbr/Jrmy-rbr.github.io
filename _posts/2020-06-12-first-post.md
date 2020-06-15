@@ -131,7 +131,7 @@ $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 
 ##### *Second ingredient: Aggregate several categories into one of particular interest ($$T_d$$)*
 
-From the above model we can extract one etra category of particular interest. This particular category is the category of the  all the cases of COVID-19. As for other categories, part of these cases
+From the above model we can extract one extra category of particular interest. This particular category is the category of the  all the cases of COVID-19. As for other categories, part of these cases
 remains undetected. Therefore, I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
 $$T_{nd} := I_{nd} + R_{nd} + D_{nd}$$. $$T_d$$ is of particular interest for two reasons:
 1. $$T_d$$ is a quantity we can
