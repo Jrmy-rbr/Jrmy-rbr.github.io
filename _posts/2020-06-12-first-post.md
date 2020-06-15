@@ -268,9 +268,9 @@ In this post we have seen two key ingredients on the estimation of $$p_d$$:
    virus will spread.
 
 **NB:** Both in my simplified model and in the model used in [[LPJ*]](#1) many 
-implicit assumptions are made. In general, they are necessary to the extraction of an estimate of the value of $$p_d$$, but 
-the estimade might be highly dependent on these assumptions. In particular, if these assumptions are not satisfied in 
-reality, the  estimation of $$p_d$$ can be inaccurate. This is why a model is not reliable on its own. We need to use 
+implicit assumptions are made. In general, they are necessary to the extraction of an estimate of the value of $$p_d$$, 
+but the estimate might be highly dependent on these assumptions. In particular, if these assumptions are not satisfied 
+in reality, the  estimation of $$p_d$$ can be inaccurate. This is why a model is not reliable on its own. We need to use 
 different model with different data, and different techniques to estimate a parameter like $$p_d$$. If all these techniques 
 converge to the same value of the parameter, then we can be confident in the accuracy of these estimations.
 
