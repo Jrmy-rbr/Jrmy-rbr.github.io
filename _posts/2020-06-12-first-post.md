@@ -75,7 +75,7 @@ $$
 $$
 
 The first line intuitively reads as follows: during a small amount of time $$dt$$
-the susceptible population $$S$$ (i.e. the not infected part population that isn still susceptible to get infected)
+the susceptible population $$S$$ (i.e. the not infected part population but that is still susceptible to get infected)
 varies by an amount $$dS = -\beta I \frac{S}{N} dt$$. This means that if at time $$t_0$$ there are
 $$S(t_0)$$ susceptible people, at time $$t_0+dt$$ there are $$S(t_0+dt)=S(t_0)+dS = S(t_0)-\beta I
 \frac{S}{N} dt$$. Since $$dS$$ is negative, the population $$S$$ decreases with time, i.e. there are less and
