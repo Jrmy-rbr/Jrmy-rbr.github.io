@@ -188,13 +188,15 @@ What would happen if we suddenly decided to strictly quarantine the detected cas
 contaminate anyone anymore (i.e. $$\beta_d = 0$$)? <br>
 Assuming that this is the only measure taken against the pandemic (in particular no measures are taken
 for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
-to a smaller value. The extent by which the value of $$\beta$$ diminishes depends on $$p_d$$.
-This means that if one measures the new value of $$\beta$$ and compares it with the old value of $$\beta$$, one gets some information about $$p_d$$.
+to a smaller value. The extent by which the value of $$\beta$$ diminishes depends on $$p_d$$. Indeed, since  $$\beta = p_d 
+\beta_d + (1-p_d) \beta_{nd}$$, setting $$\beta_d$$ to $$0$$ has a bigger effect on the value of $$\beta$$ when $$p_d$$ is 
+large than when $$p_d$$ is small. This means that if one estimate the value of $$\beta$$ before the quarantine measure and 
+compares it with its value before the quarantine measure, one will get some information about $$p_d$$.
 
 **Preliminary conclusion 1:** The observable repercussions of the difference of treatment between the
 detected and not detected subcategories allow to extract some information about $$p_d$$.
-This is a key point of [[LPJ*]](#1). In their model, the detected infectious people cannot travel from city to city, while the other people
-(including the undetected infectious people) can. The consequence is that the speed at which
+This is a key point of [[LPJ*]](#1). In their model, the detected infectious people cannot travel from city to city, while 
+the other people can (which includes the undetected infectious people). The consequence is that the speed at which
 the COVID-19 spreads to other cities highly depends on the parameter $$p_d$$:
 1.  If $$p_d$$ is very high,
   i.e. most of the infectious people are detected, then very few infectious people can travel, and the COVID-19 should 
@@ -218,8 +220,8 @@ cannot explain the data, at least not over a period of 50 days. Indeed, if we do
 {% include image.html url="/assets/images/Post_COVID19/PlotFit_18_days.png" description="Regression performed over 18 days" %}
 </center>
 
-From this we can make the hypothesis that the rate $$\beta$$ is not constant, but slowly changes
-through time. This make sense considering that measures, like social distancing, have been taken to
+From this we can make the hypothesis that the rate $$\beta$$ is not constant, but is slowly changing
+through time. This make sense considering that preventive measures, like social distancing, have been taken to
 precisely decrease this rate $$\beta$$. Therefore, if we fit the model at two different moments in time,
 we should be able to extract two different values for $$\beta$$: $$\beta^{(1)}$$ and $$\beta^{(2)}$$.
 Moreover, we still have that $$\beta^{(1)} = p_d \beta_d^{(1)} +(1-p_d) \beta_{nd}^{(1)}$$ and
@@ -248,12 +250,12 @@ beyond the mobility data from [Apple](https://www.apple.com/covid19/mobility) an
 </iframe>
 </center>
 
-**Preliminary conclusion 2:** If one wants to extract the value of $$p_d$$, one needs extra information, not immediately 
-related to $$p_d$$ itself, but on parameters that influence the variation of $$\beta_d$$ and $$\beta_{nd}$$.
+**Preliminary conclusion 2:** If one wants to extract the value of $$p_d$$, one needs extra information, not necessarily 
+immediately related to $$p_d$$ itself, but related, or correlated to other parameters that influence the variation of 
+$$\beta_d$$ and $$\beta_{nd}$$.
 
-In [[LPJ*]](#1)  they
-also need some extra information to recover the value of $$p_d$$. But in their case this extra
-information is the number of people between any pair of cities for each day of the period of time on which they run their model.
+In [[LPJ*]](#1)  they also need some extra information to recover the value of $$p_d$$. In their case this extra
+information is the daily number of people travelling between any pair of cities.
 
 ## Conclusion
 
