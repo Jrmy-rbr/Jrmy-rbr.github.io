@@ -8,8 +8,9 @@ layout: post
 
 
 In the COVID-19 pandemic, one interesting quantity one might want to estimate is the proportion $$p_{nd}$$
-of infected people that are *not detected* by the tests (on a given date or period of time). We can for that
-estimate the proportion of infected people $$p_d:= 1-p_{nd} $$ that have been detected. There are
+of infected people that are *not detected* by the tests (on a given date or period of time). We can, for that,
+estimate the proportion of infected people $$p_d:= 1-p_{nd} $$ that have been detected (the subscripts $$d$$ and $$nd$$ 
+respectively stand for *detected* and *not detected*). There are
 many reasons why not all infectious persons are detected: For example, many people might 
 only have mild symptoms, and therefore do not try to get tested. Another reason is that we simply do
 not have enough tests to test all the infectious people, and therefore we need to prioritize by choosing who gets
@@ -74,21 +75,21 @@ $$
 $$
 
 The first line intuitively reads as follows: during a small amount of time $$dt$$
-the susceptible population $$S$$ (i.e. the not-infectious part population that still be infectious)
+the susceptible population $$S$$ (i.e. the not-infectious part population that can still be infected)
 varies by an amount $$dS = -\beta I \frac{S}{N} dt$$. This means that if at time $$t_0$$ there are
 $$S(t_0)$$ susceptible people, at time $$t_0+dt$$ there are $$S(t_0+dt)=S(t_0)+dS = S(t_0)-\beta I
-\frac{S}{N}$$. Since $$dS$$ is negative, the population $$S$$ decreases with time, i.e. there are less and
-less not-infectious people through time. The quantity $$|dS|$$ represents the number
+\frac{S}{N} dt$$. Since $$dS$$ is negative, the population $$S$$ decreases with time, i.e. there are less and
+less not-infected people through time. The quantity $$|dS|$$ represents the number
 of new cases of COVID-19 that have occurred during the duration $$dt$$.
 
 Let us see why we have $$dS = -\beta I \frac{S}{N} dt$$. Let us say that
 each infectious person infects on average a fraction $$f_{\rm inf}$$ of the susceptible
 person they meet, and that on average they meet $$\kappa \times dt$$ persons during the time
-$$dt$$. Importantly, not all the met people are susceptible. If we assume that people meet each other in
+$$dt$$. Importantly, not all the people they meet are susceptible. If we assume that people meet each other in
 a sufficiently random way, then there should be a fraction $$\frac{S}{N}$$  (where $$N$$ is the total size
-of the studied population) of the met people that are susceptible.
-In other words, each of the infectious people meets on average $$\kappa \times dt \times \frac{S}{N}$$ {\bf
-susceptible} persons and infects a fraction $$f_{\rm inf}$$ of them, i.e. they infect on average $$f_{\rm inf}
+of the studied population) of the people they have met that are susceptible.
+In other words, each of the infectious people meets on average $$\kappa \times dt \times \frac{S}{N}$$ **susceptible**
+persons and infects a fraction $$f_{\rm inf}$$ of them, i.e. they infect on average $$f_{\rm inf}
 \times \kappa \times dt \times \frac{S}{N}$$ people. Since there are $$I$$ infectious people, each of them
 infecting on average $$f_{\rm inf} \times \kappa \times dt \times \frac{S}{N}$$ people, there are in total
 $$|dS| = I\times f_{\rm inf} \times \kappa \times dt \times \frac{S}{N}$$ new infections during the time
@@ -98,7 +99,7 @@ dt$$ (remember that $$dS$$ must be negative since $$S$$ must decrease). The para
 which each of the infectious people infects other people.
 
 Similarly, the three other equations respectively describe how the numbers $$I$$ of infectious people, $$R$$
-of recovered people, and $$D$$ of dead evolve through time. The parameter $$\gamma$$ is the rate at which
+of recovered people, and $$D$$ of dead people evolve through time. The parameter $$\gamma$$ is the rate at which
 infectious people recover from the COVID-19, and $$\mu$$ is the rate at which they die from COVID-19.
 
 To avoid the use of equations, I will, from now on, graphically represent the SIRD model as follows.
@@ -114,9 +115,9 @@ To avoid the use of equations, I will, from now on, graphically represent the SI
 
 #### Modifications
 
-##### *First ingredient: slpit categories*
+##### *First ingredient: split categories*
 
-In my cases I need to make the distinction between the infectious people that have been tested and
+In my case I need to make the distinction between the infectious people that have been tested and
 detected, and the infectious people that have not been detected. Therefore, I will
 split the infectious category into two subcategories $$I_d$$ and $$I_{nd}$$, and similarly split
 the recovered category into two subcategories $$R_d$$ and $$R_{nd}$$, and the deaths category into
@@ -130,10 +131,16 @@ $$D_d$$ and $$D_{nd}$$. The SIRD model then becomes,
 
 ##### *Second ingredient: Aggregate several categories into one of particular interest ($$T_d$$)*
 
-From the above model we can extract one of particular interest. This particular equation describes the evolution of the total number of cases of COVID-19. As for other quantity, part of these cases
+From the above model we can extract one etra category of particular interest. This particular category is the category of the  all the cases of COVID-19. As for other categories, part of these cases
 remains undetected. Therefore, I will use the quantity $$T_d$$, $$T_{nd}$$, and $$T:= T_d+T_nd$$ to denote the total number of detected, undetected, and overall cases respectively. By definition $$T_d:=I_d+R_d+D_d$$, and
-$$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest since it is a quantity we can
-actually observe as opposed to $$T_{nd}$$. However, we can deduce from the equations in (2) that $$T_d = p_d T$$, and therefore $$T_{nd} = T - p_d T_d = (1-p_d) T$$.
+$$T_{nd} := I_{nd} + R_{nd} +D_{nd}$$. $$T_d$$ is of particular interest for two reasons:
+1. $$T_d$$t is a quantity we can
+actually observe as opposed to $$T_{nd}$$ or $$T$$. 
+2. From the equations describing the model presented in the above figure, we can deduce that $$T_d = p_d T$$. An interesting
+consequence of this is that the rate at which $$T_d$$ evolves is the same as the rate at which $$T$$ evolves, which turns 
+out to be $$\beta$$. In other words, the evolution of $$T_d$$, which only concerns the *detected* people, actually gives us 
+information about the evolution of the whole category $$T$$ of the people that have been infected at some point, whether they 
+have been detected or not.
 
 <center>
   {% include image.html url="/assets/images/Post_COVID19/SIRD_Td.png" description="Here we regroup the categories corresponding to the detected Infectious, Recovered and Dead into the category of the Total detected cases." %}
