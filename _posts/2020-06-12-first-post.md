@@ -1,6 +1,6 @@
 ---
 title: COVID-19 the missing ones
-subtitle : What does it take to estimate the number of undetected infectious people?
+subtitle : What does it take to estimate the number of undetected cases?
 author: Jeremy
 published: true
 layout: post
@@ -30,7 +30,7 @@ make our estimation. If no test has been performed on such a random sample, the 
 of available data, and we need to use other data and ways of estimating $$p_{nd}$$.
 
 This is what the authors of [[LPJ*]](#1) have done. In this post I will
-explain the principles underlying such an estimation method for $$p_{nd}$$ through an analogue but simpler analysis using data about the total number of confirmed COVID-19 cases. 
+explain the principles underlying such an estimation method for $$p_{d}$$ (or equivalently $$p_{nd}$$) through an analogue but simpler analysis using data about the total number of confirmed COVID-19 cases. 
 
 I will try as much as
 possible to draw parallels between my simplified approach and the work done in [[LPJ*]](#1).
@@ -61,7 +61,7 @@ In order to analyse the data of the COVID-19 I will use a variation of the SIRD 
 Susceptible Infectious Recovered Dead.  It is a simple model for epidemiology that works as follows: The
 studied population, comprised of N individuals, is divided into four categories: susceptible (S),
 infectious (I), recovered (R), dead (D). For each of these categories the model describes the evolution
-of the number of members belonging to these categories as a function of time. To do so the model uses
+of the number of people belonging to these categories as a function of time. To do so the model uses
 the following system of four differential equations,
 
 
@@ -75,7 +75,7 @@ $$
 $$
 
 The first line intuitively reads as follows: during a small amount of time $$dt$$
-the susceptible population $$S$$ (i.e. the not-infectious part population that can still be infected)
+the susceptible population $$S$$ (i.e. the not infected part population that isn still susceptible to get infected)
 varies by an amount $$dS = -\beta I \frac{S}{N} dt$$. This means that if at time $$t_0$$ there are
 $$S(t_0)$$ susceptible people, at time $$t_0+dt$$ there are $$S(t_0+dt)=S(t_0)+dS = S(t_0)-\beta I
 \frac{S}{N} dt$$. Since $$dS$$ is negative, the population $$S$$ decreases with time, i.e. there are less and
@@ -87,7 +87,7 @@ each infectious person infects on average a fraction $$f_{\rm inf}$$ of the susc
 person they meet, and that on average they meet $$\kappa \times dt$$ persons during the time
 $$dt$$. Importantly, not all the people they meet are susceptible. If we assume that people meet each other in
 a sufficiently random way, then there should be a fraction $$\frac{S}{N}$$  (where $$N$$ is the total size
-of the studied population) of the people they have met that are susceptible.
+of the studied population) of the people the infectious person has met that are susceptible.
 In other words, each of the infectious people meets on average $$\kappa \times dt \times \frac{S}{N}$$ **susceptible**
 persons and infects a fraction $$f_{\rm inf}$$ of them, i.e. they infect on average $$f_{\rm inf}
 \times \kappa \times dt \times \frac{S}{N}$$ people. Since there are $$I$$ infectious people, each of them
@@ -186,7 +186,7 @@ cases can contaminate new people, i.e. $$\beta_d, \beta_{nd} >0$$.
 
 What would happen if we suddenly decided to strictly quarantine the detected cases, so that they cannot
 contaminate anyone anymore (i.e. $$\beta_d = 0$$)? <br>
-Assuming that this is the only measure taken against the pandemic (in particular no measures are taken
+Assuming that this is the only preventive measure taken against the pandemic (in particular no measures are taken
 for the undetected cases: $$\beta_{nd}$$ does not change), the value of $$\beta$$ would actually change
 to a smaller value. The extent by which the value of $$\beta$$ diminishes depends on $$p_d$$. Indeed, since  $$\beta = p_d 
 \beta_d + (1-p_d) \beta_{nd}$$, setting $$\beta_d$$ to $$0$$ has a bigger effect on the value of $$\beta$$ when $$p_d$$ is 
