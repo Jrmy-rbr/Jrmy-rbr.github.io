@@ -64,8 +64,7 @@ google_analytics: "UA-165294587-1"
 remote_theme: chrisbobbe/jekyll-theme-prologue
 collections: [sections]
 
-# Jekyll Environement it can be developement or production
-JEKYLL_ENV=production
+
 
 #Variables for the distribution licence of the blog posts written in the footer
 defaults:
