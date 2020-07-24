@@ -6,7 +6,6 @@ icon: fa-book
 order: 3
 ---
 
-List of books want to read:
 
 - Lê Nguyên Hoang: *The Equation of Knowledge*
 - William Macaskill: *Doing good Better*
