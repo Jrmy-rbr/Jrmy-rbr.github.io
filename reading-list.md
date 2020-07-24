@@ -1,8 +1,8 @@
 
 ---
 title: Reading List
-subtitle: a list of books I read
-layout: page
+subtitle: a list of books I want to read
+layout: "page"
 icon: fa-book
 order: 3
 ---
@@ -15,7 +15,7 @@ List of books want to read:
 - Thomas Piketty: *The Capital in the Twenty-First Century*
 - Gilles Mitteau : *Tout sur l'économie, ou presque*
 - E. T. Jaynes: *Probability Theory: The Logic of Science*
-- David D Burns M.D.: *Feeling Good*
+- David D Burns MD: *Feeling Good*
 - Nick Bostrom: *Superintelligence*
 - Ben Todd: *80,000 Hours*
 - Martin Peterson: *An Introduction to Decision Theory*
