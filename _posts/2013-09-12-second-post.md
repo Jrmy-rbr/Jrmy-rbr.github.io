@@ -91,7 +91,7 @@ In this section I will use a percentile interval using the fact that I know the 
 ## What is percentile interval?
 
 Let us assume that we want to infer the value of a parameter $\theta$ using data $X_1,\ldots, X_k$. Let's call 
-$\hat \theta := f(X_1,\ldots, X_k)$ the value of $\theta$ infered from the data $X_1,\ldots, X_k$. We say that $\hat \theta$ is an estimator of $\theta$. Ideally 
+$\hat \theta := f(X_1,\ldots, X_k)$ the value of $\theta$ inferred from the data $X_1,\ldots, X_k$. We say that $\hat \theta$ is an estimator of $\theta$. Ideally 
 the estimator $\hat \theta$ is close to the real value $\theta$. But how close are they? To get an idea of how close 
 the estimator is from the true value, we can use a confidence interval. A confidence interval is an interval $I_\alpha$ that is a function of the observed data $X_1,\ldots, X_k$, ie $I_\alpha=g_\alpha(X_1,\ldots, X_k)$, such that for all possible values of $\theta$, $\Pr_\theta( \theta \in I_\alpha) = \alpha$. The parameter $\alpha$ represents the confidence level we have that, for a fix value of $\theta$ and for data sampled according to this value, the construction of the interval $I_\alpha$ contains the true value $\theta$. So for a $95\%$-interval we will have 
 $\Pr_\theta(\theta \in I_{95\%})=95\%$.[^2]
@@ -252,7 +252,7 @@ IMAGE
 
 ## Conclusion
 
-### Going further, and possible imprvements
+### Going further, and possible improvements
 
 - Other noise distribution
 - Using the median as predictor, and checking its robustness with other type of noise
