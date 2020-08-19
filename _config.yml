@@ -64,7 +64,10 @@ google_analytics: "UA-165294587-1"
 remote_theme: chrisbobbe/jekyll-theme-prologue
 collections: [sections]
 
-
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 #Variables for the distribution licence of the blog posts written in the footer
 defaults:
