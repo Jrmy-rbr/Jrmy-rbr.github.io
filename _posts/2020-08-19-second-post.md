@@ -234,14 +234,14 @@ The [McDiarmid inequality](https://www.wikiwand.com/en/Doob_martingale#/McDiarmi
 
 >Consider independent random variables $$X_1, X_2, \dots X_k$$ and a mapping $$f: \mathcal{X}_1 \times \mathcal{X}_2 \times \cdots \times \mathcal{X}_k \rightarrow \mathbb{R} $$. Assume there exist constants $$c_1, c_2, \dots, c_k$$ such that for all $$i$$,
 
-$$
+>$$
 \underset{x_1, \cdots, x_{i-1}, x_i, x_i', x_{i+1}, \cdots, x_k}{\sup}
 |f(x_1, \dots, x_{i-1}, x_i, x_{i+1}, \cdots, x_k)-f(x_1, \dots, x_{i-1}, x_i', x_{i+1}, \cdots, x_k)|\leq c_i.
 $$
 
-(In other words, changing the value of the $$i$$th coordinate $$x_i$$ changes the value of $$f$$ by at most $$c_i$$.) Then, for any $$\epsilon > 0$$,
+>(In other words, changing the value of the $$i$$th coordinate $$x_i$$ changes the value of $$f$$ by at most $$c_i$$.) Then, for any $$\epsilon > 0$$,
 
-$$
+>$$
 \Pr\big(\big|f(X_1, X_2, \cdots, X_k) - \mathbb{E}[f(X_1, X_2, \cdots, X_k)]\big| \geq \epsilon\big)
 \leq
 2 \exp \left(-\frac{2 \epsilon^2}{\sum_{i=1}^{k} c_i^2}\right).
