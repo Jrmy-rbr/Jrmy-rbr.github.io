@@ -2,7 +2,7 @@
 title: Second Post
 author: Chris
 layout: post
-published: true
+published: True
 ---
 
 Some time ago Constance Crozier made a nice animation illustrating that forecasting s-curves is hard: 
@@ -238,34 +238,4 @@ From this we can derive a confidence interval by remembering that the estimator 
 {% include image.html url="/assets/images/sigmoid_uncertainty/McDiarmid.png" description="smth" %} 
 
 
-As you can see, the bound we get from the McDiarmid inequality is much looser than what we got from the previous methods, and that is why I will develop further. Also, the assumptions I made to derive this interval is not necessarily realistic which makes even less interesting.
-
-
-# Comparison & conclusions <a name="CCL"></a>
-
-## Comparison <a name="CCL-comparison"></a>
-
-In this post, we have seen the percentile interval, the boot-T interval and an interval coming from the McDiarmid inequality. Since the last one 
-gives result that are far too loose compare to the other, I will not compare it further t the other methods.
-
-In the case of the percentile interval I will essentially focus on the situation in which the probability distribution of the noise is unknown.
-
-To have a fair comparison, let me show you a couple of plots with the percentile interval and the boot-T interval computed on the same data.
-
-{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="smth" %} 
-
-
-## Conclusion
-
-### Going further, and possible improvements
-
-- Other noise distribution
-- Using the median as predictor, and checking its robustness with other type of noise
-- Improving the fit over the past data with bootstrap
-- Combination of the above
-
-### A quick word on confidence intervals
-
-# References
-<a id="1">[Hest14]</a> [Hesterberg, Tim C. "What teachers should know about the bootstrap: Resampling in the undergraduate statistics curriculum." The American Statistician 69.4 (2015): 371-386.](https://arxiv.org/abs/1411.5279.pdf)
-
+As you can see, the bound we get from the McDiarmid inequality is much looser than what we got from the previous methods, and that is why I will develop 
