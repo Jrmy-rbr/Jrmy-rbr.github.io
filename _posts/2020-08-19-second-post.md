@@ -132,7 +132,7 @@ Bootstrap sampling is a method that allows us to use known data to generate "new
 We will now use $x_1, \ldots, x_k$ to generate what looks like a new list $\bar x_1,\ldots, \bar x_k$ of realizations of the same random variables $X_1, \ldots X_k$.
 
 To do so, we will sample uniformly at random (with replacement) elements of the known data to create the new data. In other words,
-for every $1\leq i \leq k$ we choose $\bar x_i := x_{{\rm rand}(1,k)}$, where the function ${\rm rand}(1,k)$ picks an integer in $[1,k]$ uniformly at random (with replacement). In python this looks like the following (for $k=50$):
+for every $1\leq i \leq k$ we choose $\bar x_i := x_{{\rm rand}}(1,k)$, where the function ${\rm rand}(1,k)$ picks an integer in $[1,k]$ uniformly at random (with replacement). In python this looks like the following (for $k=50$):
 ```python
 import numpy as np
 k = 50
