@@ -1,5 +1,5 @@
 ---
-title: COVID-19: How many are missing?
+title: "COVID-19: How many are missing?"
 subtitle : What does it take to estimate the number of undetected cases?
 author: Jeremy
 published: true
