@@ -253,8 +253,9 @@ $$
 
 From this we can derive a confidence interval by remembering that the estimator $$\hat \theta$$ of the parameter $$\theta$$ is a function of the observed data, ie we have something like $$\hat \theta = f(X_1, \ldots, X_k)$$. I won't develop more, but under some assumptions we can derive a confidence interval that lead to the following graph.
 
+<center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/McDiarmid.png" description="smth" %} 
-
+</center>
 
 As you can see, the bound we get from the McDiarmid inequality is much looser than what we got from the previous methods, and that is why I will develop
 
