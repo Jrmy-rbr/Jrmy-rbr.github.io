@@ -255,6 +255,9 @@ beyond the mobility data from [Apple](https://www.apple.com/covid19/mobility) an
 </iframe>
 </center>
 
+**Remark:** As you may see, the figure is quite sentive to the parameters you pick. This tells us that even if we knew the missing parameters, the prediction 
+we would make would likely have a quite important uncertainty. 
+
 **Preliminary conclusion 2:** If one wants to extract the value of $$p_d$$, one needs extra information, not necessarily 
 immediately related to $$p_d$$ itself, but related, or correlated to other parameters that influence the variation of 
 $$\beta_d$$ and $$\beta_{nd}$$.
