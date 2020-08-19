@@ -28,9 +28,9 @@ I'll do this in 4 different ways. In the first approach I will use the fact that
 6. [Comparison and conclusions](#CCL)
 
 
-# Preliminaries <a name='Prelim'></a>
+## Preliminaries <a name='Prelim'></a>
 
-## Model & Data
+### Model & Data
 
 The sigmoid function I will use here as a model is:
 $${\rm sig}(x,(a,b,c,d)) = \frac{a}{1+e^{-b (x-c)}}+d,$$
@@ -84,11 +84,11 @@ plt.legend(loc = 'best')
 {% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="smth" %} 
 
 
-# Percentile interval when we know the noise distribution  <a name='First_method'></a>
+## Percentile interval when we know the noise distribution  <a name='First_method'></a>
 
 In this section I will use a percentile interval using the fact that I know the probability distribution of the noise of my data.
 
-## What is percentile interval?
+### What is percentile interval?
 
 Let us assume that we want to infer the value of a parameter $\theta$ using data $X_1,\ldots, X_k$. Let's call 
 $\hat \theta := f(X_1,\ldots, X_k)$ the value of $\theta$ inferred from the data $X_1,\ldots, X_k$. We say that $\hat \theta$ is an estimator of $\theta$. Ideally 
@@ -101,7 +101,7 @@ $\Pr_\theta(\theta \in I_{95\%})=95\%$.[^2]
 The idea of the percentile interval, is to resample the data many times. For the $i^{\rm th}$ sampling we use this newly generated data to make a new estimate $\hat \theta_{i}$ of $\theta$. Then from the list $\{\hat \theta_i\}_i$ we find the $\bar \alpha/2 $ percentile $\theta_{\bar \alpha/2}^*$ and the $1-\bar \alpha/2 $ percentile $\theta_{1-\bar \alpha/2}^*$ of the list, where $\bar \alpha:=1-\alpha$. This two elements respectively constitute the lower- and upper-bound of the interval $I_{\alpha}$, ie 
 $$I_{\alpha}:= [\theta_{\bar \alpha/2}^*, \theta_{1-\bar \alpha/2}^*].$$
 
-## Back to our problem <a name='First_method_2'></a>
+### Back to our problem <a name='First_method_2'></a>
 
 Let us apply this percentile interval to our case. First, what is our parameter $\theta$?
 
@@ -117,16 +117,16 @@ Once you have done this for one future time step, do all the above for the next 
 {% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="smth" %} 
 
 
-## Limitations of this method for constructing confidence interval
+### Limitations of this method for constructing confidence interval
 
 The most obvious limitation of this method here, is that we used the fact that the probability distribution of the noise 
 is known. In practice this is not always the case. In the next section we will see how to remedy this particular issue.
 
-# Percentile interval with bootstrap sampling.  <a name='Second_method'></a>
+## Percentile interval with bootstrap sampling.  <a name='Second_method'></a>
 
 In this section we will adapt the above percentile interval construction to the case where we **do not** know the probability distribution of the noise. To do so, we only have to replace how to generate new data point. In the previous section, we could generate new data in step 3 because we knew how the noise was distributed. So we will modify this step of the procedure, and use bootstrap sampling to generate new data.
 
-## Bootstrap sampling.
+### Bootstrap sampling.
 
 Bootstrap sampling is a method that allows us to use known data to generate "new" data that approximately follows the same distribution as the known one. Let us consider a list of independent random variables $X_1, \ldots, X_k$, all following the same **unknown** probability distribution. The realizations $x_1, \ldots, x_k$ of these random variables will represent known data. 
 We will now use $x_1, \ldots, x_k$ to generate what looks like a new list $\bar x_1,\ldots, \bar x_k$ of realizations of the same random variables $X_1, \ldots X_k$.
@@ -142,7 +142,7 @@ X = np.random.random(size = k)
 X_new = np.random.choice(X, size = k, replace = True)
 ```
 
-## Back to our problem
+### Back to our problem
 
 We now replace the step 3 of the procedure presented in the [previous section](#First_method_2). In our new point 3 we will use bootstrap sampling to generate new data. I divide the new step 3 into two sub-steps as follows:
 
@@ -151,7 +151,7 @@ We now replace the step 3 of the procedure presented in the [previous section](#
     
 All the other steps of the procedure presented in the [previous section](#First_method_2) remain unchanged.
 
-## Limitations of this method to construct confidence interval
+### Limitations of this method to construct confidence interval
 
 In this section we have solved the problem of the technique presented in the [previous section](#First_method), namely we can now construct a confidence interval even if we do **not** know the probability distribution of the noise. However, the method is not perfect and suffers from a few problems either linked to the bootstrap sampling or to the percentile method itself. 
 
@@ -165,12 +165,12 @@ In this section we have solved the problem of the technique presented in the [pr
 
 In the following section we will see a method using bootstrap sampling that is in general less sensitive to skewness of the distribution, at least for some estimator (see [[Sec. 5.5 & 5.6, Hest14]](#1) for more details).  
 
-# Bootstrap-T (or Boot-T) interval  <a name='Third_method'></a>
+## Bootstrap-T (or Boot-T) interval  <a name='Third_method'></a>
 
 In this section we will use a method that is somehow more robust than the previous ones. However, the method is not a magical solution: There are some estimators for which Boot-T performs well, and some others for which it performs poorly. For the purpose of this blog post I will simply use it 
 and compare the result to the previous methods.
 
-## How to construct the Boot-T interval?
+### How to construct the Boot-T interval?
 
 Once again let us call $\theta$ the parameter we want to estimate, and $\hat \theta$ an estimator of $\theta$. The Boot-T interval uses a statistics 
 called the t-statistics:
@@ -198,7 +198,7 @@ $$I_{\alpha} = \big [\hat \theta - q_{1-\bar \alpha/2}\hat S^*, \hat \theta -q_{
 This interval is the boot-T confidence interval (for a level of confidence $\alpha$). As you can see in this interval 
 the $1-\bar \alpha/2$ percentile is in the lower-bound of the interval and the $\bar \alpha$ percentile is in the upper bound of the interval. In the percentile intervals of the previous sections the situation was reversed, and we will see in the [comparison section](#CCL-comparison) that this makes look like the boot-T interval is a sort of mirror image of the percentile interval. 
 
-## Back to our problem
+### Back to our problem
 
 To use the boot-T confidence interval in our problem we need to follow the following procedure: 
 Let us consider a single time step in the future for which we want to make a prediction. Let us call $\theta$ the expected value 
@@ -215,7 +215,7 @@ This procedure leads to the following graph.
 {% include image.html url="/assets/images/sigmoid_uncertainty/Boot-T.png" description="smth" %} 
 
 
-# Interval based on Mc Diarmid inequality <a name='Fourth_method'></a>
+## Interval based on Mc Diarmid inequality <a name='Fourth_method'></a>
 
 In this section I will quickly mention the possibility to derive confidence interval from some theoretical bound from probability theory. However, I will not develop a lot this method because it gives bigger interval than the previous methods, and require some not necessarily valid assumption to be derived.
 
@@ -240,9 +240,9 @@ From this we can derive a confidence interval by remembering that the estimator 
 
 As you can see, the bound we get from the McDiarmid inequality is much looser than what we got from the previous methods, and that is why I will develop
 
-# Comparison & conclusions <a name="CCL"></a>
+## Comparison & conclusions <a name="CCL"></a>
 
-## Comparison <a name="CCL-comparison"></a>
+### Comparison <a name="CCL-comparison"></a>
 
 In this post, we have seen the percentile interval, the boot-T interval and an interval coming from the McDiarmid inequality. Since the last one 
 gives result that are far too loose compare to the other, I will not compare it further t the other methods.
@@ -265,5 +265,7 @@ To have a fair comparison, let me show you a couple of plots with the percentile
 
 ### A quick word on confidence intervals
 
-# References
+## References
 <a id="1">[Hest14]</a> [Hesterberg, Tim C. "What teachers should know about the bootstrap: Resampling in the undergraduate statistics curriculum." The American Statistician 69.4 (2015): 371-386.](https://arxiv.org/abs/1411.5279.pdf)
+
+-------------------------
