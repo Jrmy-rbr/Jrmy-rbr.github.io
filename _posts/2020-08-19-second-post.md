@@ -82,9 +82,9 @@ plt.plot(x,sig(x,fit_param['x']), label = "Prediction")
 plt.plot([x[length],x[length]], [0,1])
 plt.legend(loc = 'best')
 ```
-
+<center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="smth" %} 
-
+</center>
 
 ## Percentile interval when we know the noise distribution  <a name='First_method'></a>
 
@@ -117,7 +117,9 @@ Here we try to predict the expectation values of the future values of the sigmoi
 
 Once you have done this for one future time step, do all the above for the next time steps until you are finished. As you can see in the above procedure, the prediction given at a time step by the fit of the data plays the role of the predicted parameter $$\hat \theta$$ we talked about in the previous section, while the value of the true sigmoid at a time step plays the role of the true value of $$\theta$$ from the previous section.
 
+<center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="smth" %} 
+</center>
 
 
 ### Limitations of this method for constructing confidence interval
@@ -164,8 +166,9 @@ In this section we have solved the problem of the technique presented in the [pr
 3. In practice this method is not robust when the probability distribution of the noise is skewed or the estimator $$\hat \theta$$ is biased [[Hest14]](#1).
 4. When computing a $$95\%$$ several times with a different data set each time, we observe that this interval varies quite a lot, which is not ideal...
 
+<center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/Boot-Percentile.png" description="smth" %} 
-
+</center>
 
 In the following section we will see a method using bootstrap sampling that is in general less sensitive to skewness of the distribution, at least for some estimator (see [[Sec. 5.5 & 5.6, Hest14]](#1) for more details).  
 
@@ -223,8 +226,9 @@ of the future data point at this time step.
 
 This procedure leads to the following graph.
 
+<center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/Boot-T.png" description="smth" %} 
-
+</center>
 
 ## Interval based on Mc Diarmid inequality <a name='Fourth_method'></a>
 
@@ -265,8 +269,9 @@ In the case of the percentile interval I will essentially focus on the situation
 
 To have a fair comparison, let me show you a couple of plots with the percentile interval and the boot-T interval computed on the same data.
 
+<center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="smth" %} 
-
+</center>
 
 ## Conclusion
 
