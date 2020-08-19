@@ -1,6 +1,6 @@
 ---
 title: Second Post
-author: Chris
+author: Jeremy
 layout: post
 published: True
 ---
