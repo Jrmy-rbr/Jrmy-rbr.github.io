@@ -263,7 +263,7 @@ To have a fair comparison, let me show you a couple of plots with the percentile
 - Improving the fit over the past data with bootstrap
 - Combination of the above
 
-#### A quick word on confidence intervals
+### A quick word on confidence intervals
 
-## References
+# References
 <a id="1">[Hest14]</a> [Hesterberg, Tim C. "What teachers should know about the bootstrap: Resampling in the undergraduate statistics curriculum." The American Statistician 69.4 (2015): 371-386.](https://arxiv.org/abs/1411.5279.pdf)
