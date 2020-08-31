@@ -20,10 +20,10 @@ function loadDoc() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("demo").innerHTML =
-      this.response;
+      this.response.getElementById("about-me");
     }
   };
-  xhttp.open("GET", "https://scholar.google.com/citations?user=y1ZcBOYAAAAJ&hl=en", true);
+  xhttp.open("GET", "https://jrmy-rbr.github.io/", true);
   xhttp.send();
 }
 </script>
