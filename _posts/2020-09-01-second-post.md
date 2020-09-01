@@ -76,7 +76,7 @@ plt.figure(figsize=(10,8))
 plt.axes(xlim=(-6, 6), ylim=(-0.2, 1.2))
 length = 20 #number of points considered for the fit
 plt.scatter(x,ydat)
-plt.plot(x, sig(x), label = "Thruth")
+plt.plot(x, sig(x), label = "Truth")
 fit_param = curve_fit(sig, x[:length], ydat[:length], [1,1,0,0]) #infer the parameter of the model by fitting the curve the k first points (k=length)
 plt.plot(x,sig(x,fit_param['x']), label = "Prediction")
 plt.plot([x[length],x[length]], [0,1])
