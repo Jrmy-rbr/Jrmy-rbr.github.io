@@ -271,14 +271,30 @@ To have a fair comparison, let me show you a couple of plots with the percentile
 
 ## Conclusion
 
+The last section shows that, in this particular situation, and with this particular noise, the bootstrap percentile interval behaves better than the boot-T interval. We also see that the interval starts to behave properly when the "past data" represents about $$40\%$$ or more of the total data, ie when the "future" starts a bit before the inflection point of the sigmoid.
+
 ### Going further, and possible imprvements
 
-- Other noise distribution
-- Using the median as predictor, and checking its robustness with other type of noise
-- Improving the fit over the past data with bootstrap
-- Combination of the above
+If one wants to go further, here are some interesting leads:
+1. One can explore the effect of other type of noise on the different techniques to build these intervals. 
+In this post I limited myself to Gaussian noise, which is symmetric and with thin tails. 
+It is possible that skewed noise with fat tail distribution can completely 
+change how well the techniques perform in constructing a confidence intervals.
+2. An important observation to make about the different plot I presented in this post, is that the quality of the fit on 
+the past data completely conditions the quality of the confidense interval. A fit that is too far from the truth on the past data likely leads to an interval that is completely off. Therefore, one may explore the effect of randomization  and averaging (using some bootstrap sampling methods) of the fit for the past data to see whether it can improve its quality. This will not only allow to have better confidence interval, but also get 
+meaningful confidence interval using less past data.
+3. One may want to use another predictor instead of the fit we presented here. For example one might want to use 
+the median or the average of an ensemble of fits.
+4. A combination of the above is likely to improve the constructions of the confidence intervals I have presented in this post.
 
-### A quick word on confidence intervals
+### A quick word about confidence levels
+
+It is easy to be confused by the meaning of a confidence level. One might be tempted to see it as the probability that 
+the true values of the parameter we try to estimate lies in the interval. Rather it is, for a given true value of the parameter and for a given method to 
+construct the interval, the probability that the data leads to the construction of an interval that contains the true value. In other
+words it measures the capacity that the construction of the interval has to "capture" the true value of the parameter.
+
+
 
 ## References
 <a id="1">[Hest14]</a> [Hesterberg, Tim C. "What teachers should know about the bootstrap: Resampling in the undergraduate statistics curriculum." The American Statistician 69.4 (2015): 371-386.](https://arxiv.org/abs/1411.5279.pdf)
