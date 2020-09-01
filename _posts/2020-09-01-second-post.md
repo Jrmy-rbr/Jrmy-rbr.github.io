@@ -2,7 +2,7 @@
 title: Second Post
 author: Jeremy
 layout: post
-published: false
+published: true
 ---
 
 Some time ago Constance Crozier made a nice animation illustrating that forecasting s-curves is hard: 
