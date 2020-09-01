@@ -83,7 +83,7 @@ plt.plot([x[length],x[length]], [0,1])
 plt.legend(loc = 'best')
 ```
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="The true sigmoid is in blue. Adding Gaussian noise I created the data points. Using the data point in the "past" I fit the orange sigmoid curve. The goal is to use the orange curve to predict the shape of the true sigmoid in the "future"." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="The" %} 
 </center>
 
 ## Percentile interval when we know the noise distribution  <a name='First_method'></a>
@@ -118,7 +118,7 @@ Here we try to predict the expectation values of the future values of the sigmoi
 Once you have done this for one future time step, do all the above for the next time steps until you are finished. As you can see in the above procedure, the prediction given at a time step by the fit of the data plays the role of the predicted parameter $$\hat \theta$$ we talked about in the previous section, while the value of the true sigmoid at a time step plays the role of the true value of $$\theta$$ from the previous section.
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="Percentile interval. The blue sigmoid is the true curve. The red curve is the one obtained by fit the past data points. The green region is obtained by resampling the past data points around the red curve, and fit many other curves this way. Among all these curves $$95\%$$ were in the green region. The purple curve is the median curve of all these curves: $$50%$$ were below and $$50\%$$ above this curve. The median curve is a possible alternative predictor to the red fitted curve. Even if the red curve is too high and the median curve is too low, the true curve is contained in the green interval." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="Percentile" %} 
 </center>
 
 
@@ -166,7 +166,7 @@ In this section we have solved the problem of the technique presented in the [pr
 4. When computing a $$95\%$$ several times with a different data set each time, we observe that this interval varies quite a lot, which is not ideal...
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Boot-Percentile.png" description="Bottstrp percentile interval. It is similar to the previous figure. The only change comes from the method I used to resample the past data points: Here I used the bootstrap sampling method." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Boot-Percentile.png" description="Bootstrap" %} 
 </center>
 
 In the following section we will see a method using bootstrap sampling that is in general less sensitive to skewness of the distribution, at least for some estimator (see [[Sec. 5.5 & 5.6, Hest14]](#1) for more details).  
@@ -226,7 +226,7 @@ of the future data point at this time step.
 This procedure leads to the following graph.
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Boot-T.png" description="Boot-T interval. The curves are similar to the previous figures, but I now use the boot-T interval instead of the percentile interval." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Boot-T.png" description="Boot-T" %} 
 </center>
 
 ## Interval based on Mc Diarmid inequality <a name='Fourth_method'></a>
@@ -249,7 +249,7 @@ $$
 From this we can derive a confidence interval by remembering that the estimator $$\hat \theta$$ of the parameter $$\theta$$ is a function of the observed data, ie we have something like $$\hat \theta = f(X_1, \ldots, X_k)$$. I won't develop more, but under some assumptions we can derive a confidence interval that leads to the following graph.
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/McDiarmid.png" description="McDiarmid's inequality based interval. We can see that this interval is much wider than the ones obtained with the other methods." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/McDiarmid.png" description="McDiarmid" %} 
 </center>
 
 As you can see, the bound we get from the McDiarmid inequality is much looser than what we got from the previous methods, and that is why I will develop
@@ -266,7 +266,7 @@ In the case of the percentile interval I will essentially focus on the situation
 To have a fair comparison, let me show you a couple of plots with the percentile interval and the boot-T interval computed on the same data.
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. The boot-T is basicaly a mirrored image of the percentile interval with respect to the red curve." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="Comparison" %} 
 </center>
 
 ## Conclusion
