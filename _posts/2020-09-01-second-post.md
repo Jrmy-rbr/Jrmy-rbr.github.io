@@ -83,9 +83,7 @@ plt.plot([x[length],x[length]], [0,1])
 plt.legend(loc = 'best')
 ```
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="The true sigmoid is in blue. Adding Gaussian noise I created 
-    the data points. Using the data point in the "past" I fit the orange sigmoid curve. The goal is to use the orange curve to 
-    predict the shape of the true sigmoid in the "future"." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="The true sigmoid is in blue. Adding Gaussian noise I created the data points. Using the data point in the "past" I fit the orange sigmoid curve. The goal is to use the orange curve to predict the shape of the true sigmoid in the "future"." %} 
 </center>
 
 ## Percentile interval when we know the noise distribution  <a name='First_method'></a>
@@ -120,11 +118,7 @@ Here we try to predict the expectation values of the future values of the sigmoi
 Once you have done this for one future time step, do all the above for the next time steps until you are finished. As you can see in the above procedure, the prediction given at a time step by the fit of the data plays the role of the predicted parameter $$\hat \theta$$ we talked about in the previous section, while the value of the true sigmoid at a time step plays the role of the true value of $$\theta$$ from the previous section.
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="Percentile interval. The blue sigmoid is the true curve. The red curve is the one 
-    obtained by fit the past data points. The green region is obtained by resampling the past data points around the red curve, and fit many other curves this way.  
-    Among all these curves $$95\%$$ were in the green region. The purple curve is the median curve of all these curves: $$50%$$ were below and $$50\%$$ above
-    this curve. The median curve is a possible alternative predictor to the red fitted curve. Even if the red curve is too high and the median curve is too low, the  
-    true curve is contained in the green interval." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="Percentile interval. The blue sigmoid is the true curve. The red curve is the one obtained by fit the past data points. The green region is obtained by resampling the past data points around the red curve, and fit many other curves this way. Among all these curves $$95\%$$ were in the green region. The purple curve is the median curve of all these curves: $$50%$$ were below and $$50\%$$ above this curve. The median curve is a possible alternative predictor to the red fitted curve. Even if the red curve is too high and the median curve is too low, the true curve is contained in the green interval." %} 
 </center>
 
 
