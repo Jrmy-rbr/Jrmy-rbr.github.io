@@ -1,11 +1,19 @@
 ---
 title: Reading List
-subtitle: A list of books I want to read
+subtitle: "" 
 layout: "page"
 icon: fa-book
 order: 3
 ---
 
+
+Books I am reading:
+
+- Nick Polson & James Scott: *AIQ*
+- Machado de Assis: *O Alienista*
+
+
+A list of books I want to read:
 
 - Lê Nguyên Hoang: *The Equation of Knowledge*
 - William Macaskill: *Doing good Better*
