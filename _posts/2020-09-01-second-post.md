@@ -266,8 +266,14 @@ In the case of the percentile interval I will essentially focus on the situation
 To have a fair comparison, let us plot the percentile interval and the boot-T interval computed on the same data.
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. The boot-T is basicaly a mirrored image of the percentile interval with respect to the red curve." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-20.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 20% of total data." %}
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-30.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 30% of total data." %}
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 40% of total data" %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-50.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 50% of total data." %}
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-60.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 60% of total data." %}
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-70.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 70% of total data." %}
 </center>
+Note that the boot-T interval is basicaly a mirrored image of the percentile interval with respect to the red curve.
 
 ## Conclusion
 
