@@ -83,7 +83,7 @@ plt.plot([x[length],x[length]], [0,1])
 plt.legend(loc = 'best')
 ```
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="The true sigmoid is in blue. Adding Gaussian noise I created the data points. Using the data point in the past I fit the orange sigmoid curve. The goal is to use the orange curve to predict the shape of the true sigmoid in the future." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="" %} 
 </center>
 
 ## Percentile interval when we know the noise distribution  <a name='First_method'></a>
