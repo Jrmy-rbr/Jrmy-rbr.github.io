@@ -268,7 +268,7 @@ To have a fair comparison, let us plot the percentile interval and the boot-T in
 <center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-20.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 20% of total data." %}
 {% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-30.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 30% of total data." %}
-{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 40% of total data" %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-40.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 40% of total data" %} 
 {% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-50.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 50% of total data." %}
 {% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-60.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 60% of total data." %}
 {% include image.html url="/assets/images/sigmoid_uncertainty/Comparison-70.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. Past data = 70% of total data." %}
