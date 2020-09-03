@@ -21,7 +21,7 @@ I'll do this in 4 different ways. In the first approach I will use the fact that
 
 ## Table of content 
 1. [Preliminaries](#Prelim)
-2. [Percentile interval when know the noise distribution](#First_method)
+2. [Percentile interval when we know the noise distribution](#First_method)
 3. [Percentile interval with bootstrap sampling](#Second_method)
 4. [Boot-T interval](#Third_method)
 5. [Interval based on Mc Diarmid inequality](#Fourth_method)
@@ -53,7 +53,7 @@ def sig(x, args = (1,1,0,0)):
     return out
 
 #generate the data
-std = 0.03
+std = 0.05
 x = np.linspace(-6,6,100)
 ydat=sig(x)+np.random.normal(scale=std,size=len(x))
 ```
@@ -83,8 +83,9 @@ plt.plot([x[length],x[length]], [0,1])
 plt.legend(loc = 'best')
 ```
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="The true sigmoid is in blue. Adding Gaussian noise I created the data points. Using the data point in the 'past' I fit the orange sigmoid curve. The goal is to use the orange curve to predict the shape of the true sigmoid in the 'future'." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/basic_plot.png" description="The true sigmoid is in blue. Adding Gaussian noise I created the data points. Using the data point in the 'past' I fit the orange sigmoid curve. The goal is to use the orange curve to predict the shape of the true sigmoid in the 'future'. As we can see here, the fit is not good for the future as explained by Constance Crozier in her post." %} 
 </center>
+
 
 ## Percentile interval when we know the noise distribution  <a name='First_method'></a>
 
@@ -112,19 +113,19 @@ Here we try to predict the expectation values of the future values of the sigmoi
 1. Use the $$k$$ past points, and fit the sigmoid to these past points.
 2. Use the sigmoid we found in the previous step and store the predicted value at the time step of interest.
 3. Generate new data by adding noise to the sigmoid you got in step 1. for all the **past** time steps. We can do this since we know the probability distribution of the noise we want to add.
-4. Fit a new sigmoid to the newly generated data, and record the prediction of this sigmoid on the future time steps in a list. Repeat steps 3 and 4 many times.
+4. Fit a new sigmoid to the newly generated data, and record the prediction of this sigmoid on the future time step in a list. Repeat steps 3. and 4. many times.
 5. When having a sufficiently long list of predicted values for the time step of interest, find the $$\bar \alpha/2 $$ percentile  and the $$1-\bar \alpha/2 $$ percentile of the list. These two values will be the lower- and upper-bound of the confidence interval on the predicted value for this time step.
 
 Once you have done this for one future time step, do all the above for the next time steps until you are finished. As you can see in the above procedure, the prediction given at a time step by the fit of the data plays the role of the predicted parameter $$\hat \theta$$ we talked about in the previous section, while the value of the true sigmoid at a time step plays the role of the true value of $$\theta$$ from the previous section.
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="Percentile interval. The blue sigmoid is the true curve. The red curve is the one obtained by fit the past data points. The green region is obtained by resampling the past data points around the red curve, and fit many other curves this way. Among all these curves 95% were in the green region. The purple curve is the median curve of all these curves: 50% were below and 50% above this curve. The median curve is a possible alternative predictor to the red fitted curve. Even if the red curve is too high and the median curve is too low, the true curve is contained in the green interval." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Percentile_known.png" description="Percentile interval. The blue sigmoid is the true curve. The red curve is the one obtained by fitting the past data points. The green region is obtained by resampling the past data points around the red curve, and fit many other curves this way. Among all these curves 95% were in the green region. The purple curve is the median curve of all these curves: 50% were below and 50% above this curve. The median curve is a possible alternative predictor to the red fitted curve. Even if the red curve is too high and the median curve is too low, the true curve is contained in the green interval." %} 
 </center>
 
 
 ### Limitations of this method for constructing confidence interval
 
-The most obvious limitation of this method here, is that we used the fact that the probability distribution of the noise 
+The most obvious limitation of this method, is that we used the fact that the probability distribution of the noise 
 is known. In practice this is not always the case. In the next section we will see how to remedy this particular issue.
 
 ## Percentile interval with bootstrap sampling.  <a name='Second_method'></a>
@@ -150,31 +151,30 @@ X_new = np.random.choice(X, size = k, replace = True)
 
 ### Back to our problem
 
-We now replace the step 3 of the procedure presented in the [previous section](#First_method_2). In our new point 3 we will use bootstrap sampling to generate new data. I divide the new step 3 into two sub-steps as follows:
+We now replace the step 3. of the procedure presented in the [previous section](#First_method_2). In our new point 3 we will use bootstrap sampling to generate new data. I divide the new step 3. into two sub-steps as follows:
 
 3.  1. Compute the list of the differences between the **past** data points and the value given by the sigmoid obtained in step 1. This is called the residues, and it approximates the noise.
-    2. Generate new data by adding to the sigmoid obtained in step 1 the residues picked uniformly at random (with replacement) from the list of residues computed in the previous sub-step. This is the bootstrap sampling of the noise.
+    2. Generate new data by adding to the sigmoid obtained in step 1. the residues picked uniformly at random (with replacement) from the list of residues computed in the previous sub-step. This is the bootstrap sampling of the noise.
     
 All the other steps of the procedure presented in the [previous section](#First_method_2) remain unchanged.
 
 ### Limitations of this method to construct confidence interval
 In this section we have solved the problem of the technique presented in the [previous section](#First_method), namely we can now construct a confidence interval even if we do **not** know the probability distribution of the noise. However, the method is not perfect and suffers from a few problems either linked to the bootstrap sampling or to the percentile method itself. 
 
-1. The bootstrap sampling is only an approximation that does not always work. For example, if one wants to generate more "new points" than one has "old points", some extra correlation will show up, therefore the probability distribution of the bootstrap sample is not independently and identically distributed.
-2. There is no good theoretical justification of why percentile confidence interval works: "It just does" [[Sec. 5.4, Hest14]](#1).
-3. In practice this method is not robust when the probability distribution of the noise is skewed or the estimator $$\hat \theta$$ is biased [[Hest14]](#1).
-4. When computing a $$95\%$$ several times with a different data set each time, we observe that this interval varies quite a lot, which is not ideal...
+1. The bootstrap sampling is only an approximation that does not always work. For example, if one wants to generate more "new points" than one has "old points", then some of the old point will be picked several times as new point: Some extra correlation appears, therefore the probability distribution of the bootstrap sample is not independently and identically distributed.
+2. There is no strong theoretical justification of why percentile confidence interval works: "It just does" [[Sec. 5.4, Hest14]](#1).
+3. In general, this method is not robust when the probability distribution of the noise is skewed or the estimator $$\hat \theta$$ is biased [[Hest14]](#1).
 
 <center>
-{% include image.html url="/assets/images/sigmoid_uncertainty/Boot-Percentile.png" description="Bottstrap percentile interval. It is similar to the previous figure. The only change comes from the method I used to resample the past data points: Here I used the bootstrap sampling method." %} 
+{% include image.html url="/assets/images/sigmoid_uncertainty/Boot-Percentile.png" description="Bootstrap percentile interval. It is similar to the previous figure. The only change comes from the method used to resample the past data points: Here the bootstrap sampling method is used." %} 
 </center>
 
 In the following section we will see a method using bootstrap sampling that is in general less sensitive to skewness of the distribution, at least for some estimator (see [[Sec. 5.5 & 5.6, Hest14]](#1) for more details).  
 
 ## Bootstrap-T (or Boot-T) interval  <a name='Third_method'></a>
 
-In this section we will use a method that is somehow more robust than the previous ones. However, the method is not a magical solution: There are some estimators for which Boot-T performs well, and some others for which it performs poorly. For the purpose of this blog post I will simply use it 
-and compare the result to the previous methods.
+In this section we will use a method that is often more robust than the previous ones. However, the method is not a magical solution: There are some estimators for which Boot-T performs well, and some others for which it performs poorly. For the purpose of this blog post I will simply use it 
+and compare the result to the previous method.
 
 ### How to construct the Boot-T interval?
 
@@ -183,14 +183,14 @@ called the t-statistics:
 
 $$ t := \frac{\hat \theta - \theta}{\hat S}, $$
 
-where $$S$$ is an estimator of the standard deviation of $$\hat \theta$$.
+where $$\hat S$$ is an estimator of the standard deviation of $$\hat \theta$$.
 
-However, we do not have direct access to the distribution of $$\hat \theta$$ and $$S$$, therefore we don't have access to the distribution of the $$t$$-statistics.
+However, we do not have direct access to the distribution of $$\hat \theta$$ and $$\hat S$$, therefore we don't have access to the distribution of the $$t$$-statistics.
 We will therefore use bootstrap sampling to approximate the distribution of the $$t$$-statistics, similarly as we did approximate the noise distribution with bootstrap sampling in the previous section. In other words, we compute many times the following quantity,
 
 $$t^* := \frac{\hat \theta^* - \hat \theta}{\hat S^*},$$
 
-where $$\hat \theta^*$$ denotes the estimation of $$\theta$$ done through bootstrap sampling, and $$S^*$$ is the standard error of $$\hat \theta^*$$. We compute this $$t^*$$ many times, and store all this values in a list. We can then compute the $$\bar \alpha$$ percentile $$q_{\bar \alpha}$$ and the $$1-\bar \alpha/2$$ percentile $$q_{1-\bar \alpha/2}$$ of this list of values for $$t^*$$, where $$\bar \alpha = 1-\alpha$$, and $$\alpha$$ is the confidence level of the interval we are trying to construct as in the previous sections. Then by definition of the percentile we have:
+where $$\hat \theta^*$$ denotes the estimation of $$\theta$$ done through bootstrap sampling, and $$\hat S^*$$ is the standard error of $$\hat \theta^*$$. We compute this $$t^*$$ many times, and store all this values in a list. We can then compute the $$\bar \alpha$$ percentile $$q_{\bar \alpha}$$ and the $$1-\bar \alpha/2$$ percentile $$q_{1-\bar \alpha/2}$$ of this list of values of $$t^*$$, where $$\bar \alpha = 1-\alpha$$, and $$\alpha$$ is the confidence level of the interval we are trying to construct as in the previous sections. Then by definition of the percentile we have:
 
 $$
 \begin{align}
@@ -204,12 +204,12 @@ $$
 
 where in the first equation with the $$\approx$$ symbol we assume that the bootstrap probability distribution of $$t^*$$ is a good approximation of the true distribution of $$t$$, and in the second equation with the $$\approx$$ symbol we assume that $$\hat S^* \approx \hat 
 S$$, ie that the standard error of the estimation $$\hat \theta$$ is well approximated by the standard error of the bootstrap estimation 
-$$\hat \theta^*$$. The last equation leads to conclude that the $$\alpha$$-confidence interval is given by,
+$$\hat \theta^*$$. The last equation leads to the conclusion that the $$\alpha$$-confidence interval is given by,
 
 $$I_{\alpha} = \big [\hat \theta - q_{1-\bar \alpha/2}\hat S^*, \hat \theta -q_{\bar \alpha/2} \hat S^*\big].$$
 
-This interval is the boot-T confidence interval (for a level of confidence $$\alpha$$). As you can see in this interval 
-the $$1-\bar \alpha/2$$ percentile is in the lower-bound of the interval and the $$\bar \alpha$$ percentile is in the upper bound of the interval. In the percentile intervals of the previous sections the situation was reversed, and we will see in the [comparison section](#CCL-comparison) that this makes look like the boot-T interval is a sort of mirror image of the percentile interval. 
+This interval is the boot-T confidence interval (for a level of confidence $$\alpha$$). As we can see in this interval 
+the $$1-\bar \alpha/2$$ percentile is related to the lower-bound of the interval and the $$\bar \alpha$$ percentile is related to the upper bound of the interval. In the percentile intervals of the previous sections the situation was reversed, and we will see in the [comparison section](#CCL-comparison) that this makes look like the boot-T interval is a sort of mirror image of the percentile interval. 
 
 ### Back to our problem
 
@@ -218,10 +218,10 @@ Let us consider a single time step in the future for which we want to make a pre
 of the future data point at this time step.
 1. Use the $$k$$ past points, and fit the sigmoid to these past points.
 2. Use the sigmoid we found in the previous step and store the predicted value $$\hat \theta$$ at the future time step.
-3.  1. Compute the list of the differences between the **past** data points and the value given by the sigmoid obtained in step 1 for these past time steps. This is called the residues, and it approximates the noise.
-    2. Generate new data by adding to the sigmoid obtained in step 1 the residues picked uniformly at random (with replacement) from the list of residues computed in the previous sub-step. This is the bootstrap sampling of the noise.
+3.  1. Compute the list of the differences between the **past** data points and the value given by the sigmoid obtained in step 1. for these past time steps. These are called the residues, and them approximate the noise.
+    2. Generate new data by adding to the sigmoid obtained in step 1. the residues picked uniformly at random (with replacement) from the list of residues computed in the previous sub-step. This is the bootstrap sampling of the noise.
 4. Fit a new sigmoid to the newly generated data (on the past time steps), and record the prediction $$\hat \theta^*$$ of this sigmoid for the future time step in a list. Repeat steps 3 and 4 many times.
-5. When having a sufficiently long list of predicted values for the future time step, compute the standard deviation $$\hat S^*$$ of this list. Create a new list whose elements are the t-statistics computed from each element $$\hat \theta^*$$ of the previous list and there standard deviation $$\hat S^*$$ and the prediction $$\hat \theta$$ given in step 2. In this list of t-statistics find the $$\bar \alpha/2 $$ percentile $$q_{\bar \alpha/2}$$ and the $$1-\bar \alpha/2 $$ percentile $$q_{1-\bar \alpha/2}$$. The interval is then given by $$\big [\hat \theta - q_{1-\bar \alpha/2}\hat S^*, \hat \theta -q_{\bar \alpha/2} \hat S^*\big]$$.
+5. When having a sufficiently long list of predicted values for the future time step, compute the standard deviation $$\hat S^*$$ of this list. Create a new list whose elements are the t-statistics computed from each element $$\hat \theta^*$$ of the previous list and their standard deviation $$\hat S^*$$ and the prediction $$\hat \theta$$ given in step 2. In this list of t-statistics find the $$\bar \alpha/2 $$ percentile $$q_{\bar \alpha/2}$$ and the $$1-\bar \alpha/2 $$ percentile $$q_{1-\bar \alpha/2}$$. The interval is then given by $$\big [\hat \theta - q_{1-\bar \alpha/2}\hat S^*, \hat \theta -q_{\bar \alpha/2} \hat S^*\big]$$.
 
 This procedure leads to the following graph.
 
@@ -229,9 +229,9 @@ This procedure leads to the following graph.
 {% include image.html url="/assets/images/sigmoid_uncertainty/Boot-T.png" description="Boot-T interval. The curves are similar to the previous figures, but I now use the boot-T interval instead of the percentile interval." %} 
 </center>
 
-## Interval based on Mc Diarmid inequality <a name='Fourth_method'></a>
+## Interval based on McDiarmid inequality <a name='Fourth_method'></a>
 
-In this section I will quickly mention the possibility to derive confidence interval from some theoretical bound from probability theory. However, I will not develop a lot this method because it gives bigger interval than the previous methods, and require some not necessarily valid assumption to be derived.
+In this section we will quickly see the possibility to derive confidence interval from some theoretical bound from probability theory. However, we will not spend too much time on this method because it gives larger intervals than the previous methods, and require some not necessarily valid assumptions to be derived.
 
 The [McDiarmid inequality](https://www.wikiwand.com/en/Doob_martingale#/McDiarmid's_inequality) is a concentration bound that quantifies by how much certain random variables can deviate from their expectation values. The statement of this inequality goes along the following lines.
 
@@ -247,24 +247,23 @@ $$
 2 \exp \left(-\frac{2 \epsilon^2}{\sum_{i=1}^{k} c_i^2}\right).
 $$
 
-From this we can derive a confidence interval by remembering that the estimator $$\hat \theta$$ of the parameter $$\theta$$ is a function of the observed data, ie we have something like $$\hat \theta = f(X_1, \ldots, X_k)$$. I won't develop more, but under some assumptions we can derive a confidence interval that leads to the following graph.
+From this we can derive a confidence interval by remembering that the estimator $$\hat \theta$$ of the parameter $$\theta$$ is a function of the observed data, ie we have $$\hat \theta = f(X_1, \ldots, X_k)$$. Skipping all the details, know that under some assumptions we can derive a confidence interval that leads to the following graph.
 
 <center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/McDiarmid.png" description="McDiarmid's inequality based interval. We can see that this interval is much wider than the ones obtained with the other methods." %} 
 </center>
 
-As you can see, the bound we get from the McDiarmid inequality is much looser than what we got from the previous methods, and that is why I will develop
 
 ## Comparison & conclusions <a name="CCL"></a>
 
 ### Comparison <a name="CCL-comparison"></a>
 
 In this post, we have seen the percentile interval, the boot-T interval and an interval coming from the McDiarmid inequality. Since the last one 
-gives result that are far too loose compare to the other, I will not compare it further t the other methods.
+gives result that are far too loose compare to the others, we will not compare it with the other methods.
 
 In the case of the percentile interval I will essentially focus on the situation in which the probability distribution of the noise is unknown.
 
-To have a fair comparison, let me show you a couple of plots with the percentile interval and the boot-T interval computed on the same data.
+To have a fair comparison, let us plot the percentile interval and the boot-T interval computed on the same data.
 
 <center>
 {% include image.html url="/assets/images/sigmoid_uncertainty/Comparison.png" description="Comparison between the bootstrap percentile interval and the boot-T interval on the same data. The boot-T is basicaly a mirrored image of the percentile interval with respect to the red curve." %} 
@@ -274,19 +273,19 @@ To have a fair comparison, let me show you a couple of plots with the percentile
 
 The last section shows that, in this particular situation, and with this particular noise, the bootstrap percentile interval behaves better than the boot-T interval. We also see that the interval starts to behave properly when the "past data" represents about $$40\%$$ or more of the total data, ie when the "future" starts a bit before the inflection point of the sigmoid.
 
-### Going further, and possible imprvements
+### Going further, and possible improvements
 
 If one wants to go further, here are some interesting leads:
 1. One can explore the effect of other type of noise on the different techniques to build these intervals. 
 In this post I limited myself to Gaussian noise, which is symmetric and with thin tails. 
 It is possible that skewed noise with fat tail distribution can completely 
 change how well the techniques perform in constructing a confidence intervals.
-2. An important observation to make about the different plot I presented in this post, is that the quality of the fit on 
-the past data completely conditions the quality of the confidense interval. A fit that is too far from the truth on the past data likely leads to an interval that is completely off. Therefore, one may explore the effect of randomization  and averaging (using some bootstrap sampling methods) of the fit for the past data to see whether it can improve its quality. This will not only allow to have better confidence interval, but also get 
-meaningful confidence interval using less past data.
-3. One may want to use another predictor instead of the fit we presented here. For example one might want to use 
+2. An important observation to make about the different plots presented in this post, is that the quality of the fit on 
+the past data completely conditions the quality of the confidence interval. A fit that is too far from the truth on the past data likely leads to an interval that is completely off. Therefore, one may explore the effect of randomization and averaging (using some bootstrap sampling methods) of the fit for the past data to see whether it can improve its quality. This will not only allow to have better confidence intervals, but also get 
+meaningful confidence intervals using less past data.
+3. One may want to use another predictor instead of the fit presented here. For example one might want to use 
 the median or the average of an ensemble of fits.
-4. A combination of the above is likely to improve the constructions of the confidence intervals I have presented in this post.
+4. A combination of the above is likely to improve the construction of the confidence intervals presented in this post.
 
 ### A quick word about confidence level
 
