@@ -277,7 +277,7 @@ Note that the boot-T interval is basicaly a mirrored image of the percentile int
 
 ## Conclusion
 
-The last section shows that, in this particular situation, and with this particular noise, the bootstrap percentile interval behaves better than the boot-T interval. We also see that the interval starts to behave properly when the "past data" represents about $$40\%$$ or more of the total data, ie when the "future" starts a bit before the inflection point of the sigmoid.
+The last section shows that, in this particular situation, and with this particular noise, the bootstrap percentile interval behaves better than the boot-T interval. We also see that the interval starts to behave properly when the "past data" represents about $$30\%%%-%%40\%$$ and more of the total data, ie when the "future" starts a bit before the inflection point of the sigmoid.
 
 ### Going further, and possible improvements
 
