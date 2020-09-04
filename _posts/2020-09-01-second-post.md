@@ -1,5 +1,5 @@
 ---
-title: Second Post
+title: Uncertainty when forcasting s-curves
 author: Jeremy
 layout: post
 published: true
