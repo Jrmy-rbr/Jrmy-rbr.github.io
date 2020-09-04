@@ -38,7 +38,7 @@ $${\rm sig}(x,(a,b,c,d)) = \frac{a}{1+e^{-b (x-c)}}+d,$$
 
 where $$a, b, c,$$ and $$d$$ are the parameters of the model to be fitted.
 
-To generate the data, I will fix $$(a,b,c,d)=(1,1,0,0)$$ and add Gaussian noise:
+To generate the data, I will fix $$(a,b,c,d)=(1,1,6,0)$$ and add Gaussian noise:
 
 ``` python
 import numpy as np
