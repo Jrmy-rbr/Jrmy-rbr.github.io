@@ -24,7 +24,7 @@ I'll do this in 4 different ways. In the first approach I will use the fact that
 2. [Percentile interval when we know the noise distribution](#First_method)
 3. [Percentile interval with bootstrap sampling](#Second_method)
 4. [Boot-T interval](#Third_method)
-5. [Interval based on Mc Diarmid inequality](#Fourth_method)
+5. [Interval based on McDiarmid inequality](#Fourth_method)
 6. [Comparison and conclusions](#CCL)
 
 
@@ -43,7 +43,7 @@ To generate the data, I will fix $$(a,b,c,d)=(1,1,6,0)$$ and add Gaussian noise:
 ``` python
 import numpy as np
 
-def sig(x, args = (1,1,0,0)):
+def sig(x, args = (1,1,6,0)):
     #This function implements the sigmoid model described above
     a = args[0] 
     b = args[1] 
