@@ -24,6 +24,7 @@ A list of books I want to read:
 - E. T. Jaynes: *Probability Theory: The Logic of Science*
 - David D Burns MD: *Feeling Good*
 - Nick Bostrom: *Superintelligence*
+- Stuart Russell: *Human Compatible: Artificial Intelligence and the Problem of Control*
 - Ben Todd: *80,000 Hours*
 - Martin Peterson: *An Introduction to Decision Theory*
 - Tom Salinsky & Deborah Frances-White: *The Improv Handbook*
