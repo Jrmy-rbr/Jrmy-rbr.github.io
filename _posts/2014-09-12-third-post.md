@@ -10,11 +10,11 @@ published: false
 
 
 ## Table of content
-[1] [Data](#Data)
-[2] [Classification using meta-data only](#meta-data_clf)
-[3] [Classification using the pretrained Bert model](#Bert)
-[4] [Combine](#Combine)
-[5] [Inegrate the whole model into pipeline](#Pipeline)
+1. [Data](#Data)
+2. [Classification using meta-data only](#meta-data_clf)
+3. [Classification using the pretrained Bert model](#Bert)
+4. [Combine](#Combine)
+5. [Inegrate the whole model into pipeline](#Pipeline)
 
 
 ## Data <a name='Data'></a>
