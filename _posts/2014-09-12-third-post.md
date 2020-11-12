@@ -1,5 +1,5 @@
 ---
-title: Tweets: Disater or Not
+title: "Tweets: Disater or Not"
 subtitle: A NLP project
 author: Chris
 layout: post
