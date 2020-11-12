@@ -1,6 +1,6 @@
 ---
 title: "Tweets: Disater or Not"
-subtitle: A [NLP](https://en.wikipedia.org/wiki/Natural_language_processing) project using bert model
+subtitle: A Natural Language Processing (NLP) project using the pretrained bert model
 author: Jeremy Ribeiro
 layout: post
 icon: fa-lightbulb
