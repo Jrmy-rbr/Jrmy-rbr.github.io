@@ -6,7 +6,7 @@ layout: post
 icon: fa-cogs
 icon-style: regular
 published: true
-hidden: 'true'
+hide: 'true'
 ---
 
 
