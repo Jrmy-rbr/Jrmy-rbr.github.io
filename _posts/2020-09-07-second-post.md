@@ -3,6 +3,7 @@ title: Uncertainty when forcasting s-curves
 author: Jeremy
 layout: post
 published: true
+hidden: false
 ---
 
 Some time ago Constance Crozier made a nice animation illustrating that forecasting s-curves is hard: 
