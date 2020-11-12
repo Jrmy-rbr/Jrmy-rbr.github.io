@@ -5,7 +5,7 @@ author: Chris
 layout: post
 icon: fa-lightbulb
 icon-style: regular
-published: false
+published: true
 hidden: true
 ---
 
