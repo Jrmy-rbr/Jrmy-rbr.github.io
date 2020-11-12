@@ -6,7 +6,7 @@ layout: post
 icon: fa-lighbulbs
 icon-style: regular
 published: true
-hidden: 'true'
+hidden: 'false'
 ---
 
 
