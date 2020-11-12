@@ -4,6 +4,7 @@ subtitle : What does it take to estimate the number of undetected cases?
 author: Jeremy
 published: true
 layout: post
+hidden: false
 ---
 
 The code used for making the plots and the regressions can be found [here](https://github.com/Jrmy-rbr/COVID-19-the-missing-ones/blob/master/final/COVID19_final.ipynb)
