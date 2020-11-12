@@ -2,7 +2,7 @@
 layout: default
 ---
 {%- assign _posts = site.posts | sort: 'date' | reverse -%}
-{%- assert Post_nHidden = _post | where: 'hidden', 'false' -%}
+{%- assign Post_nHidden = _post | where: 'hidden', 'false' -%}
 {%- include header.html scrolly_nav=Post_nHidden -%}
 <!-- Main -->
 <div id="main">
