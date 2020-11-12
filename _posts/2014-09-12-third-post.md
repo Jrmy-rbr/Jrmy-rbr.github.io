@@ -3,10 +3,10 @@ title: "Tweets: Disater or Not"
 subtitle: A NLP project
 author: Chris
 layout: post
-icon: fa-lightbulb
+icon: fa-cogs
 icon-style: regular
 published: true
-hide: 'true'
+hidden: 'true'
 ---
 
 
