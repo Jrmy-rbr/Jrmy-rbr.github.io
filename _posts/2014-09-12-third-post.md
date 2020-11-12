@@ -6,7 +6,7 @@ layout: post
 icon: fa-bed
 icon-style: regular
 published: true
-hidden: 'false'
+hidden: 'true'
 ---
 
 
