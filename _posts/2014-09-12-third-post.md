@@ -1,7 +1,7 @@
 ---
 title: "Tweets: Disater or Not"
-subtitle: A NLP project
-author: Chris
+subtitle: A Natural Language Processing (NLP) project
+author: Jeremy Ribeiro
 layout: post
 icon: fa-lightbulb
 icon-style: regular
