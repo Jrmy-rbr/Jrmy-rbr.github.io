@@ -11,7 +11,7 @@ published: false
 
 ## Table of content
 [1] [Data](#Data)
-[2] [Classification using meta-data only](#meta-data clf)
+[2] [Classification using meta-data only](#meta-data_clf)
 [3] [Classification using the pretrained Bert model](#Bert)
 [4] [Combine](#Combine)
 [5] [Inegrate the whole model into pipeline](#Pipeline)
@@ -23,7 +23,7 @@ published: false
 
 ### Feature extraction: adding meta-data
 
-## Classification using meta-data only <a name='meta-data clf'></a>
+## Classification using meta-data only <a name='meta-data_clf'></a>
 
 ### Random Froest
 
