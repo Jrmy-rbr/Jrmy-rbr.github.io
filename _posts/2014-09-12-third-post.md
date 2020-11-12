@@ -5,8 +5,8 @@ author: Chris
 layout: post
 icon: fa-bed
 icon-style: regular
-published: false
-hidden: 'true'
+published: true
+hidden: true
 ---
 
 
