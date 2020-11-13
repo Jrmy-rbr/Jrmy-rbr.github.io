@@ -13,7 +13,7 @@ In this blog post I will present a Kaggle based NLP project. The project is the 
 We are given a data set containing tweets and a little of additional information. These tweets 
 are labeled according to whether they speak about disasters or not. The goal of the project is simple: Making a 
 model that automatically classifies tweets into the category "it speaks about a disaster" or 
-it "does not speak about a disaster".
+"it does not speak about a disaster".
 
 To do that I will use the pretrained bert model by Google that allows to extract the meaning of words (embedding).
 What it does is that it transforms words into a 768-dimensional vector, such that words with similar 
