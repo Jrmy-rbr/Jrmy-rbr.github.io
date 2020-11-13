@@ -9,7 +9,8 @@ published: true
 hidden: true
 ---
 
-In this blog post I will present a Kaggle based NLP project. The project is the following.
+In this blog post I will present a Kaggle based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
+project. The project is the following.
 We are given a data set containing tweets and a little of additional information. These tweets 
 are labeled according to whether they speak about disasters or not. The goal of the project is simple: Making a 
 model that automatically classifies tweets into the category "it speaks about a disaster" or 
