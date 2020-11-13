@@ -34,7 +34,7 @@ I am using the occasion of this blog post to also explain a little some strategi
 to try to understand what the model is doing, and why it classifies tweets the way they do.
 
 But first things first. Let me start with presenting the data, and how one can clean the data
-before that will be used in the machine learning models.
+before it is used in the machine learning models.
 
 ## Table of content
 1. [Data](#Data)
