@@ -9,7 +9,7 @@ published: true
 hidden: true
 ---
 
-
+Bla bla bla
 
 ## Table of content
 1. [Data](#Data)
@@ -17,6 +17,7 @@ hidden: true
 3. [Classification using the pretrained Bert model](#Bert)
 4. [Combining the bert model with meta-data based model](#Combine)
 5. [Inegrate the whole model into pipeline](#Pipeline)
+6. [Conclusion](#Conclusion)
 
 
 ## Data <a name='Data'></a>
@@ -40,3 +41,5 @@ hidden: true
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
 ## Inegrate the whole model into pipeline <a name='Pipeline'></a>
+
+## Conclusion <a name='Conclusion'></a>
