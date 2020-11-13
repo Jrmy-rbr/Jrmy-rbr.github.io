@@ -1,5 +1,5 @@
 ---
-title: "Tweets: Disater or Not"
+title: "Tweets: Disaster or Not"
 subtitle: A Natural Language Processing (NLP) project using the pretrained bert model
 author: Jeremy Ribeiro
 layout: post
