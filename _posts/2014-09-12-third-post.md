@@ -55,7 +55,7 @@ test_set = pd.read_csv('./test.csv')
 data_set.head()
 '''
 
-<table class="dataframe" border="1">
+<table class="dataframe" border="1" sytel="font-size: 14px">
   <thead>
     <tr style="text-align: right;">
       <th></th>
