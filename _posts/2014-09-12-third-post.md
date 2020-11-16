@@ -10,7 +10,7 @@ hidden: true
 ---
 
 In this blog post I will present a Kaggle based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
-project. The project is the following.
+project (see the project Kaggle (https://www.kaggle.com/c/nlp-getting-started/overview)). The project is the following.
 We are given a data set containing tweets and some extra information about them. These tweets 
 are labeled according to whether they speak about disasters or not. The goal of the project is simple: Making a 
 model that automatically classifies tweets into the category "it speaks about a disaster" or 
@@ -38,7 +38,7 @@ But first things first. Let me start with presenting the data, and how one can c
 before it is used in the machine learning models.
 
 ## Table of content
-1. [Data](#Data)
+1. [Data & metrics](#Data)
 2. [Classification using meta-data only](#meta-data_clf)
 3. [Classification using the pretrained Bert model](#Bert)
 4. [Combining the bert model with meta-data based model](#Combine)
@@ -48,6 +48,7 @@ before it is used in the machine learning models.
 
 ## Data & metrics<a name='Data'></a>
 
+I use the [data](https://www.kaggle.com/c/nlp-getting-started/data) provided by Kaggle.
 To have an idea of what the data looks like, let's run the following in python.
 
 ```python
@@ -120,6 +121,15 @@ data_set.shape
 > (7613,5)
 
 This means that the data set cointains 7613 samples, for each of them we have 4 features and the target column.
+Let us checks how many of those samples are in each classes:
+
+```python
+sns.barplot(x='target', y=0, data=pd.DataFrame(data_set.groupby('target').size().reset_index()))
+plt.ylabel('number')
+plt.legend()
+```
+> {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_in_class.png" description="" %} 
+
 ### Metrics
 
 ### Cleaning process
