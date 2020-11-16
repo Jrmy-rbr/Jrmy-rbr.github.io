@@ -114,19 +114,20 @@ From which we get the following output:
   </tbody>
 </table>
 
-As you can see the data contains 5 columns, and one of them is the target label. We already see that in some columns that there are some NaN values
-that we will have to take care during the cleaning phase of the data. By run the following line we can make sure that 
-the NaN value are only in the columns 'keyword' and 'location'.
+As you can see the data contains 5 columns, and one of them is the target label: The target label is equal to $$1$$ whenever 
+the tweet is about a disaster, and is equal to $$0$$ otherwise. We already see that in some columns that there are some NaN values
+that we will have to take care during the cleaning phase of the data. By runnig the following line we can make sure that 
+the NaN values are only in the columns 'keyword' and 'location'.
 ```python
 data_set.isna().sum(axis=0)
 ```
->| Feature || number of NaN |
- |:--------||:-------------:|
- | id      ||     0         |
- |keyword  ||     61        |
- |location ||     2533      |
- |text     ||     0         |
- |target   ||     0         |
+>| Feature | number of NaN |
+ |:--------|:-------------:|
+ | id      |     0         |
+ |keyword  |     61        |
+ |location |     2533      |
+ |text     |     0         |
+ |target   |     0         |
 
 
 
