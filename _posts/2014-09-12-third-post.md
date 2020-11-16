@@ -120,12 +120,12 @@ the NaN value are only in the columns 'keyword' and 'location'.
 ```python
 data_set.isna().sum(axis=0)
 ```
->id             0
-keyword       61
-location    2533
-text           0
-target         0
-dtype: int64 
+>| id      | 0 |
+ |keyword  | 61 |
+ |location | 2533 |
+ |text     | 0 |
+ |target   | 0 |
+ |dtype: int64 | |
 
 
 
