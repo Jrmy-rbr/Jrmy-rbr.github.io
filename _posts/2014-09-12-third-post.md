@@ -113,12 +113,13 @@ From which we get the following output:
   </tbody>
 </table>
 
-As you can see the data contains 5 features. We can also check the shape of the data:
+As you can see the data contains 5 columns, and one of them is the target label. We can also check the shape of the data:
 ```python
 data_set.shape
 ```
->>> (7613,5)
-from which we get: $$(7613,5)$$. This means that 
+> (7613,5)
+
+This means that the data set cointains 7613 samples, for each of them we have 4 features and the target column.
 ### Metrics
 
 ### Cleaning process
