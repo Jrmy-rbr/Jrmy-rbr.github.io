@@ -143,11 +143,9 @@ sns.barplot(x='target', y=0, data=pd.DataFrame(data_set.groupby('target').size()
 plt.ylabel('number')
 plt.legend()
 ```
-> {
-<center>
-{% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="" %} 
-</center>
-}
+<blockquote>
+<center> {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="" %} </center>
+</blockquote>
 
 We can see a small imbalance between the two classes, but it is not to bad to work with.
 
