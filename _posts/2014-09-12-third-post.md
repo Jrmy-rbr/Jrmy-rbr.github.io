@@ -9,7 +9,7 @@ published: true
 hidden: true
 ---
 
-In this blog post I will present a Kaggle based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
+In this blog post I will present a [Kaggle](https://www.kaggle.com/) based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
 project (see the project Kaggle (https://www.kaggle.com/c/nlp-getting-started/overview)). The project is the following.
 We are given a data set containing tweets and some extra information about them. These tweets 
 are labeled according to whether they speak about disasters or not. The goal of the project is simple: Making a 
@@ -114,21 +114,37 @@ From which we get the following output:
   </tbody>
 </table>
 
-As you can see the data contains 5 columns, and one of them is the target label. We can also check the shape of the data:
+As you can see the data contains 5 columns, and one of them is the target label. We already see that in some columns that there are some NaN values
+that we will have to take care during the cleaning phase of the data. By run the following line we can make sure that 
+the NaN value are only in the columns 'keyword' and 'location'.
+```python
+data_set.isna().sum(axis=0)
+```
+>id             0
+keyword       61
+location    2533
+text           0
+target         0
+dtype: int64 
+
+
+
+We can also check the shape of the data to see how many samples we have in the data set.
 ```python
 data_set.shape
 ```
 > (7613,5)
 
 This means that the data set cointains 7613 samples, for each of them we have 4 features and the target column.
-Let us checks how many of those samples are in each classes:
+Let us check how many of those samples are in each classes:
 
 ```python
 sns.barplot(x='target', y=0, data=pd.DataFrame(data_set.groupby('target').size().reset_index()))
 plt.ylabel('number')
 plt.legend()
 ```
-> {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="" %} 
+> <center>{% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="" %} </center>
+We can see a small imbalance between the two classes, but it is not to bad to work with.
 
 ### Metrics
 
