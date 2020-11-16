@@ -48,12 +48,12 @@ before it is used in the machine learning models.
 
 ## Data <a name='Data'></a>
 
-'''python
+```python
 data_set = pd.read_csv('./train.csv')
 test_set = pd.read_csv('./test.csv')
 
 data_set.head()
-'''
+```
 <table class="dataframe" sytel="width: 'auto'; " border="1">
   <thead>
     <tr style="text-align: right; font-size: small">
