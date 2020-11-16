@@ -46,7 +46,9 @@ before it is used in the machine learning models.
 6. [Conclusion](#Conclusion)
 
 
-## Data <a name='Data'></a>
+## Data & metrics<a name='Data'></a>
+
+To have an idea of what the data looks like, let's run the following in python.
 
 ```python
 data_set = pd.read_csv('./train.csv')
@@ -54,6 +56,8 @@ test_set = pd.read_csv('./test.csv')
 
 data_set.head()
 ```
+From which we get the following output:
+
 <table class="dataframe" style="width: 70%;" border="1">
   <thead>
     <tr style="text-align: right; font-size: 0.7em;">
@@ -108,6 +112,14 @@ data_set.head()
     </tr>
   </tbody>
 </table>
+
+As you can see the data contains 5 features. We can also check the shape of the data:
+```python
+data_set.shape
+```
+>>> (7613,5)
+from which we get: $$(7613,5)$$. This means that 
+### Metrics
 
 ### Cleaning process
 
