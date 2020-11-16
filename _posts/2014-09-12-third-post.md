@@ -54,10 +54,9 @@ test_set = pd.read_csv('./test.csv')
 
 data_set.head()
 '''
-
-<table class="dataframe" border="1" sytel="font-size: 14px; width=200px">
+<table class="dataframe" sytel="width: 'auto'; " border="1">
   <thead>
-    <tr style="text-align: right;">
+    <tr style="text-align: right; font-size: small">
       <th></th>
       <th>id</th>
       <th>keyword</th>
@@ -66,7 +65,7 @@ data_set.head()
       <th>target</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="font-size: small">
     <tr>
       <th>0</th>
       <td>1</td>
