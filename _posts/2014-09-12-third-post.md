@@ -120,7 +120,8 @@ the NaN value are only in the columns 'keyword' and 'location'.
 ```python
 data_set.isna().sum(axis=0)
 ```
->|:---------|------:|
+>| Feature | number of NaN |
+ |:---------|------:|
  | id      | 0 |
  |keyword  | 61 |
  |location | 2533 |
