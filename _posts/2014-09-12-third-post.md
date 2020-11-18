@@ -180,14 +180,19 @@ possible outcome of a model.
   the recall and the precision. In particular the f1 score is defined as being the harmonic mean of the recall and the precision, ie
   id we call the recall $$R$$ and the precision $$P$$, then the f1 score is defined as,
   
-  $$f1:= \frac{2 R P}{R+P} = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
+  $$f1:= \frac{2 R P}{R+P}.$$
   
   For example the illustration of Figure 5. depicts a model with a high f1 score, ie with a high recall **and** a high precision.
   
   You might now wonder why de we pick an expression relatively complicated to aggregate the precision and the recall. Indeed
   one could, for example, choose to simply compute the arthmetic mean $$\tfrac{R+P}{2}$$ of the recall and the precision. This is 
-  indeed a possibility, but the the arthmetic mean as the inconvenient that its value does not depend the the difference between 
-  the recall and the precision: the arthmetic mean will be the same when $$(R,P)=(1,0)$$ and when $$(R,P)=(0.5, 0.5)$$.
+  indeed a possibility, but the the arthmetic mean as the inconvenience that its value does not depend the the difference between 
+  the recall and the precision: the arthmetic mean will be the same when $$(R,P)=(1,0)$$ and when $$(R,P)=(0.5, 0.5)$$. On the other 
+  hand, th f1 score can be seen as the arthmetic mean to which we add a penalty term that depends on the difference of $$R$$ and $$P$$. Indeed,
+  the above expression of the f1 score can be rewritten as,
+  
+  $$f1 = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
+
   
 ### Cleaning process
 
