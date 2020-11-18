@@ -59,7 +59,7 @@ data_set.head()
 ```
 From which we get the following output:
 
-<table class="dataframe" style="width: 70%;" border="1">
+<table class="dataframe" style="width: 100%;" border="1">
   <thead>
     <tr style="text-align: right; font-size: 0.7em;">
       <th></th>
@@ -131,15 +131,26 @@ the NaN values are only in the columns 'keyword' and 'location' we can simply co
 The shape of the data set is (7613,5). This means that the data set contains 7613 samples. For each of them we have 4 features and the target column.
 Let us check how many of those samples are in each classes:
 
-<blockquote>
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="" %} 
   </center>
-</blockquote>
 
-We can see a small imbalance between the two classes, but it is not to bad to work with.
+We can see a small imbalance (40:60) between the two classes, but it is not to bad to work with.
+
+Now that we have an idea of the data we have, let's talk about what metric we will use to measure the 
+the predictive power of the model.
 
 ### Metrics
+
+In order to assess the quality of the model, we need to choose a metric. The Kaggle project page
+suggests the so called f1 score. Let us see what is this score and why it a good metric.
+
+The f1 score is an aggregation of two other metrics called the recall and the precision.
+To explain the these metrics are let us look at the following figure.
+
+  <center> 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.pdf" description="" %} 
+  </center>
 
 ### Cleaning process
 
