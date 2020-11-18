@@ -59,6 +59,7 @@ data_set.head()
 ```
 From which we get the following output:
 
+<center style="width: auto;">
 <table class="dataframe" style="width: 100%;" border="1">
   <thead>
     <tr style="text-align: right; font-size: 0.7em;">
@@ -113,13 +114,13 @@ From which we get the following output:
     </tr>
   </tbody>
 </table>
+</center>
 
 As you can see the data contains 5 columns, and one of them is the target label: The target label is equal to $$1$$ whenever 
 the tweet is about a disaster, and is equal to $$0$$ otherwise. We already see that in some columns that there are some NaN values
 that we will have to take care during the cleaning phase of the data. To make sure that 
 the NaN values are only in the columns 'keyword' and 'location' we can simply count all of the NaNs for each column, and we get the following.
 
-<center style="width: auto;">
  | Feature | number of NaN |
  |:--------|:-------------:|
  | id      |     0         |
@@ -127,7 +128,6 @@ the NaN values are only in the columns 'keyword' and 'location' we can simply co
  |location |     2533      |
  |text     |     0         |
  |target   |     0         |
-</center>
 
 The shape of the data set is (7613,5). This means that the data set contains 7613 samples. For each of them we have 4 features and the target column.
 Let us check how many of those samples are in each classes:
