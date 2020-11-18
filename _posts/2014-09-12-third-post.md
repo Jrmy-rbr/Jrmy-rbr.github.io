@@ -118,7 +118,7 @@ As you can see the data contains 5 columns, and one of them is the target label:
 the tweet is about a disaster, and is equal to $$0$$ otherwise. We already see that in some columns that there are some NaN values
 that we will have to take care during the cleaning phase of the data. By runnig the following line we can make sure that 
 the NaN values are only in the columns 'keyword' and 'location'.
-| Feature | number of NaN |
+ | Feature | number of NaN |
  |:--------|:-------------:|
  | id      |     0         |
  |keyword  |     61        |
