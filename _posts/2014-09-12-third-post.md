@@ -172,7 +172,7 @@ possible outcome of a model.
   
   <center>
   {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_precision.svg" description="Figure 4. In this 
-  figure the recall less than 50%, while the precision is 100%" %} 
+  figure the recall less than 50\%, while the precision is 100\%" %} 
   </center>
   <br>
   Ideally we would like a model to have a high recall **and** a high precision. In order to deal 
