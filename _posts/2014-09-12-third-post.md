@@ -193,7 +193,9 @@ possible outcome of a model.
   
   $$f1 = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
   
-  Moreover, the f1 score is not very sentitive to imbalanced data (one class of the classification being more represented in the data than the other, like in Figure 1.). Some metrics are quite sensitive to an imbalanced data set, like the [accuracy](https://www.wikiwand.com/en/Accuracy_and_precision#/In_binary_classification).
+  Moreover, the f1 score is not very sentitive to imbalanced data 
+  (one class of the classification being more represented in the data than the other, like in Figure 1.). 
+  Some metrics are quite sensitive to an imbalanced data set, like the [accuracy](https://www.wikiwand.com/en/Accuracy_and_precision#/In_binary_classification).
   
 ### Cleaning process
 
