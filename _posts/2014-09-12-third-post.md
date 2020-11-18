@@ -132,7 +132,7 @@ The shape of the data set is (7613,5). This means that the data set contains 761
 Let us check how many of those samples are in each classes:
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="" %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="Figure 1." %} 
   </center>
 
 We can see a small imbalance (40:60) between the two classes, but it is not to bad to work with.
@@ -149,9 +149,21 @@ The f1 score is an aggregation of two other metrics called the recall and the pr
 To explain the these metrics are let us look at the following figure.
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="" %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="Figure 2." %} 
   </center>
 
+The figure represents all the tweets of the data set: Each dot reprents a tweet. When green, the dot represents
+a tweet talking about a disaster, otherwise it is red. The goal of the model is to automatically find the 
+tweets talking about a disaster, ie it should find the green dots. The following figure represents a
+possible outcome of a model.
+
+  <center> 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_recall.svg" description="Figure 3.
+  The dots inside the 'circle' represent the tweets that have been classified as 'tweet talking about disaster' by the model." %} 
+  </center>
+  
+  Here the model correctly classified most of the green dots, but there are many dots inside the circle are red.
+  
 ### Cleaning process
 
 ### Feature extraction: adding meta-data
