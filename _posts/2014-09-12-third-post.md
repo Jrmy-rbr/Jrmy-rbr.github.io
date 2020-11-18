@@ -188,11 +188,12 @@ possible outcome of a model.
   one could, for example, choose to simply compute the arthmetic mean $$\tfrac{R+P}{2}$$ of the recall and the precision. This is 
   indeed a possibility, but the the arthmetic mean as the inconvenience that its value does not depend the the difference between 
   the recall and the precision: the arthmetic mean will be the same when $$(R,P)=(1,0)$$ and when $$(R,P)=(0.5, 0.5)$$. On the other 
-  hand, th f1 score can be seen as the arthmetic mean to which we add a penalty term that depends on the difference of $$R$$ and $$P$$. Indeed,
+  hand, the f1 score can be seen as the arthmetic mean to which we add a penalty term that depends on the difference of $$R$$ and $$P$$. Indeed,
   the above expression of the f1 score can be rewritten as,
   
   $$f1 = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
-
+  
+  Moreover, the f1 score is not very sentitive to imbalanced data (one class of the classification being more represented in the data than the other, like in Figure 1.). Some metrics are quite sensitive to an imbalanced data set, like the [accuracy](https://www.wikiwand.com/en/Accuracy_and_precision#/In_binary_classification).
   
 ### Cleaning process
 
