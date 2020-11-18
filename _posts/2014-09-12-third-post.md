@@ -116,8 +116,9 @@ From which we get the following output:
 
 As you can see the data contains 5 columns, and one of them is the target label: The target label is equal to $$1$$ whenever 
 the tweet is about a disaster, and is equal to $$0$$ otherwise. We already see that in some columns that there are some NaN values
-that we will have to take care during the cleaning phase of the data. By runnig the following line we can make sure that 
-the NaN values are only in the columns 'keyword' and 'location'.
+that we will have to take care during the cleaning phase of the data. To make sure that 
+the NaN values are only in the columns 'keyword' and 'location' we can simply count all of the NaNs for each column, and we get the following.
+
  | Feature | number of NaN |
  |:--------|:-------------:|
  | id      |     0         |
@@ -127,16 +128,9 @@ the NaN values are only in the columns 'keyword' and 'location'.
  |target   |     0         |
 
 
-
-
-The shape of the data set is (7613,5). This means that the data set cointains 7613 samples, for each of them we have 4 features and the target column.
+The shape of the data set is (7613,5). This means that the data set contains 7613 samples. For each of them we have 4 features and the target column.
 Let us check how many of those samples are in each classes:
 
-```python
-sns.barplot(x='target', y=0, data=pd.DataFrame(data_set.groupby('target').size().reset_index()))
-plt.ylabel('number')
-plt.legend()
-```
 <blockquote>
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="" %} 
