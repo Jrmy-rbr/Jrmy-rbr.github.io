@@ -17,12 +17,12 @@ model that automatically classifies tweets into the category "it speaks about a 
 "it does not speak about a disaster".
 
 To do that I will use the pretrained bert model, created by Google, that allows to extract the meaning of words (embedding).
-What it does is that it transforms words into a 768-dimensional vector, such that words with similar 
+What it does is that it transforms words into a 768-dimensional vector, such that the vectors of words with similar 
 meaning are somewhat close to each other. On top of this bert layer, I will add two dense layers
 that are there to learn the classification task. I'll explain the training procedure, and the interest of using 
 a pretrained layer.
 
-I will also use more traditional machine learning algorithms and method to perform this task by first 
+I will also use more traditional machine learning algorithms and methods to perform this task by first 
 trying to create features form the tweets, and then learning from these features. These features 
 are features of the tweets that are not explicit in the tweets, like the mean word length of a tweet for 
 example. For this reason I will call the features meta-data in the following.
@@ -152,6 +152,7 @@ To explain the these metrics are let us look at the following figure.
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="Figure 2." %} 
   </center>
+  <br>
 
 The figure represents all the tweets of the data set: Each dot reprents a tweet. When green, the dot represents
 a tweet talking about a disaster, otherwise it is red. The goal of the model is to automatically find the 
@@ -162,6 +163,7 @@ possible outcome of a model.
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_recall.svg" description="Figure 3.
   The dots inside the 'circle' represent the tweets that have been classified as 'tweet talking about disaster' by the model." %} 
   </center>
+  <br>
   
   Here the model correctly classified all of the green dots, but there are many dots inside the circle are red. We can define what 
   the recall and precision are using this example. The recall (or recall score) is the fraction of green dots that are in the 
