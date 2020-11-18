@@ -119,6 +119,7 @@ the tweet is about a disaster, and is equal to $$0$$ otherwise. We already see t
 that we will have to take care during the cleaning phase of the data. To make sure that 
 the NaN values are only in the columns 'keyword' and 'location' we can simply count all of the NaNs for each column, and we get the following.
 
+<center style="width: auto;">
  | Feature | number of NaN |
  |:--------|:-------------:|
  | id      |     0         |
@@ -126,7 +127,7 @@ the NaN values are only in the columns 'keyword' and 'location' we can simply co
  |location |     2533      |
  |text     |     0         |
  |target   |     0         |
-
+</center>
 
 The shape of the data set is (7613,5). This means that the data set contains 7613 samples. For each of them we have 4 features and the target column.
 Let us check how many of those samples are in each classes:
@@ -162,7 +163,11 @@ possible outcome of a model.
   The dots inside the 'circle' represent the tweets that have been classified as 'tweet talking about disaster' by the model." %} 
   </center>
   
-  Here the model correctly classified most of the green dots, but there are many dots inside the circle are red.
+  Here the model correctly classified all of the green dots, but there are many dots inside the circle are red. We can define what 
+  the recall and precision are using this example. The recall (or recall score) is the fraction of green dots that are in the 
+  circle (ie correctly classified): In this example it would be $$100\%$$ since all the green dots are in the 
+  circle. The precision is the fraction of dots in the circle that are green: Here it would be less than $$50\%$$ since most of the dot in the 
+  circle are red. Ideally we would like a model to have a high recall **and** a high precision. 
   
 ### Cleaning process
 
