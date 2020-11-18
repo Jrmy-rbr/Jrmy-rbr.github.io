@@ -149,7 +149,7 @@ The f1 score is an aggregation of two other metrics called the recall and the pr
 To explain the these metrics are let us look at the following figure.
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.pdf" description="" %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="" %} 
   </center>
 
 ### Cleaning process
