@@ -59,8 +59,8 @@ data_set.head()
 ```
 From which we get the following output:
 
-<center style="width: auto;">
-<table class="dataframe" style="width: 100%;" border="1">
+<center>
+<table class="dataframe"  border="1">
   <thead>
     <tr style="text-align: right; font-size: 0.7em;">
       <th></th>
