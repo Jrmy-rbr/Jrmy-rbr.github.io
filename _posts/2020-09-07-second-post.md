@@ -12,7 +12,7 @@ Some time ago Constance Crozier made a nice animation illustrating that forecast
 <p><a href="https://vimeo.com/408599958">mymovie</a> from <a href="https://vimeo.com/user113005777">Constance Crozier</a> on <a href="https://vimeo.com">Vimeo</a>.</p></p>&mdash; Constance Crozier (@clcrozier) <a href="https://twitter.com/clcrozier/status/1251148890595708938?ref_src=twsrc%5Etfw">April 17, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
 
-I wanted to go a small step further. Instead of trying to predict the shape of the curve in the future, what if we tried to predict the range of shape it can have? In other words can we try to add confidence intervals to the prediction? [^1]
+I wanted to go a small step further. Instead of trying to predict the shape of the curve in the future, what if we tried to predict the range of shapes it can have? In other words can we try to add confidence intervals to the prediction? [^1]
 
 [^1]: To be precise, we will see a confidence interval on the expected values of the predictions of the future values.
 
