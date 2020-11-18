@@ -153,7 +153,6 @@ To explain the these metrics are let us look at the following figure.
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="Figure 2." %} 
   </center>
   <br>
-
 The figure represents all the tweets of the data set: Each dot reprents a tweet. When green, the dot represents
 a tweet talking about a disaster, otherwise it is red. The goal of the model is to automatically find the 
 tweets talking about a disaster, ie it should find the green dots. The following figure represents a
@@ -161,11 +160,11 @@ possible outcome of a model.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_recall.svg" description="Figure 3.
-  The dots inside the 'circle' represent the tweets that have been classified as 'tweet talking about disaster' by the model." %} 
+  The dots inside the 'circle' represent the tweets that have been classified as 'tweet talking about disaster' by the model.
+  Here the model correctly classified all of the green dots, but there are many dots inside the circle are red." %} 
   </center>
   <br>
-  
-  Here the model correctly classified all of the green dots, but there are many dots inside the circle are red. We can define what 
+  We can define what 
   the recall and precision are using this example. The recall (or recall score) is the fraction of green dots that are in the 
   circle (ie correctly classified): In this example it would be $$100\%$$ since all the green dots are in the 
   circle. The precision is the fraction of dots in the circle that are green: Here it would be less than $$50\%$$ since most of the dot in the 
