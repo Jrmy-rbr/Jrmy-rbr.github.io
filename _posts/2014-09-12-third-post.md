@@ -168,7 +168,14 @@ possible outcome of a model.
   the recall and precision are using this example. The recall (or recall score) is the fraction of green dots that are in the 
   circle (ie correctly classified): In this example it would be $$100\%$$ since all the green dots are in the 
   circle. The precision is the fraction of dots in the circle that are green: Here it would be less than $$50\%$$ since most of the dot in the 
-  circle are red. Ideally we would like a model to have a high recall **and** a high precision. 
+  circle are red. 
+  
+  Ideally we would like a model to have a high recall **and** a high precision. In order to deal 
+  a unique number, one can aggregate these two metrics into a single one. The f1 score is such an aggregation of 
+  the recall and the precision. In particular the f1 score is defined as being the harmonic mean of the recall and the precision, ie
+  id we call the recall $$R$$ and the precision $$P$, then the f1 score is defined as,
+  
+  $$f1:= \frac{2 R P}{R+P}.$$
   
 ### Cleaning process
 
