@@ -119,7 +119,7 @@ From which we get the following output:
 As you can see the data contains 5 columns, and one of them is the target label: The target label is equal to $$1$$ whenever 
 the tweet is about a disaster, and is equal to $$0$$ otherwise. We already see that in some columns that there are some NaN values
 that we will have to take care during the cleaning phase of the data. To make sure that 
-the NaN values are only in the columns 'keyword' and 'location' we can simply count all of the NaNs for each column, and we get the following.
+the NaN values are only in the columns 'keyword' and 'location' we can simply count all the NaNs for each column, and we get the following.
 
  | Feature | number of NaN |
  |:--------|:-------------:|
@@ -130,7 +130,7 @@ the NaN values are only in the columns 'keyword' and 'location' we can simply co
  |target   |     0         |
 
 The shape of the data set is (7613,5). This means that the data set contains 7613 samples. For each of them we have 4 features and the target column.
-Let us check how many of those samples are in each classes:
+Let us check how many of those samples are in each class:
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="Figure 1." %} 
@@ -138,13 +138,13 @@ Let us check how many of those samples are in each classes:
 
 We can see a small imbalance (40:60) between the two classes, but it is not too bad to work with.
 
-Now that we have an idea of the data we have, let's talk about what metric we will use to measure the 
+Now that we have an idea of the data we have, let's talk about what metric we will use to measure 
 the predictive power of the model.
 
 ### Metrics
 
 In order to assess the quality of the model, we need to choose a metric. The Kaggle project page
-suggests the so called f1 score. Let us see what is this score and why it a good metric.
+suggests the so called f1 score. Let us see what is this score and why it is a good metric.
 
 The f1 score is an aggregation of two other metrics called the recall and the precision.
 To explain the these metrics are let us look at the following figure.
@@ -153,7 +153,7 @@ To explain the these metrics are let us look at the following figure.
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="Figure 2." %} 
   </center>
   <br>
-The figure represents all the tweets of the data set: Each dot reprents a tweet. When green, the dot represents
+The figure represents all the tweets of the data set: Each dot represents a tweet. When green, the dot represents
 a tweet talking about a disaster, otherwise it is red. The goal of the model is to automatically find the 
 tweets talking about a disaster, ie it should find the green dots. The following figure represents a
 possible outcome of a model.
@@ -161,7 +161,7 @@ possible outcome of a model.
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_recall.svg" description="Figure 3.
   The dots inside the 'circle' represent the tweets that have been classified as 'tweet talking about disaster' by the model.
-  Here the model correctly classified all of the green dots, but there are many dots inside the circle are red." %} 
+  Here the model correctly classified all the green dots, but there are many dots inside the circle are red." %} 
   </center>
   <br>
   We can define what 
@@ -190,11 +190,11 @@ possible outcome of a model.
   </center>
   <br>
   
-  You might now wonder why de we pick an expression relatively complicated to aggregate the precision and the recall. Indeed
-  one could, for example, choose to simply compute the arthmetic mean $$\tfrac{R+P}{2}$$ of the recall and the precision. This is 
-  indeed a possibility, but the the arthmetic mean as the inconvenience that its value does not depend the the difference between 
-  the recall and the precision: the arthmetic mean will be the same when $$(R,P)=(1,0)$$ and when $$(R,P)=(0.5, 0.5)$$. On the other 
-  hand, the f1 score can be seen as the arthmetic mean to which we add a penalty term that depends on the difference of $$R$$ and $$P$$. Indeed,
+  You might now wonder why we pick an expression relatively complicated to aggregate the precision and the recall. Indeed,
+  one could, for example, choose to simply compute the arithmetic mean $$\tfrac{R+P}{2}$$ of the recall and the precision. This is 
+  indeed a possibility, but the arithmetic mean as the inconvenience that its value does not depend on the difference between 
+  the recall and the precision: the arithmetic mean will be the same when $$(R,P)=(1,0)$$ and when $$(R,P)=(0.5, 0.5)$$. On the other 
+  hand, the f1 score can be seen as the arithmetic mean to which we add a penalty term that depends on the difference of $$R$$ and $$P$$. Indeed,
   the above expression of the f1 score can be rewritten as,
   
   $$f1 = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
