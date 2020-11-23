@@ -221,8 +221,8 @@ becomes
 
 In these two example, we see that all capital letter have been set to lower case fonts, ponctuation has been separated from 
 words, contraction (eg. can't, shouldn't...) are expanded (cannot, should not...), the '@' symbol and the '#' symbol are also 
-separated from words. Moreover, our modification should include some common typo correction, split some word glued together
-(eg 'autoaccidents' -> 'auto accidents').
+separated from words. Moreover, our modification should include some common typo corrections, split some word glued together
+(eg 'autoaccidents' -> 'auto accidents'), etc.
 
 But how do we know, what tranformation to make, which typos to correct, and which "glued words" to split?
 
@@ -239,13 +239,11 @@ are in the vocabulary list, so the text coverage is $$8/9 \approx 0.89$$.
 
 The goal of the cleaning procedure will to tranform the text so that the text and the vocabulary coverage become as close as possible to 1. In the above example,
 one only needs to split "georgewashington" into "george washington" in order to make both the text and vocabulary coverage equal to 1. To do so 
-we need to find all the words in the text that are not in the vocabulary list, sort them from the most frequent to the least frequent, and make the necessary  
-change in the cleaning function so that the corverage increase. You can find some code about this cleaning process in the section 4 of [this notebook on Kaggle](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert).
+we need to find all the words in the text that are not in the vocabulary list, sort them from the most frequent to the least frequent, and make the necessary changes in the cleaning function so that the text and vocabulary corverages increase. You can find some code about this cleaning process in the section 4 of [this notebook on Kaggle](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert).
 
-Personally I reused the cleaning function created by the author of the above mentioned notebook on Kaggle. I modifed this function so that it runs faster 
-and so that it generalizes more easily for other text data set. I do so by more using the power of regular expressions more extensively. 
+Personally I just reused the cleaning function created by the author of the above mentioned notebook on Kaggle. I modifed this function so that it runs faster 
+and so that it generalizes more easily for other text data set. I do so by using the power of regular expressions more extensively. 
 You can find my cleaning function on my [own notebook]().
-
 
 ### Feature extraction: adding meta-data
 
