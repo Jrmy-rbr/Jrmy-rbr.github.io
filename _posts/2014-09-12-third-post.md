@@ -136,7 +136,7 @@ Let us check how many of those samples are in each classes:
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="Figure 1." %} 
   </center>
 
-We can see a small imbalance (40:60) between the two classes, but it is not to bad to work with.
+We can see a small imbalance (40:60) between the two classes, but it is not too bad to work with.
 
 Now that we have an idea of the data we have, let's talk about what metric we will use to measure the 
 the predictive power of the model.
@@ -199,19 +199,63 @@ possible outcome of a model.
   
 ### Cleaning process
 
+I will now explain how to perfrom the cleaning process of the tweets. Indeed, text data, and in particular tweets, are too 
+messy to be used as is in a model. We need to "standardize" as much as possible the text that will be use as input 
+to the model. For example, the following tweet,
+> only had a car for not even a week and got in a fucking car accident .. Mfs can't fucking drive . 
+
+becomes after cleaning,
+> only had a car for not even a week and got in a fucking car accident  .  .  mfs cannot fucking drive  .  
+
+Or the following,
+> .@NorwayMFA #Bahrain police had previously died in a road accident they were not killed by explosion https://t.co/gFJfgTodad 
+
+becomes
+>  .  @ norwaymfa  # bahrain police had previously died in a road accident they we are not killed by explosion url 
+
+In these two example, we see that all capital letter have been set to lower case fonts, ponctuation has been separated from 
+words, contraction (eg. can't, shouldn't...) are expanded (cannot, should not...), the '@' symbol and the '#' symbol are also 
+separated from words. Moreover, our modification should include some common typo correction, split some word glued together
+(eg 'autoaccidents' -> 'auto accidents').
+
+But how do we know, what tranformation to make, which typos to correct, and which "glued words" to split?
+
+The strategy here is to use an embedding model (like GloVe or FastText) or a list of vocabulary that already exists, and see how many words in 
+the tweets can be found in the embedding or the vocabulary list. For the following we define the text coverage and the vocabulary coverage as follows:
+- vocabulary coverage: It is the fraction of **unique** words of the text (the tweets) that can be found in the embedding or vocabulary list.
+- text coverage: It is the fraction of (**not necessarily unique**) words of the text (the tweets) that can be found in the embedding or vocabulary list.
+
+For example let us say that we look at the following text: "The first president of the United States is GeorgeWashington". 
+The 8 unique words in this text are (we lower case all word for simplicity): "the", "first", "president", "of" , "united", "states", "is", "georgewashington"
+Let us assume that that the vocabulary list we use contains the following words: "the", "first", "president", "of" , "united", "states", "is", "george", "washington". Among the 8 unique words of the text, 7 of them can be found in the vocabulary list, since "georgewashingtion" is not in this list. Therefore, 
+the vocabulary coverage in this example is $$7/8 = 0.875$$. On the other hand, there are 9 words in the text (since the word "the" is repeated), and 8 of them 
+are in the vocabulary list, so the text coverage is $$8/9 \approx 0.89$$.
+
+The goal of the cleaning procedure will to tranform the text so that the text and the vocabulary coverage become as close as possible to 1. In the above example,
+one only needs to split "georgewashington" into "george washington" in order to make both the text and vocabulary coverage equal to 1. To do so 
+we need to find all the words in the text that are not in the vocabulary list, sort them from the most frequent to the least frequent, and make the necessary  
+change in the cleaning function so that the corverage increase. You can find some code about this cleaning process in the section 4 of [this notebook on Kaggle](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert).
+
+Personally I reused the cleaning function created by the author of the above mentioned notebook on Kaggle. I modifed this function so that it runs faster 
+and so that it generalizes more easily for other text data set. I do so by more using the power of regular expressions more extensively. 
+You can find my cleaning function on my [own notebook]().
+
+
 ### Feature extraction: adding meta-data
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
 
 ### Random Froest
 
-#### explaination
+#### Model explaination
 
 ### Logistic Regression
 
-#### explaination
+#### Model explaination
 
 ## Classification using the pretrained Bert model  <a name='Bert'></a>
+
+### Model explaination
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
