@@ -184,6 +184,12 @@ possible outcome of a model.
   
   For example the illustration of Figure 5. depicts a model with a high f1 score, ie with a high recall **and** a high precision.
   
+  <center>
+  {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_f1.svg" description="Figure 5. In this 
+  figure both the recall and the precision are close 100%" %} 
+  </center>
+  <br>
+  
   You might now wonder why de we pick an expression relatively complicated to aggregate the precision and the recall. Indeed
   one could, for example, choose to simply compute the arthmetic mean $$\tfrac{R+P}{2}$$ of the recall and the precision. This is 
   indeed a possibility, but the the arthmetic mean as the inconvenience that its value does not depend the the difference between 
@@ -245,7 +251,7 @@ You can find my cleaning function on my [own notebook]().
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
 
-### Random Froest
+### Random Forest
 
 #### Model explaination
 
