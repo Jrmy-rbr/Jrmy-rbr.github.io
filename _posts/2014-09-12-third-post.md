@@ -284,11 +284,18 @@ and others have been added by myself. In total I have extracted 15 features:
 Some of them (the features 10, 11, 13, and 14) use the labels ('target' feature of the data set) of the training set 
 in order to extract the relevant information. 
 You should allow your code to use the labels on the traning set **only**, **not** on the validation set. Not paying attention to 
-that can result in a label leakage (aka target leakage) which [wikipedia defines](https://www.wikiwand.com/en/Leakage_(machine_learning)) as:
+that can result in a label leakage (aka target leakage) which [wikipedia defines](https://www.wikiwand.com/en/Leakage_(machine_learning)) as follows:
 
 > In statistics and machine learning, leakage (also data leakage, or target leakage) is the use of information in the model training process which would not be expected to be available at prediction time, causing the predictive scores (metrics) to overestimate the model's utility when run in a production environment.[1]
 Leakage is often subtle and indirect, making it hard to detect and eliminate. Leakage can cause modeler to select a suboptimal model, which otherwise could be outperformed by a leakage-free model.[1] 
 
+In order to avoid this issue, one needs to split the data set into a training set and a validation set *before* adding any features.
+```python
+X_train, X_val, y_train, y_val = train_test_split(data_set[['keyword','text', 'text_cleaned']], 
+                                                  data_set['target_corrected'])
+```
+
+Then for the steps that use the labels of the training set one needs to make use of transformers like the ones provided by the library [scikit-learn](https://scikit-learn.org/stable/index.html)
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
 
