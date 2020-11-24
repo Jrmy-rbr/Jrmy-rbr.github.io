@@ -268,12 +268,16 @@ and others have been added by myself. In total I have extracted 15 features:
 7. The number of characters of a tweet
 8. the number of punctuation characters of a tweet
 9. The number of mentions of a tweet
-10. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet taklking about a disater'
-11. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet *not* taklking about a disater'
-12. The difference between the last two features
-12. The number of [2-grams](https://www.wikiwand.com/en/N-gram) of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet taklking about a disater'
-14. The number of 2-grams of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet *not* taklking about a disater'
-53. The difference between the last two features
+10. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet taklking about a disater'.
+  The idea is that, some mentions might be particularly frequent in the tweets talking about disasters. One can think about 
+  mention of newspapers' accounts etc.
+11. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet *not* taklking about a disater'.
+    The idea is the same as above, but with the tweets that do not talk about a disaster.
+12. The difference between the last two features. 
+13. The number of [2-grams](https://www.wikiwand.com/en/N-gram) of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet taklking about a disater'
+14. The number of 2-grams of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet *not* taklking about a disater'.
+  The idea of this feature and the previous one is that some 2-grams can be more frequent in "disaster tweets" and other 2-gram more present in "none disaster tweets".
+15. The difference between the last two features
 
 
 
