@@ -237,8 +237,7 @@ Let us assume that the vocabulary list we use contains the following words: "the
 the vocabulary coverage in this example is $$7/8 = 0.875$$. On the other hand, there are 9 words in the text (since the word "the" is repeated), and 8 of them 
 are in the vocabulary list, so the text coverage is $$8/9 \approx 0.89$$.
 
-The goal of the cleaning procedure will be to transform the text so that the text and the vocabulary coverage become as close as possible to 1. In the above example,
-one only needs to split "georgewashington" into "george washington" in order to make both the text coverage and vocabulary coverage equal to 1. To do so, 
+The goal of the cleaning procedure will be to transform the text so that the text and the vocabulary coverage become as close as possible to 1. In the above example, one only needs to split "georgewashington" into "george washington" in order to make both the text coverage and vocabulary coverage equal to 1. To do so, 
 we need to find all the words in the text that are not in the vocabulary list, sort them from the most frequent to the least frequent, and make the necessary changes in the cleaning function so that the text coverage and vocabulary coverage increase. You can find some code about this cleaning process in the section 4 of [this notebook on Kaggle](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert).
 
 Personally, I just reused the cleaning function created by the author of the above mentioned notebook on Kaggle. I modified this function so that it runs faster 
@@ -246,6 +245,17 @@ and so that it generalizes more easily to other text data set. I do so by using 
 You can find my cleaning function on my [own notebook]().
 
 ### Feature extraction: adding meta-data
+
+We will now see that from the raw tweet one can extract some features that are not explicit in the text body (here the tweets). 
+This meta-data can be used for checking that the training set and the test set we have have the same statistics. Indeed,
+if this weren't the case, then there are chances that the learning on the traning set poorly generalizes on the test set. On the 
+contrary, if they have similar statistics for several of these fetures then one can be more confident that the model 
+will give good resuts on the test set. It is therefore a good sanity check to do before even starting to work on the model.
+
+On the other hand, the statistics of these feature might be slightly different for the tweets that speak about disters compared to the ones that do not.
+If this is the case, then one could use this meta-data and leverage these differences in the statistics to develop 
+a model classifying the tweets.
+
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
 
