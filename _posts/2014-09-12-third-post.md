@@ -3,10 +3,10 @@ title: "Tweets: Disaster or Not"
 subtitle: A Natural Language Processing (NLP) project using the pretrained bert model
 author: Jeremy Ribeiro
 layout: post
-icon: fa-lightbulb
+icon: fa-briefcase
 icon-style: regular
 published: true
-hidden: true
+hidden: false
 ---
 
 In this blog post I will present a [Kaggle](https://www.kaggle.com/) based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
@@ -279,7 +279,7 @@ and others have been added by myself. In total I have extracted 15 features:
   The idea of this feature and the previous one is that some 2-grams can be more frequent in "disaster tweets" and other 2-gram more present in "none disaster tweets".
 15. The difference between the last two features
 
-<i class="fas fa-cat"></i>
+<i class="fas fa-exclamation-triangle"></i>
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
 
