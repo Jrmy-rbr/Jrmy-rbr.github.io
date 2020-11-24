@@ -4,7 +4,7 @@ subtitle: A Natural Language Processing (NLP) project using the pretrained bert 
 author: Jeremy Ribeiro
 layout: post
 icon: fa-briefcase
-icon-style: regular
+icon-style: fas
 published: true
 hidden: false
 ---
