@@ -12,7 +12,7 @@ hidden: true
 In this blog post I will present a [Kaggle](https://www.kaggle.com/) based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
 project (see the project on Kaggle [https://www.kaggle.com/c/nlp-getting-started/overview](https://www.kaggle.com/c/nlp-getting-started/overview)). The project is the following.
 We are given a data set containing tweets and some extra information about them. These tweets 
-are labeled according to whether they speak about disasters or not. The goal of the project is simple: Making a 
+are labeled according to whether or not they speak about disasters. The goal of the project is simple: Making a 
 model that automatically classifies tweets into the category "it speaks about a disaster" or 
 "it does not speak about a disaster".
 
@@ -29,7 +29,7 @@ example. For this reason I will call the features meta-data in the following.
 
 I will later explain how to combine the bert based model and the meta-data based classifiers to try to improve 
 the overall performance of the model. To do so, I will briefly explain a few approaches and 
-develop a little more the "Stacking" strategy I have used.
+develop a little more of the "Stacking" strategy I have used.
 
 I am using the occasion of this blog post to also explain a little some strategies one can use 
 to try to understand what the model is doing, and why it classifies tweets the way they do.
@@ -144,10 +144,10 @@ the predictive power of the model.
 ### Metrics
 
 In order to assess the quality of the model, we need to choose a metric. The Kaggle project page
-suggests the so called f1 score. Let us see what is this score and why it is a good metric.
+suggests using the so called f1 score. Let us see what is this score and why it is a good metric.
 
 The f1 score is an aggregation of two other metrics called the recall and the precision.
-To explain the these metrics are let us look at the following figure.
+To explain these metrics are let us look at the following figure.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="Figure 2." %} 
@@ -160,14 +160,14 @@ possible outcome of a model.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_recall.svg" description="Figure 3.
-  The dots inside the 'circle' represent the tweets that have been classified as 'tweet talking about disaster' by the model.
+  The dots inside the 'circle' represent the tweets that have been classified by the model as 'tweet talking about disaster'.
   Here the model correctly classified all the green dots, but there are many dots inside the circle are red." %} 
   </center>
   <br>
   We can define what 
   the recall and precision are using this example. The recall (or recall score) is the fraction of green dots that are in the 
   circle (ie correctly classified): In this example it would be $$100\%$$ since all the green dots are in the 
-  circle. The precision is the fraction of dots in the circle that are green: Here it would be less than $$50\%$$ since most of the dot in the 
+  circle. The precision is the fraction of dots in the circle that are green: Here it would be less than $$50\%$$ since most of the dots in the 
   circle are red. 
   
   <center>
@@ -175,14 +175,14 @@ possible outcome of a model.
   figure the recall less than 50%, while the precision is 100%" %} 
   </center>
   <br>
-  Ideally we would like a model to have a high recall **and** a high precision. In order to deal 
+  Ideally, we would like a model to have a high recall **and** a high precision. In order to deal 
   a unique number, one can aggregate these two metrics into a single one. The f1 score is such an aggregation of 
   the recall and the precision. In particular the f1 score is defined as being the harmonic mean of the recall and the precision, ie
-  id we call the recall $$R$$ and the precision $$P$$, then the f1 score is defined as,
+  if we call the recall $$R$$ and the precision $$P$$, then the f1 score is defined as,
   
   $$f1:= \frac{2 R P}{R+P}.$$
   
-  For example the illustration of Figure 5. depicts a model with a high f1 score, ie with a high recall **and** a high precision.
+  For example, the illustration of Figure 5. depicts a model with a high f1 score, ie with a high recall **and** a high precision.
   
   <center>
   {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_f1.svg" description="Figure 5. In this 
@@ -191,7 +191,7 @@ possible outcome of a model.
   <br>
   
   You might now wonder why we pick an expression relatively complicated to aggregate the precision and the recall. Indeed,
-  one could, for example, choose to simply compute the arithmetic mean $$\tfrac{R+P}{2}$$ of the recall and the precision. This is 
+  one could for example, choose to simply compute the arithmetic mean $$\tfrac{R+P}{2}$$ of the recall and the precision. This is 
   indeed a possibility, but the arithmetic mean as the inconvenience that its value does not depend on the difference between 
   the recall and the precision: the arithmetic mean will be the same when $$(R,P)=(1,0)$$ and when $$(R,P)=(0.5, 0.5)$$. On the other 
   hand, the f1 score can be seen as the arithmetic mean to which we add a penalty term that depends on the difference of $$R$$ and $$P$$. Indeed,
@@ -199,13 +199,13 @@ possible outcome of a model.
   
   $$f1 = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
   
-  Moreover, the f1 score is not very sentitive to imbalanced data 
+  Moreover, the f1 score is not very sensitive to imbalanced data 
   (one class of the classification being more represented in the data than the other, like in Figure 1.). 
   Some metrics are quite sensitive to an imbalanced data set, like the [accuracy](https://www.wikiwand.com/en/Accuracy_and_precision#/In_binary_classification).
   
 ### Cleaning process
 
-I will now explain how to perfrom the cleaning process of the tweets. Indeed, text data, and in particular tweets, are too 
+I will now explain how to perform the cleaning process of the tweets. Indeed, text data, and in particular tweets, are too 
 messy to be used as is in a model. We need to "standardize" as much as possible the text that will be use as input 
 to the model. For example, the following tweet,
 > only had a car for not even a week and got in a fucking car accident .. Mfs can't fucking drive . 
@@ -219,30 +219,30 @@ Or the following,
 becomes
 >  .  @ norwaymfa  # bahrain police had previously died in a road accident they we are not killed by explosion url 
 
-In these two example, we see that all capital letter have been set to lower case fonts, ponctuation has been separated from 
+In these two examples, we see that all capital letter have been set to lower case fonts, punctuation has been separated from 
 words, contraction (eg. can't, shouldn't...) are expanded (cannot, should not...), the '@' symbol and the '#' symbol are also 
 separated from words. Moreover, our modification should include some common typo corrections, split some word glued together
 (eg 'autoaccidents' -> 'auto accidents'), etc.
 
-But how do we know, what tranformation to make, which typos to correct, and which "glued words" to split?
+But how do we know what transformation to make, which typos to correct, and which "glued words" to split?
 
 The strategy here is to use an embedding model (like GloVe or FastText) or a list of vocabulary that already exists, and see how many words in 
 the tweets can be found in the embedding or the vocabulary list. For the following we define the text coverage and the vocabulary coverage as follows:
 - vocabulary coverage: It is the fraction of **unique** words of the text (the tweets) that can be found in the embedding or vocabulary list.
 - text coverage: It is the fraction of (**not necessarily unique**) words of the text (the tweets) that can be found in the embedding or vocabulary list.
 
-For example let us say that we look at the following text: "The first president of the United States is GeorgeWashington". 
-The 8 unique words in this text are (we lower case all word for simplicity): "the", "first", "president", "of" , "united", "states", "is", "georgewashington"
-Let us assume that that the vocabulary list we use contains the following words: "the", "first", "president", "of" , "united", "states", "is", "george", "washington". Among the 8 unique words of the text, 7 of them can be found in the vocabulary list, since "georgewashingtion" is not in this list. Therefore, 
+For example, let us say that we look at the following text: "The first President of the United States is GeorgeWashington". 
+The 8 unique words in this text are (we lower case all word for simplicity): "the", "first", "president", "of", "united", "states", "is", "georgewashington"
+Let us assume that the vocabulary list we use contains the following words: "the", "first", "president", "of", "united", "states", "is", "george", "washington". Among the 8 unique words of the text, 7 can be found in the vocabulary list, since "georgewashingtion" is not in this list. Therefore, 
 the vocabulary coverage in this example is $$7/8 = 0.875$$. On the other hand, there are 9 words in the text (since the word "the" is repeated), and 8 of them 
 are in the vocabulary list, so the text coverage is $$8/9 \approx 0.89$$.
 
-The goal of the cleaning procedure will to tranform the text so that the text and the vocabulary coverage become as close as possible to 1. In the above example,
-one only needs to split "georgewashington" into "george washington" in order to make both the text and vocabulary coverage equal to 1. To do so 
-we need to find all the words in the text that are not in the vocabulary list, sort them from the most frequent to the least frequent, and make the necessary changes in the cleaning function so that the text and vocabulary corverages increase. You can find some code about this cleaning process in the section 4 of [this notebook on Kaggle](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert).
+The goal of the cleaning procedure will be to transform the text so that the text and the vocabulary coverage become as close as possible to 1. In the above example,
+one only needs to split "georgewashington" into "george washington" in order to make both the text coverage and vocabulary coverage equal to 1. To do so, 
+we need to find all the words in the text that are not in the vocabulary list, sort them from the most frequent to the least frequent, and make the necessary changes in the cleaning function so that the text coverage and vocabulary coverage increase. You can find some code about this cleaning process in the section 4 of [this notebook on Kaggle](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert).
 
-Personally I just reused the cleaning function created by the author of the above mentioned notebook on Kaggle. I modifed this function so that it runs faster 
-and so that it generalizes more easily for other text data set. I do so by using the power of regular expressions more extensively. 
+Personally, I just reused the cleaning function created by the author of the above mentioned notebook on Kaggle. I modified this function so that it runs faster 
+and so that it generalizes more easily to other text data set. I do so by using the power of regular expressions more extensively. 
 You can find my cleaning function on my [own notebook]().
 
 ### Feature extraction: adding meta-data
