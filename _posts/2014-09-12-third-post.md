@@ -6,7 +6,8 @@ layout: post
 icon: fa-briefcase
 icon-style: fas
 published: true
-hidden: false
+hidden: true
+
 ---
 
 In this blog post I will present a [Kaggle](https://www.kaggle.com/) based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
