@@ -279,7 +279,7 @@ and others have been added by myself. In total I have extracted 15 features:
   The idea of this feature and the previous one is that some 2-grams can be more frequent in "disaster tweets" and other 2-gram more present in "none disaster tweets".
 15. The difference between the last two features
 
-
+<i class="fas fa-cat"></i>
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
 
