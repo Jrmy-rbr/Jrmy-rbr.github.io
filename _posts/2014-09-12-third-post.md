@@ -280,7 +280,7 @@ and others have been added by myself. In total I have extracted 15 features:
   The idea of this feature and the previous one is that some 2-grams can be more frequent in "disaster tweets" and other 2-gram more present in "none disaster tweets".
 15. The difference between the last two features
 
-<i class="fas fa-exclamation-triangle"></i> Be very careful when writing the code that will extract these features: 
+<i class="fas fa-exclamation-triangle" style="font-size:2em;"></i> Be very careful when writing the code that will extract these features: 
 Some of them (the features 10, 11, 13, and 14) use the labels ('target' feature of the data set) of the training set 
 in order to extract the relevant information. 
 You should only allow your code to use the labels on the traning set **only**, not on the validation set. If by mistake you use the 
