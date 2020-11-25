@@ -490,9 +490,22 @@ print("\nValidation scores:\n",
       "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_val, y_pred=y_val_pred))
       )
 ```
+By runing the above code we obtain the following output.
+
 > <div style="font-family: NewCM, Mono, sans serif;">  Training scores:<br> precision=0.81 recall=0.91 f1=0.86<br><br> Validation scores:<br> precision=0.60 recall=0.74 f1=0.67</div>
 
+To have an idea of how well the model perfroms, one should look at the f1 score for the validation set, since it should tell us what would be the score on truely new data. 
+Printing the f1 score of the traning set can be useful: If it is too high compared to the score on the validation set, then the model might overfit the data. 
+Overfitting can hurt the performance of the data so it is important to detect it. Here, the training score is 0.86 while the validation score is 0.67. 
+There is probably some overfitting here. I suspect that this is due to the added features 10, 11, 13, and 14, which by construction 
+"memorise" some text specific of the training set. It would be worth exploring this further to see weather the perfromance of the model can be improved.
+However, for the purpose of this blog post, I won't do that, and instead I'll move on to the model explaination. Model explanation can be used 
+as a tool to diagnose issues with the model, and help improve the performance. Besides this usecase, it can also be used to 
+justify the "decision" made by the model.
+
 #### Model explaination
+
+
 
 <table class="eli5-weights eli5-feature-importances" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto;">
     <thead>
