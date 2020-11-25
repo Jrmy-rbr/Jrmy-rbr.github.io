@@ -324,8 +324,8 @@ present ways of trying to interpret the model. In particular, I will present a m
 important for the model. Then I will present a method that allows to interpret a classification done by the model, 
 ie we will try to answer the following question: Given a tweet, why did the model "decided" to classify it the way it did?
 
-In both cases we will use X_train, y_train as training data, and we will use 
-X_val, y_val for to assess the model. We will consider that all 
+In both cases we will use X_train (shape=(5709, 18)), y_train as training data, and we will use 
+X_val (shape=(1904, 18)), y_val for to assess the model. We will consider that all 
 the meta-data features have already been added to this training data. By running the following
 ```python
 X_val.head(3)
@@ -426,6 +426,7 @@ we get,
 </div>
 </center>
 
+As you can see
 
 
 ### Random Forest
