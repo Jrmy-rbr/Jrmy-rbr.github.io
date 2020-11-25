@@ -438,7 +438,7 @@ The model I will present in here is based on a [random forsest](https://www.wiki
 the [random forest classifier from scikit-learn](https://scikit-learn.org/stable/modules/ensemble.html#forest), to which I add some data preparation
 steps for the features. Note that we have a lot of numerical features, and one categorcal feature, and we need to treat them separatly in the
 data preparation steps. Let us then define the following:
-```ptyhon
+```python
 # Categorical meta-data
 cat_metaData_features = ['keyword']
 
@@ -460,13 +460,19 @@ we need to encode them. For that, I will use the [OneHotEncoder](https://scikit-
 but it is a good habit to get so I choose to do it anyways. In all cases, I'll have to do that for the Logistic Regression in the next section.
 
 ```python
+# Define the scaling and the encoding
 enc_scale = ColumnTransformer([('scaler',StandardScaler(), numerical_metaData_features),
                                ('enc', OneHotEncoder(handle_unknown='ignore'), cat_metaData_features)]).fit(X_train,y_train)
 
+# Definie the Radom Forest model
 Model_Forest = RandomForestClassifier(n_estimators=900, max_depth=23, n_jobs=8, class_weight='balanced')
 
+# Train the model on the data after scaling and encoding.
+# In a next section we will see how to use pipelines in order to intgrate the model and the data preparation in a single object.
 Model_Forest.fit(enc_scale.transform(X_train), y_train)
 
+
+# Evaluate the model on the traning set and on the validation set.
 y_train_pred = Model_Forest.predict(enc_scale.transform(X_train))
 y_val_pred = Model_Forest.predict(enc_scale.transform(X_val))
 
