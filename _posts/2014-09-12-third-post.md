@@ -332,7 +332,7 @@ X_val.head(3)
 ```
 we get,
 <center>
-<div style="resize: both;  overflow: auto;">
+<div style="overflow: auto;">
 <table class="dataframe" border="1">
   <thead>
     <tr style="text-align: right;  font-size: 0.7em;">
