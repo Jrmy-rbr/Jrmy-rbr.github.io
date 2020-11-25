@@ -499,13 +499,58 @@ Printing the f1 score of the traning set can be useful: If it is too high compar
 Overfitting can hurt the performance of the data so it is important to detect it. Here, the training score is 0.86 while the validation score is 0.67. 
 There is probably some overfitting here. I suspect that this is due to the added features 10, 11, 13, and 14, which by construction 
 "memorise" some text specific of the training set. It would be worth exploring this further to see weather the perfromance of the model can be improved.
-However, for the purpose of this blog post, I won't do that, and instead I'll move on to the model explaination. Model explanation can be used 
-as a tool to diagnose issues with the model, and help improve the performance. Besides this usecase, it can also be used to 
-justify the "decision" made by the model.
+However, for the purpose of this blog post, I won't do that. Instead I'll move on to the model explaination, which can actually be part of the required work for 
+improving the model and reducing the overfitting. Indeed, Model explanation can is as a tool meant to diagnose issues with the model. 
+
+Besides, it can also be used to justify the "decision" made by the model for any given example provided as input. You might want to do that 
+to convince yourself, or maybe to convince others, that the model is doing something that makes sense, and that it can therefore be trusted.
 
 #### Model explaination
 
+In order to explain the model I will use the eli5 library, that is a library specialised into model explaination. Let's start 
+with Feature Importance. Feature Importance is simply a measure of the importance of each feature for the model.
+Here, I will use the so called Permutation Importance. Permutation Importance compute the importance of a feature as follows.
+1. Apply the model on the validation set, and evaluate the perfromance of the model.
+2. - Pick a column of the validation set (X_val), *randomly* permute the values of the column. 
+   - Apply the model on the validation set (on which the column has been permuted), and evaluate the new perfromance of the model.
+   - Permute the column back to recover the original validation set.
+3. Perform step 2 for all the columns of the validation set.
 
+Once this is done, you can see by how much the performance has change after the permutation of a column compare to the initial perfromance 
+on the original set. This difference is the permutation importance of the column.
+
+Intuitively, *randomly* permuting a column basically erases all the corelations between the values of this column and the values of the target (stored in y_val). 
+In terms of information, it is as if you erased the information contained in the column. We then expect that, the more a feature (column) is important for the model, the more the model performance drops after the permutation of this feature.
+
+The operation I have describe above is automatically performed by the PermutationImportance class of the library eli5.
+
+```python
+##### First redefine and train the Random Forest model in a way that will be accepted by the PermutationImportance calss.
+
+# copy X_train into X
+X = X_train[cat_metaData_features+numerical_metaData_features].copy()
+X[cat_metaData_features] = OrdinalEncoder().fit_transform(X[cat_metaData_features])
+
+# The model is the same as before, but integrated into a pipeline. It is fitted on the same traning set X_train (X is used as a proxy for X_train).
+model_metadata = make_pipeline(enc_scale, Model_Forest).fit(X[cat_metaData_features+numerical_metaData_features], y_train)
+
+
+##### Feature importance: permutation importance
+
+# copy X_val into X
+X = X_val[cat_metaData_features+numerical_metaData_features].copy()
+
+# Have to use OrdinalEncoder() because PermutationImportance() will internally try to convert 
+# the categories into floats (idk why...), and it will fail if I keep the categories as strings
+X[cat_metaData_features] = OrdinalEncoder().fit_transform(X[cat_metaData_features]) 
+
+perm_importance = PermutationImportance(model_metadata).fit(X, y_val)  # performs the operations I have described above.
+eli5.show_weights(perm_importance, feature_names=cat_metaData_features+numerical_metaData_features)  # display the importance of each feature in a table
+
+
+```
+    
+After running th above code we get the following table.
 
 <table class="eli5-weights eli5-feature-importances" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto;">
     <thead>
