@@ -295,7 +295,21 @@ X_train, X_val, y_train, y_val = train_test_split(data_set[['keyword','text', 't
                                                   data_set['target_corrected'])
 ```
 
-Then for the steps that use the labels of the training set one needs to make use of transformers like the ones provided by the library [scikit-learn](https://scikit-learn.org/stable/index.html)
+Then for the steps that use the labels of the training set one needs to make use of transformers like the ones provided by the library [scikit-learn](https://scikit-learn.org/stable/index.html). Let's see a code example of that:
+```python
+# Create the transformer object of the classe CountMentionInClass(). 
+# This class is a customized version of a scikit-learn transformer that I have programed for 
+# creating the above mentioned features 10 and 11.
+mentionCounter = CountMentionsInClass() 
+
+# Create and add the features 10 and 11 to the traning set X_train. 
+# Note that the fit_transform() method uses the labels stored in y_train
+X_train = mentionCounter.fit_transform(X_train, y_train, column='text')
+
+# Create and add the features 10 and 11 to the validation set X_val. 
+# Note that the transform() method does not use any label.
+X_val = mentionCounter.transform(X_val, column='text')
+```
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
 
