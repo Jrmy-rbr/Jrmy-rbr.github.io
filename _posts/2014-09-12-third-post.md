@@ -494,6 +494,211 @@ print("\nValidation scores:\n",
 
 #### Model explaination
 
+<table class="eli5-weights eli5-feature-importances" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto;">
+    <thead>
+    <tr style="border: none;">
+        <th style="padding: 0 1em 0 0.5em; text-align: right; border: none;">Weight</th>
+        <th style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">Feature</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr style="background-color: hsl(120, 100.00%, 80.00%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0243
+                
+                    ± 0.0114
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                mean_word_length
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 82.36%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0203
+                
+                    ± 0.0084
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                keyword
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 82.75%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0196
+                
+                    ± 0.0073
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                difference_2-grams_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 89.42%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0098
+                
+                    ± 0.0102
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                char_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 90.48%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0084
+                
+                    ± 0.0051
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                count_2-grams_in_ndisaster
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 90.65%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0082
+                
+                    ± 0.0030
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                count_2-grams_in_disaster
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 93.84%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0045
+                
+                    ± 0.0021
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                count_mentions_in_disaster
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 94.04%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0043
+                
+                    ± 0.0045
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                capital_words_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 94.88%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0035
+                
+                    ± 0.0039
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                difference_mentions_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 96.02%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0024
+                
+                    ± 0.0044
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                count_mentions_in_ndisaster
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 96.91%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0017
+                
+                    ± 0.0038
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                punctuation_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(120, 100.00%, 98.27%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                0.0007
+                
+                    ± 0.0014
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                hastags_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(0, 100.00%, 99.56%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                -0.0001
+                
+                    ± 0.0031
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                mention_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(0, 100.00%, 96.65%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                -0.0019
+                
+                    ± 0.0053
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                url_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(0, 100.00%, 93.94%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                -0.0044
+                
+                    ± 0.0042
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                word_count
+            </td>
+        </tr>
+    
+        <tr style="background-color: hsl(0, 100.00%, 93.05%); border: none;">
+            <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+                -0.0054
+                
+                    ± 0.0050
+                
+            </td>
+            <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+                unique_word_count
+            </td>
+        </tr>
+    
+    
+    </tbody>
+</table>
+
 ### Logistic Regression
 
 #### Model explaination
