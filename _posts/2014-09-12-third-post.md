@@ -311,12 +311,18 @@ X_train = mentionCounter.fit_transform(X_train, y_train, column='text')
 X_val = mentionCounter.transform(X_val, column='text')
 ```
 The code for the definition of the CountMentionInClass class can be found in the MyClasses.py file [here]().
-By splitting the data set before add the features, and by using transformers as shown above, allows to reduce the risk 
+By splitting the data set before adding the features, and by using transformers as shown above, allows to reduce the risk 
 of a label leakage. It has the additional advantage that code written like this can 
 easily be included into a pipeline as we will see later in this post.
 
 
 ## Classification using meta-data only <a name='meta-data_clf'></a>
+
+Once the meta-data features are created one can try to use these in order to classify the tweets. I will quickly present
+two models for that: One using Random Forest and one using Logistic Regression. For these two models I will
+present ways of trying to interpret the model. In particular, I will present a method to see what features are 
+important for the model. Then I will present a method that allows to interpret a classification done by the model, 
+ie we will try to answer the following question: Given a tweet, why did the model "decided" to classify it the way it did?
 
 ### Random Forest
 
@@ -332,6 +338,6 @@ easily be included into a pipeline as we will see later in this post.
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
-## Inegrate the whole model into a pipeline <a name='Pipeline'></a>
+## Integrate the whole model into a pipeline <a name='Pipeline'></a>
 
 ## Conclusion <a name='Conclusion'></a>
