@@ -324,7 +324,108 @@ present ways of trying to interpret the model. In particular, I will present a m
 important for the model. Then I will present a method that allows to interpret a classification done by the model, 
 ie we will try to answer the following question: Given a tweet, why did the model "decided" to classify it the way it did?
 
+In both cases we will use X_train, y_train as training data, and we will use 
+X_val, y_val for to assess the model. We will consider that all 
+the meta-data features have already been added to this training data. By running the following
+```python
+X_val.head(3)
+```
+we get,
+<table class="dataframe" border="1">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>keyword</th>
+      <th>text</th>
+      <th>text_cleaned</th>
+      <th>hastags_count</th>
+      <th>capital_words_count</th>
+      <th>word_count</th>
+      <th>unique_word_count</th>
+      <th>url_count</th>
+      <th>mean_word_length</th>
+      <th>char_count</th>
+      <th>punctuation_count</th>
+      <th>mention_count</th>
+      <th>count_mentions_in_disaster</th>
+      <th>count_mentions_in_ndisaster</th>
+      <th>difference_mentions_count</th>
+      <th>count_2-grams_in_disaster</th>
+      <th>count_2-grams_in_ndisaster</th>
+      <th>difference_2-grams_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6447</th>
+      <td>suicide%20bombing</td>
+      <td>@Haji_Hunter762 @MiddleEastEye maybe some muzz...</td>
+      <td>haji hunter middle east eye maybe some muzzies...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>17</td>
+      <td>17</td>
+      <td>0</td>
+      <td>6.941176</td>
+      <td>134</td>
+      <td>13</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7433</th>
+      <td>wounded</td>
+      <td>@wocowae Officer Wounded Suspect Killed in Exc...</td>
+      <td>@ wocowae officer wounded suspect killed in e...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>11</td>
+      <td>11</td>
+      <td>1</td>
+      <td>7.363636</td>
+      <td>91</td>
+      <td>6</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4836</th>
+      <td>mass%20murder</td>
+      <td>@yelllowheather controlled murder is fine. mas...</td>
+      <td>@ yelllowheather controlled murder is fine . ...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>16</td>
+      <td>15</td>
+      <td>0</td>
+      <td>5.750000</td>
+      <td>107</td>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 ### Random Forest
+
 
 #### Model explaination
 
