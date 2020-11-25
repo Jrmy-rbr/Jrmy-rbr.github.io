@@ -331,9 +331,10 @@ the meta-data features have already been added to this training data. By running
 X_val.head(3)
 ```
 we get,
+<center>
 <table class="dataframe" border="1">
   <thead>
-    <tr style="text-align: right;">
+    <tr style="text-align: right;  font-size: 0.7em;">
       <th></th>
       <th>keyword</th>
       <th>text</th>
@@ -355,7 +356,7 @@ we get,
       <th>difference_2-grams_count</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="font-size: 0.7em;">
     <tr>
       <th>6447</th>
       <td>suicide%20bombing</td>
@@ -421,6 +422,7 @@ we get,
     </tr>
   </tbody>
 </table>
+</center>
 
 
 
