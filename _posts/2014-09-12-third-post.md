@@ -766,7 +766,7 @@ In this section, we will see the exact same thing as before but by replacing Ran
 Since the code is exactly the same as before (except for the use of the LogisticRegression) I will 
 simply show the f1 score of this new model.
 
-> Training scores:<br> precision=0.79 recall=0.83 f1=0.81 <br><br> Validation scores:<br> precision=0.69 recall=0.75 f1=0.72
+> <div style="font-family: NewCM, Mono, sans serif;">Training scores:<br> precision=0.79 recall=0.83 f1=0.81 <br><br> Validation scores:<br> precision=0.69 recall=0.75 f1=0.72 </div>
 
 All the remark made in the previous section apply here too. The main difference is that this model seems a little bit 
 better, and seems to overfit a little less. One thing that is important though, is that for this model the scaling of the numerical values 
@@ -981,6 +981,9 @@ what we get when computing the permutation importance for the new model:
     
     </tbody>
 </table>
+
+
+We can also do the same operation has before, for the Shapley and we get the following.
 
 
 
