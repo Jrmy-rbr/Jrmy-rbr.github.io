@@ -248,7 +248,7 @@ You can find my cleaning function on my [own notebook]().
 ### Feature extraction: adding meta-data
 
 We will now see that from the raw tweet one can extract some features that are not explicit in the text body (here the tweets). 
-This meta-data can be used for checking that the training set and the test set we have have the same statistics. Indeed,
+This meta-data can be used for checking that the training set and the test set we have the same statistics. Indeed,
 if this weren't the case, then there are chances that the learning on the traning set poorly generalizes on the test set. On the 
 contrary, if they have similar statistics for several of these fetures then one can be more confident that the model 
 will give good resuts on the test set. It is therefore a good sanity check to do before even starting to work on the model.
@@ -426,11 +426,71 @@ we get,
 </div>
 </center>
 
-As you can see
+As you can see there are 18 columns. The first two were already present in the data set[^1], then follows the cleaned tweets, and finally the 15 added features.
+For the classification we will use the fisrt column and the 15 added feature, ie the only column I don't use are the tweets and their cleaned version.
 
+[^1]: Note that I revomed the location colum from the data set. This is because there are too many unique locations, which makes this column 
+not useful for the classification.
 
 ### Random Forest
 
+The model I will present in here is based on a [random forsest](https://www.wikiwand.com/en/Random_forest) classifier. In particular I will use 
+the [random forest classifier from scikit-learn](https://scikit-learn.org/stable/modules/ensemble.html#forest), to which I add some data preparation
+steps for the features. Note that we have a lot of numerical features, and one categorcal feature, and we need to treat them separatly in the
+data preparation steps. Let us then define the following:
+```ptyhon
+# Categorical meta-data
+cat_metaData_features = ['keyword']
+
+# numerical meta-data
+numerical_metaData_features = ['hastags_count', 'capital_words_count', 'word_count', 'unique_word_count', 
+                               'url_count', 'mean_word_length', 'char_count', 'punctuation_count',
+                               'mention_count', 'count_mentions_in_disaster', 'count_mentions_in_ndisaster', 
+                               'difference_mentions_count', 'count_2-grams_in_disaster', 'count_2-grams_in_ndisaster',
+                               'difference_2-grams_count']
+# text feature
+txt_feature = ['text_cleaned']
+```
+
+This allows us to quickly refer to the categorical data or to the numerical data. Here, the data preparation will be extremely 
+simple. We will rescale all the numerical feature, so that their standard deviation equals 1[^2]. For the categorical feature
+we need to encode them. For that, I will use the [OneHotEncoder](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing-categorical-features) from scikit-learn.
+
+[^2]: This step is not necesary for a tree based model like the Random Forest since they are not sensitive to scaling, 
+but it is a good habit to get so I choose to do it anyways. In all cases, I'll have to do that for the Logistic Regression in the next section.
+
+```python
+enc_scale = ColumnTransformer([('scaler',StandardScaler(), numerical_metaData_features),
+                               ('enc', OneHotEncoder(handle_unknown='ignore'), cat_metaData_features)]).fit(X_train,y_train)
+
+Model_Forest = RandomForestClassifier(n_estimators=900, max_depth=23, n_jobs=8, class_weight='balanced')
+
+Model_Forest.fit(enc_scale.transform(X_train), y_train)
+
+y_train_pred = Model_Forest.predict(enc_scale.transform(X_train))
+y_val_pred = Model_Forest.predict(enc_scale.transform(X_val))
+
+# training score
+print("Training scores:\n",
+      "precision={:.2f}".format(skl.metrics.precision_score(y_true=y_train, y_pred=y_train_pred)),
+      "recall={:.2f}".format(skl.metrics.recall_score(y_true=y_train, y_pred=y_train_pred)),
+      "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_train, y_pred=y_train_pred))
+      )
+
+# validation score
+print("\nValidation scores:\n",
+      "precision={:.2f}".format(skl.metrics.precision_score(y_true=y_val, y_pred=y_val_pred)),
+      "recall={:.2f}".format(skl.metrics.recall_score(y_true=y_val, y_pred=y_val_pred)),
+      "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_val, y_pred=y_val_pred))
+      )
+```
+> <div>
+  Training scores:
+ precision=0.81 recall=0.91 f1=0.86
+
+Validation scores:
+ precision=0.60 recall=0.74 f1=0.67
+</div>
 
 #### Model explaination
 
