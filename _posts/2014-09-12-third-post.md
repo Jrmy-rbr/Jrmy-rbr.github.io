@@ -484,10 +484,10 @@ print("\nValidation scores:\n",
       "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_val, y_pred=y_val_pred))
       )
 ```
-> <div>
+> {<div style="font-family: NewCM, Mono, sans serif;">
   Training scores:
  precision=0.81 recall=0.91 f1=0.86
-
+<br>
 Validation scores:
  precision=0.60 recall=0.74 f1=0.67
 </div>
