@@ -1025,7 +1025,7 @@ what we get when computing the permutation importance for the new model:
 </table>
 
 
-We can now see what the shap library tells use of the same sample, nemely on,
+Let us see what the shap library tells us about the following sample,
 ```python
 X_val.iloc[5].loc['text']
 ```
@@ -1040,8 +1040,8 @@ Once the Shapley values are calculated, we get the following,
   </figure>
 </center>
   
-  Here again we can see that the features with high contribution (positive or negative) often are the one 
-  with a high permutation importance: For example, here it is true for "word_count" anf "char_count".
+Here again we can see that the features with high contribution (positive or negative) often are the one 
+with a high permutation importance: For example, here it is true for "word_count" anf "char_count".
 
 
 ## Classification using the pretrained Bert model  <a name='Bert'></a>
