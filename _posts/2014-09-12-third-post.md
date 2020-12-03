@@ -761,22 +761,42 @@ We see that for this model, the three most important features are "mean_word_len
 The weights associated to each feature is the amount by which the perfromance of the model drops.
 
 The above tells use how important each feature is for the model, by looking at the whole training set. There are at least two pieces 
-of information it is mute about: It does not allow to explain the prediction of the model for individual sample of the set, and 
+of information on which it says nothing: It does not allow to explain the predictions of the model for individual sample of the data set, and 
 does not tell in which direction a given feature influances the prediction, it only says whether or not it will have a big influence.
 Eli5 gives some methods to explain the model with these two extra pieces of information. However, because of the one hot encoding,
-our model is not supported by these methods. I will therefore use the shap library which gives for every sample of the data set
-a comtribution score each feature. Here is an example for the following sample,
+our model is not supported by these explainers. 
+
+I will therefore use the [shap](https://shap.readthedocs.io/en/latest/#) library which 
+gives for every sample of the data set a "contribution score" for each feature. It does so 
+by computing what is called the [Shapley value](https://www.wikiwand.com/en/Shapley_value) 
+for each feature of a given sample. The Shapley value 
+is a concept that has been developed in the context of game theory. So a priori 
+it has very little to do with model explaination. The Shapeley value would deserve a blog post on its own,
+but in short, the Shapley value is the solution to how to share profit among collaborator based on
+a notion of "merit". The notion of merit can be given a precise definition in this game theoretic
+framework, but it roughly says that if an individual contributes more he should get larger share of the profit.
+We can already see some analogy with a "contribution score" of a feature. But you might wonder
+what is the "profit" in our context? It's acually the difference between the predicted probability 
+given by our model on a given example and a base value which can be thaugh of the probability 
+the model would predict if it were not given any features. Let us see an example for the following sample,
 ```python
 X_val.iloc[5].loc['text']
 ```
 > <div style="font-family: NewCM, Mono, sans serif;"> '4 kidnapped ladies rescued by police in Enugu | Nigerian Tribune http://t.co/xYyEV89WIz' </div>.
 
-Without diving into how to use the shap library, here is the output we get from it,
-
+Without diving into how to use the shap library, here is the output we get,
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_rand-forest.png" description="Figure 1." %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_rand-forest.png" description="Figure 6." %} 
   </center>
+
+You see that each feature is assigned to a score (positive or negative) depending on the value taken by this feature. The 
+sum of all the Shapley values should be equal to the difference between the base value and the predicted probability. When a score is 
+negative (in blue) it tends to decrease the predicted probability, and vice versa. As expected, we can see that the featues with the largest (in absolute value)
+Shapley value often correspond to the most important features according to the permutation importance: For example, "mean_word_length " has 
+the second largest Shapley value, and it also has the second highest permutation importance. Of course the shapeley values will change for each 
+sample, since each of them has different feature values. To make sure that there really is a correcpondance between permutation importance and
+the Shapley values, one would need to compute the Shapley values of many samples, and then check that the correspondance holds on average over these samples.
 
 
 ### Logistic Regression
@@ -1002,18 +1022,20 @@ what we get when computing the permutation importance for the new model:
 </table>
 
 
-We can also do the same operation has before, for the Shapley and we get the following.
+We can now see what the shap library tells use of the same sample, nemely on,
 ```python
 X_val.iloc[5].loc['text']
 ```
 > <div style="font-family: NewCM, Mono, sans serif;"> '4 kidnapped ladies rescued by police in Enugu | Nigerian Tribune http://t.co/xYyEV89WIz' </div>.
 
-Without diving into how to use the shap library, here is the output we get from it,
-
+Once the Shapley values are calculated, we get the following,
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_logistic-reg.png" description="Figure 1." %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_logistic-reg.png" description="Figure 7." %} 
   </center>
+  
+  Here again we can see that the features with high contribution (positive or negative) often are the one 
+  with a high permutation importance: For example, here it is true for "word_count" anf "char_count".
 
 
 ## Classification using the pretrained Bert model  <a name='Bert'></a>
