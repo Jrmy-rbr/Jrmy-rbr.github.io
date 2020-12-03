@@ -786,9 +786,12 @@ X_val.iloc[5].loc['text']
 
 Without diving into how to use the shap library, here is the output we get,
 
-  <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_rand-forest.png" description="Figure 6." %} 
-  </center>
+<center> 
+  <figure class="image">
+    <img src="/assets/images/Kaggle:NLP-Twitter/Shap_rand-forest.png" alt="Figure 6." style="max-width:100%">
+    <figcaption>Figure 6.</figcaption>
+  </figure>
+</center>
 
 You see that each feature is assigned to a score (positive or negative) depending on the value taken by this feature. The 
 sum of all the Shapley values should be equal to the difference between the base value and the predicted probability. When a score is 
@@ -1030,9 +1033,12 @@ X_val.iloc[5].loc['text']
 
 Once the Shapley values are calculated, we get the following,
 
-  <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_logistic-reg.png" description="Figure 7." %} 
-  </center>
+<center> 
+  <figure class="image">
+    <img src="/assets/images/Kaggle:NLP-Twitter/Shap_logistic-reg.png" alt="Figure 6." style="max-width:100%">
+    <figcaption>Figure 6.</figcaption>
+  </figure>
+</center>
   
   Here again we can see that the features with high contribution (positive or negative) often are the one 
   with a high permutation importance: For example, here it is true for "word_count" anf "char_count".
