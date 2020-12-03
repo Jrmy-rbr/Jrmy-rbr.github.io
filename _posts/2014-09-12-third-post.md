@@ -811,7 +811,7 @@ All the remark made in the previous section apply here too. The main difference 
 better, and seems to overfit a little less. One thing that is important though, is that for this model the scaling of the numerical values 
 in the data preparation step is more important, so it is crucial not forget this step when using logistic regression.
 
-#### Model explaination
+### Model explaination
 
 Again, everything we have seen about model explanation for the random forest model also applies here. Let's see 
 what we get when computing the permutation importance for the new model: 
