@@ -505,7 +505,7 @@ improving the model and reducing the overfitting. Indeed, Model explanation can 
 Besides, it can also be used to justify the "decision" made by the model for any given example provided as input. You might want to do that 
 to convince yourself, or maybe to convince others, that the model is doing something that makes sense, and that it can therefore be trusted.
 
-#### Model explaination
+### Model explaination
 
 In order to explain the model I will use the eli5 library, that is a library specialised into model explaination. Let's start 
 with Feature Importance. Feature Importance is simply a measure of the importance of each feature for the model.
@@ -760,6 +760,25 @@ After running the above code we get the following table.
 We see that for this model, the three most important features are "mean_word_length", "keyword", "difference_2-grams_count". 
 The weights associated to each feature is the amount by which the perfromance of the model drops.
 
+The above tells use how important each feature is for the model, by looking at the whole training set. There are at least two pieces 
+of information it is mute about: It does not allow to explain the prediction of the model for individual sample of the set, and 
+does not tell in which direction a given feature influances the prediction, it only says whether or not it will have a big influence.
+Eli5 gives some methods to explain the model with these two extra pieces of information. However, because of the one hot encoding,
+our model is not supported by these methods. I will therefore use the shap library which gives for every sample of the data set
+a comtribution score each feature. Here is an example for the following sample,
+```python
+X_val.iloc[5].loc['text']
+```
+> <div style="font-family: NewCM, Mono, sans serif;"> '4 kidnapped ladies rescued by police in Enugu | Nigerian Tribune http://t.co/xYyEV89WIz' </div>.
+
+Without diving into how to use the shap library, here is the output we get from it,
+
+
+  <center> 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_rand-forest.png" description="Figure 1." %} 
+  </center>
+
+
 ### Logistic Regression
 
 In this section, we will see the exact same thing as before but by replacing RandomForestClassifier by LogisticRegression.
@@ -984,7 +1003,17 @@ what we get when computing the permutation importance for the new model:
 
 
 We can also do the same operation has before, for the Shapley and we get the following.
+```python
+X_val.iloc[5].loc['text']
+```
+> <div style="font-family: NewCM, Mono, sans serif;"> '4 kidnapped ladies rescued by police in Enugu | Nigerian Tribune http://t.co/xYyEV89WIz' </div>.
 
+Without diving into how to use the shap library, here is the output we get from it,
+
+
+  <center> 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Shap_logistic-reg.png" description="Figure 1." %} 
+  </center>
 
 
 ## Classification using the pretrained Bert model  <a name='Bert'></a>
