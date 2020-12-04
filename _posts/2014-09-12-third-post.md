@@ -1053,10 +1053,24 @@ tweets should be represented by two vectors that are close to each other. In oth
 automatically extracts the mening of the tweets. Extracting the meaning of the tweets is great, but we still 
 need to perform the classification of these tweets. To do so I add, on top of the BERT model, two dense layers.
 
+The BERT model has been pretrained by researchers with a ton of data. This means that I only need to train the two dense layers 
+I add on top. This can be done with much less data. You can fing the pretrained BERT model [here](https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/).
+
+
 ```python
+# Load the pretrained layer in bert_layer once and for all in the global scope
+try:
+    bert_layer = hub.KerasLayer("./bert_en_uncased_L-12_H-768_A-12_2/",
+                            trainable=False)
+except:
+    bert_layer = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/2",
+                            trainable=False)
+                            
+                     
+# write the function that creates the model based of the bert layer
 def build_bert_model(max_seq_length=80):
 
-    
+    # the BERT model takes as input 3 layer of lengths 80 each.
     input_word_ids = K.layers.Input(shape=(max_seq_length,), dtype=tf.int32,
                                            name="input_word_ids")
     input_mask = K.layers.Input(shape=(max_seq_length,), dtype=tf.int32,
