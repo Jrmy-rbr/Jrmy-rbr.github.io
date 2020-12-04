@@ -1098,8 +1098,8 @@ Bert_model = KerasClassifier(build_bert_model)
  ```
  
  You'll notice that I use the class MyModel in the code. This is a custom version of tf.Keras.Model that allows me 
- to train the model the way I want. In particular, it allows me to check whether there exists an already trained model, 
- in which case it simply loads it. Otherwise, it goes to the training of the two dense layer I have added on top of the bert layer 
+ to train the model the way I want. In particular, it allows me to check whether there exists a saved model, 
+ in which case it simply loads it. Otherwise, it goes to the training of the two dense layers (and only them) I have added on top of the bert layer 
  by freezing the bert layer. Then it goes to fine tuning where I unfreeze the bert layer and train the whole model for a small 
  number of epoch.
  
@@ -1253,6 +1253,23 @@ Bert_model = KerasClassifier(build_bert_model)
         return super().predict_on_batch(x)
  
 ```
+
+Note that when you train you model you can define a callback to, for example, save your model, so that 
+next time you can simply load the model instead of retraining everything.
+
+```python
+# This is the callback used to save the best model during training. 
+# If there is no already saved model, then pass this call back 
+# as an option in the fit method.
+best_model = K.callbacks.ModelCheckpoint("./weights.best.hdf5", 
+                            monitor="val_loss",
+                            verbose=1,
+                            save_best_only=True,
+                            mode='min'
+                            )  
+```
+
+
 
 ### Model explaination
 
