@@ -1310,6 +1310,7 @@ Bert_clf.fit(X_train['text'],
              batch_size = BATCH_SIZE,
              shuffle=True,
              callbacks = [best_model]  
+           )  
 ```
 
 
