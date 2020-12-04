@@ -1254,7 +1254,7 @@ Bert_model = KerasClassifier(build_bert_model)
  
 ```
 
-Note that when you train you model you can define a callback to, for example, save your model, so that 
+Note that when you train you model you can define a callback to, for example, save your model so that 
 next time you can simply load the model instead of retraining everything.
 
 ```python
@@ -1269,7 +1269,8 @@ best_model = K.callbacks.ModelCheckpoint("./weights.best.hdf5",
                             )  
 ```
 
-
+Training a model that is as big as the BERT model is computationally expensive, and it is therefore a good idea to 
+train the model using gpu acceleration. Personally I did it using [Google colaboratory](https://colab.research.google.com/).
 
 ### Model explaination
 
