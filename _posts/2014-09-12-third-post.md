@@ -1103,7 +1103,7 @@ Bert_model = KerasClassifier(build_bert_model)
  by freezing the bert layer. Then it goes to fine tuning where I unfreeze the bert layer and train the whole model for a small 
  number of epoch.
  
- ```pyhton
+ ```python
  class MyModel(K.Model):
     """ This class is mostly the same as tensorflow.keras.Model()
     Main changes:
