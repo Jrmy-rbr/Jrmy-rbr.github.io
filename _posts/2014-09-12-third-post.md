@@ -1269,8 +1269,6 @@ best_model = K.callbacks.ModelCheckpoint("./weights.best.hdf5",
                             )  
 ```
 
-Training a model that is as big as the BERT model is computationally expensive, and it is therefore a good idea to 
-train the model using gpu acceleration. Personally I did it using [Google colaboratory](https://colab.research.google.com/).
 
 Finally, in order to have a fully functioning model, I add the cleaning function I have talked about in the beging of this post 
 as a transformer before my BERT based model,
@@ -1291,6 +1289,27 @@ Bert_clf = Pipeline([('cleaner_text', Cleaner_text),
                      ('bert_model', Bert_model)
                      
             ])
+```
+
+You can then train the model. Training a model that is as big as the BERT model (in total I have 110,073,602 parameters in my model) 
+is computationally expensive, and it is therefore a good idea to 
+train the model using gpu acceleration. Personally I did it using [Google colaboratory](https://colab.research.google.com/).
+
+```python
+# if you have a saved model, this is enough
+Bert_clf.fit(X_train['text'],y_train)
+
+# if you don't have a saved model, then you can use the following
+BATCH_SIZE = 32
+EPOCHS = 20
+
+Bert_clf.fit(X_train['text'], 
+             y_train, 
+             validation_data=(X_val['text']), y_val),
+             epochs=EPOCHS,
+             batch_size = BATCH_SIZE,
+             shuffle=True,
+             callbacks = [best_model]  
 ```
 
 
