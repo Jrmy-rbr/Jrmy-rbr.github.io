@@ -1046,6 +1046,42 @@ with a high permutation importance: For example, here it is true for "word_count
 
 ## Classification using the pretrained Bert model  <a name='Bert'></a>
 
+In this section I will present how I used the BERT model to classify the tweets. As I mentioned earlier,
+the BERT model is a machine learning model that will map every tweet to a 768-dimensional vector. This 
+vector can be seen as an abstract representation of the meaning of the tweet. In particular, two semantically similar
+tweets should be represented by two vectors that are close to each other. In other words, the BERT model 
+automatically extracts the mening of the tweets. Extracting the meaning of the tweets is great, but we still 
+need to perform the classification of these tweets. To do so I add, on top of the BERT model, two dense layers.
+
+```python
+def build_bert_model(max_seq_length=80):
+
+    
+    input_word_ids = K.layers.Input(shape=(max_seq_length,), dtype=tf.int32,
+                                           name="input_word_ids")
+    input_mask = K.layers.Input(shape=(max_seq_length,), dtype=tf.int32,
+                                       name="input_mask")
+    segment_ids = K.layers.Input(shape=(max_seq_length,), dtype=tf.int32,
+                                        name="segment_ids")
+
+    pooled_output, sequence_output = bert_layer([input_word_ids, input_mask, segment_ids])
+    clf_output = sequence_output[:, 0, :]
+    
+    inputs = [input_word_ids, input_mask, segment_ids]
+    mid = K.layers.Dense(768, activation='relu')(clf_output)
+    out = K.layers.Dense(1, activation='sigmoid')(mid)
+  
+    # the class MyModel() is a custom class that inherits from tensorflow.Keras.Model()
+    # it allows me to customize the training process.
+    model = MyModel(inputs=inputs, outputs=out)  
+    model.compile(loss='binary_crossentropy', optimizer = 'adam', metrics=['accuracy'])
+    
+    return model
+
+Bert_model = KerasClassifier(build_bert_model)   # Creates a Model compatible with the scikit learn API
+
+ ```
+
 ### Model explaination
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
