@@ -1058,7 +1058,7 @@ I add on top. This can be done with much less data. You can fing the pretrained 
 
 
 ```python
-# Load the pretrained layer in bert_layer once and for all in the global scope
+# Load the pretrained layer in bert_layer
 try:
     bert_layer = hub.KerasLayer("./bert_en_uncased_L-12_H-768_A-12_2/",
                             trainable=False)
@@ -1092,9 +1092,167 @@ def build_bert_model(max_seq_length=80):
     
     return model
 
-Bert_model = KerasClassifier(build_bert_model)   # Creates a Model compatible with the scikit learn API
 
+# Creates a Model compatible with the scikit learn API
+Bert_model = KerasClassifier(build_bert_model)   
  ```
+ 
+ You'll notice that I use the class MyModel in the code. This is a custom version of tf.Keras.Model that allows me 
+ to train the model the way I want. In particular, it allows me to check whether there exists an already trained model, 
+ in which case it simply loads it. Otherwise, it goes to the training of the two dense layer I have added on top of the bert layer 
+ by freezing the bert layer. Then it goes to fine tuning where I unfreeze the bert layer and train the whole model for a small 
+ number of epoch.
+ 
+ ```pyhton
+ class MyModel(K.Model):
+    """ This class is mostly the same as tensorflow.keras.Model()
+    Main changes:
+    - fit() method: modified so that, if there is
+        a saved model, then load it. Otherwise, train the model in two steps:
+
+        1. Freeze the Bert layer and train only the top layer over 'epochs1' epochs
+        2. Unfreeze the Bert layer, and fine-tune the whole model over 'epochs2' epochs
+
+        In the case where the model is trained, the fit method returns the two histories
+
+    - adding _encode() method:
+        The _encode() method convert a pandas.Series of strings into an adapted encoding for
+        the neural network.
+
+    - adding the predict_classes() method for compatibility with the tensorflow.keras.wrappers.scikit_learn.KerasClassifier()
+        wrapper.
+     """
+    
+    def __init__(self,inputs=None, outputs=None, max_seq_length=80):
+        super(MyModel, self).__init__(inputs=inputs, outputs=outputs)
+        self.max_seq_length = max_seq_length
+
+        
+    def _encode(self, X):
+        X = pd.Series(X)
+        X = X.copy()
+        
+        max_seq_length = self.max_seq_length
+        texts = X.copy()
+        
+        vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
+        do_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
+        tokenizer = tokenization.FullTokenizer(vocab_file, do_lower_case)
+        
+        all_tokens = []
+        all_masks = []
+        all_segments = []
+
+        for text in texts:
+            text = tokenizer.tokenize(text)
+            text = text[:max_seq_length - 2]
+            input_sequence = ['[CLS]'] + text + ['[SEP]']
+            pad_len = max_seq_length - len(input_sequence)
+
+            tokens = tokenizer.convert_tokens_to_ids(input_sequence)
+            tokens += [0] * pad_len
+            pad_masks = [1] * len(input_sequence) + [0] * pad_len
+            segment_ids = [0] * max_seq_length
+
+            all_tokens.append(tokens)
+            all_masks.append(pad_masks)
+            all_segments.append(segment_ids)
+
+        return np.array(all_tokens), np.array(all_masks), np.array(all_segments)
+    
+    def fit(self, x=None, y=None, batch_size=None, epochs1=1, epochs2=1, verbose=1,
+        callbacks=None, validation_split=0.0, validation_data=None, shuffle=True,
+        class_weight=None, sample_weight=None, initial_epoch=0,
+        steps_per_epoch=None, validation_steps=None, validation_batch_size=None,
+        validation_freq=1, max_queue_size=10, workers=1,
+        use_multiprocessing=False, bert_layer_idx=3):
+        
+        x = self._encode(x)
+        
+        try:
+            # if there is already a saved model use it
+            self.load_weights("./weights.best.hdf5")
+            self.compile(loss='binary_crossentropy', optimizer = 'adam', metrics=['accuracy'])
+            return None
+        except:
+            # If no saved model, then train the model
+            # Start training the top layers of the model with epochs1 
+            self.layers[bert_layer_idx].trainable=False
+            self.compile(loss='binary_crossentropy', optimizer = 'adam', metrics=['accuracy'])
+            history1 = super().fit(x=x, y=y, batch_size=batch_size, epochs=epochs1, verbose=1,
+                        callbacks=callbacks, validation_split=validation_split, validation_data=validation_data, 
+                        shuffle=shuffle, class_weight=class_weight, sample_weight=sample_weight, initial_epoch=initial_epoch,
+                        steps_per_epoch=steps_per_epoch, validation_steps=validation_steps, validation_batch_size=validation_batch_size,
+                        validation_freq=validation_freq, max_queue_size=max_queue_size, workers=workers,
+                        use_multiprocessing=use_multiprocessing)
+
+            # Start fine-tuning the model with epochs2
+            try:
+                self.load_weights("./weights.best.hdf5")  # use the best epoch of the above training if available
+            except:
+                pass
+            self.layers[bert_layer_idx].trainable=True
+            self.compile(loss='binary_crossentropy', optimizer = 'adam', metrics=['accuracy'])
+            history2 = super().fit(x=x, y=y, batch_size=batch_size, epochs=epochs2, verbose=1,
+                        callbacks=callbacks, validation_split=validation_split, validation_data=validation_data, 
+                        shuffle=shuffle, class_weight=class_weight, sample_weight=sample_weight, initial_epoch=initial_epoch,
+                        steps_per_epoch=steps_per_epoch, validation_steps=validation_steps, validation_batch_size=validation_batch_size,
+                        validation_freq=validation_freq, max_queue_size=max_queue_size, workers=workers,
+                        use_multiprocessing=use_multiprocessing)
+
+
+            return (history1, history2)
+        
+    def evaluate(self, x=None,y=None, batch_size=None, verbose=1, sample_weight=None,
+                 steps=None, callbacks=None, max_queue_size=10, workers=1,
+                 use_multiprocessing=False, return_dict=False):
+
+        x = self._encode(x)
+
+        return super().evaluate(x=x,y=y, batch_size=batch_size, verbose=verbose, sample_weight=sample_weight,
+                 steps=steps, callbacks=callbacks, max_queue_size=max_queue_size, workers=workers,
+                 use_multiprocessing=use_multiprocessing, return_dict=return_dict)
+        
+    def predict_proba(self, x, batch_size=None, verbose=0, steps=None, callbacks=None,
+                max_queue_size=10, workers=1, use_multiprocessing=False):
+
+
+        x = self._encode(x)
+
+        return super().predict(x, batch_size=batch_size, verbose=verbose, steps=steps, callbacks=callbacks,
+                max_queue_size=max_queue_size, workers=workers, use_multiprocessing=use_multiprocessing)
+    
+    def predict_classes(self, x, batch_size=None, verbose=0, steps=None, callbacks=None,
+                max_queue_size=10, workers=1, use_multiprocessing=False):
+                                
+        y_pred = self.predict_proba(x, batch_size=batch_size, verbose=verbose, steps=steps, callbacks=callbacks,
+                max_queue_size=max_queue_size, workers=workers, use_multiprocessing=use_multiprocessing)
+        
+        y_pred = np.array(list(map(lambda b: int(b>0.5), y_pred)))  
+        
+        return y_pred
+        
+    def train_on_batch(self, x, y=None, sample_weight=None, class_weight=None, 
+                       reset_metrics=True, return_dict=False):
+
+        x = self._encode(x)
+
+        return super().train_om_batch(x, y=y, sample_weight=sample_weight, class_weight=class_weight, 
+                                      reset_metrics=reset_metrics, return_dict=return_dict)
+        
+    def test_on_batch(self, x, y=None,  sample_weight=None, reset_metrics=True, return_dict=False):
+
+        x = self._encode(x)
+
+        return super().test_on_batch(x, y=y, sample_weight=sample_weight, reset_metrics=reset_metrics, 
+                                     return_dict=return_dict)
+    def predict_on_batch(x):
+
+        x = self._encode(x)
+
+        return super().predict_on_batch(x)
+ 
+```
 
 ### Model explaination
 
