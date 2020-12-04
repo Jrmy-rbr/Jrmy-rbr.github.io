@@ -1312,9 +1312,38 @@ Bert_clf.fit(X_train['text'],
              callbacks = [best_model]  
            )  
 ```
+As for the previous models, once the model is trained, we can print its f1-score to assess its perfromance.
 
+```python
+y_train_pred = Bert_clf.predict(X_train['text'])
+y_val_pred = Bert_clf.predict(X_val['text'])
+
+# training score
+print("Training scores:\n",
+      "precision={:.2f}".format(skl.metrics.precision_score(y_true=y_train, y_pred=y_train_pred)),
+      "recall={:.2f}".format(skl.metrics.recall_score(y_true=y_train, y_pred=y_train_pred)),
+      "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_train, y_pred=y_train_pred))
+      )
+
+# validation score
+print("\nValidation scores:\n",
+      "precision={:.2f}".format(skl.metrics.precision_score(y_true=y_val, y_pred=y_val_pred)),
+      "recall={:.2f}".format(skl.metrics.recall_score(y_true=y_val, y_pred=y_val_pred)),
+      "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_val, y_pred=y_val_pred))
+      )
+```
+> <div style="font-family: NewCM, Mono, sans serif;">  Training scores:<br> precision=0.87 recall=0.80 f1=0.84<br><br> Validation scores:<br> precision=0.88 recall=0.81 f1=0.84</div>
+
+This model clearly beats the previous two models. But is it as interpretable as the meta-data based models? We will see that in the next section.
 
 ### Model explaination
+
+Let us try to interpret the model. The issue here compared to the previous models, is that we don't have a fix number of identifiable features
+for which we can measure an "importance" or a "contribution score". Fortunately some smart people have already come up 
+wich solutions to explain model like this one. In particular, I will present a tool from eli5 (again) that allows to explain 
+models working on text data.
+
+
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
