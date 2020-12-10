@@ -1408,9 +1408,11 @@ te.show_prediction()
         </tbody>
     </table>
 
+<blockquote>
 <p style="margin-bottom: 2.5em; margin-top:-0.5em;">
         <span style="background-color: hsl(120, 100.00%, 76.65%); opacity: 0.89" title="0.664">10000</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 60.00%); opacity: 1.00" title="1.432">people</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 61.52%); opacity: 0.99" title="1.355">died</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 82.31%); opacity: 0.86" title="0.446">yesterday</span><span style="opacity: 0.80">. </span>
 </p>
+ </blockquote>
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
