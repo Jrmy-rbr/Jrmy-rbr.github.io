@@ -1346,7 +1346,7 @@ models working on text data. The tool is simply called [TextExplainer](https://e
 Let me explain quicly what this tool does. For that let me state the obvious: There very simple models that can be 
 very easily explained, eg linear models are easily explained by their sets of coeficients. However, these simple models 
 are limited. On the other hand, more complex model are more powerful but very hard to interpret. The idea is then to locally approximate 
-complex models by simple ones, and then interpret the simple ones (see Figure 7 from [RSG](#RSG)). This explanation algortihm is called
+complex models by simple ones, and then interpret the simple ones (see Figure 7 from [[RSG]](#RSG)). This explanation algortihm is called
 **LIME** (**L**ocal **I**nterpretable **M**odel-agnostic **E**xplanations). the class TextExplanainer is an implementation of this algorithm.
 
  <center> 
