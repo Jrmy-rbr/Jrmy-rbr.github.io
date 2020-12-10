@@ -1413,6 +1413,84 @@ te.show_prediction()
         <span style="background-color: hsl(120, 100.00%, 76.65%); opacity: 0.89" title="0.664">10000</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 60.00%); opacity: 1.00" title="1.432">people</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 61.52%); opacity: 0.99" title="1.355">died</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 82.31%); opacity: 0.86" title="0.446">yesterday</span><span style="opacity: 0.80">. </span>
 </p>
  </blockquote>
+ 
+ ```python
+ 
+ te.show_weights()
+ ```
+ <table class="eli5-weights" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto; margin-bottom: 2em;">
+        <thead>
+        <tr style="border: none;">
+            
+                <th style="padding: 0 1em 0 0.5em; text-align: right; border: none;" title="Feature weights. Note that weights do not account for feature value scales, so if feature values have different scales, features with highest weights might not be the most important.">
+                    Weight<sup>?</sup>
+                </th>
+            
+            <th style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">Feature</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        
+            <tr style="background-color: hsl(120, 100.00%, 86.45%); border: none;">
+    <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+        +1.600
+    </td>
+    <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+        [2] died
+    </td>
+    
+</tr>
+        
+            <tr style="background-color: hsl(120, 100.00%, 87.68%); border: none;">
+    <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+        +1.397
+    </td>
+    <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+        [1] people
+    </td>
+    
+</tr>
+        
+            <tr style="background-color: hsl(120, 100.00%, 93.07%); border: none;">
+    <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+        +0.614
+    </td>
+    <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+        [0] 10000
+    </td>
+    
+</tr>
+        
+            <tr style="background-color: hsl(120, 100.00%, 95.99%); border: none;">
+    <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+        +0.281
+    </td>
+    <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+        [3] yesterday
+    </td>
+    
+</tr>
+        
+        
+
+        
+        
+            <tr style="background-color: hsl(0, 100.00%, 80.00%); border: none;">
+    <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+        -2.791
+    </td>
+    <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+        &lt;BIAS&gt;
+    </td>
+    
+</tr>
+        
+
+        </tbody>
+    </table>
+ 
+
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
