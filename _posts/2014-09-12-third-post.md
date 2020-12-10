@@ -499,15 +499,15 @@ Printing the f1 score of the traning set can be useful: If it is too high compar
 Overfitting can hurt the performance of the data so it is important to detect it. Here, the training score is 0.86 while the validation score is 0.67. 
 There is probably some overfitting here. I suspect that this is due to the added features 10, 11, 13, and 14, which by construction 
 "memorise" some text specific of the training set. It would be worth exploring this further to see weather the perfromance of the model can be improved.
-However, for the purpose of this blog post, I won't do that. Instead I'll move on to the model explaination, which can actually be part of the required work for 
+However, for the purpose of this blog post, I won't do that. Instead I'll move on to the model explanation, which can actually be part of the required work for 
 improving the model and reducing the overfitting. Indeed, Model explanation can is as a tool meant to diagnose issues with the model. 
 
 Besides, it can also be used to justify the "decision" made by the model for any given example provided as input. You might want to do that 
 to convince yourself, or maybe to convince others, that the model is doing something that makes sense, and that it can therefore be trusted.
 
-### Model explaination
+### Model explanation
 
-In order to explain the model I will use the eli5 library, that is a library specialised into model explaination. Let's start 
+In order to explain the model I will use the eli5 library, that is a library specialised into model explanation. Let's start 
 with Feature Importance. Feature Importance is simply a measure of the importance of each feature for the model.
 Here, I will use the so called Permutation Importance. Permutation Importance compute the importance of a feature as follows.
 1. Apply the model on the validation set, and evaluate the perfromance of the model.
@@ -771,7 +771,7 @@ gives for every sample of the data set a "contribution score" for each feature. 
 by computing what is called the [Shapley value](https://www.wikiwand.com/en/Shapley_value) 
 for each feature of a given sample. The Shapley value 
 is a concept that has been developed in the context of game theory. So a priori 
-it has very little to do with model explaination. The Shapeley value would deserve a blog post on its own,
+it has very little to do with model explanation. The Shapeley value would deserve a blog post on its own,
 but in short, the Shapley value is the solution to how to share profit among collaborator based on
 a notion of "merit". The notion of merit can be given a precise definition in this game theoretic
 framework, but it roughly says that if an individual contributes more he should get larger share of the profit.
@@ -814,7 +814,7 @@ All the remark made in the previous section apply here too. The main difference 
 better, and seems to overfit a little less. One thing that is important though, is that for this model the scaling of the numerical values 
 in the data preparation step is more important, so it is crucial not forget this step when using logistic regression.
 
-### Model explaination
+### Model explanation
 
 Again, everything we have seen about model explanation for the random forest model also applies here. Let's see 
 what we get when computing the permutation importance for the new model: 
@@ -1336,17 +1336,87 @@ print("\nValidation scores:\n",
 
 This model clearly beats the previous two models. But is it as interpretable as the meta-data based models? We will see that in the next section.
 
-### Model explaination
+### Model explanation
 
 Let us try to interpret the model. The issue here compared to the previous models, is that we don't have a fix number of identifiable features
 for which we can measure an "importance" or a "contribution score". Fortunately some smart people have already come up 
 wich solutions to explain model like this one. In particular, I will present a tool from eli5 (again) that allows to explain 
-models working on text data.
+models working on text data. The tool is simply called [TextExplainer](https://eli5.readthedocs.io/en/latest/tutorials/black-box-text-classifiers.html).
 
+Let me explain quicly what this tool does. For that let me state the obvious: There very simple models that can be 
+very easily explained, eg linear models are easily explained by their sets of coeficients. However, these simple models 
+are limited. On the other hand, more complex model are more powerful but very hard to interpret. The idea is then to locally approximate 
+complex models by simple ones, and then interpret the simple ones (see Figure 7).
 
+ <center> 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/LIME.png" description="Figure 7. Taken from the original paper presenting the LIME algoritm [RSG](#RSG)" %} 
+  </center>
+
+```python
+# Explain what the model look at on a text
+
+# create and fit the text explainer
+te = TextExplainer(n_samples=300, position_dependent=True)
+text = "10000 people died yesterday. "
+te.fit(doc, Bert_clf.predict_proba)
+
+# show the prediction and some metrics that indicates how trustworthy the explanation is
+print(te.metrics_)
+te.show_prediction()
+```
+
+<table class="eli5-weights" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto; margin-bottom: 2em;">
+        <thead>
+        <tr style="border: none;">
+            
+                <th style="padding: 0 1em 0 0.5em; text-align: right; border: none;" title="Feature contribution already accounts for the feature value (for linear models, contribution = weight * feature value), and the sum of feature contributions is equal to the score or, for some classifiers, to the probability. Feature values are shown if &quot;show_feature_values&quot; is True.">
+                    Contribution<sup>?</sup>
+                </th>
+            
+            <th style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">Feature</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        
+            <tr style="background-color: hsl(120, 100.00%, 80.00%); border: none;">
+    <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+        +3.898
+    </td>
+    <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+        Highlighted in text (sum)
+    </td>
+    
+</tr>
+        
+        
+
+        
+        
+            <tr style="background-color: hsl(0, 100.00%, 84.52%); border: none;">
+    <td style="padding: 0 1em 0 0.5em; text-align: right; border: none;">
+        -2.703
+    </td>
+    <td style="padding: 0 0.5em 0 0.5em; text-align: left; border: none;">
+        &lt;BIAS&gt;
+    </td>
+    
+</tr>
+        
+
+        </tbody>
+    </table>
+
+<p style="margin-bottom: 2.5em; margin-top:-0.5em;">
+        <span style="background-color: hsl(120, 100.00%, 76.65%); opacity: 0.89" title="0.664">10000</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 60.00%); opacity: 1.00" title="1.432">people</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 61.52%); opacity: 0.99" title="1.355">died</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 82.31%); opacity: 0.86" title="0.446">yesterday</span><span style="opacity: 0.80">. </span>
+</p>
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
 
 ## Conclusion <a name='Conclusion'></a>
+
+
+## References
+<a name="RSG">[RSG]</a>[Ribeiro, Marco Tulio, Sameer Singh, and Carlos Guestrin. "" Why should I trust you?" Explaining the predictions of any classifier." Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016.](https://arxiv.org/pdf/1602.04938.pdf)
