@@ -1346,10 +1346,11 @@ models working on text data. The tool is simply called [TextExplainer](https://e
 Let me explain quicly what this tool does. For that let me state the obvious: There very simple models that can be 
 very easily explained, eg linear models are easily explained by their sets of coeficients. However, these simple models 
 are limited. On the other hand, more complex model are more powerful but very hard to interpret. The idea is then to locally approximate 
-complex models by simple ones, and then interpret the simple ones (see Figure 7).
+complex models by simple ones, and then interpret the simple ones (see Figure 7 from [RSG](#RSG)). This explanation algortihm is called
+**LIME** (**L**ocal **I**nterpretable **M**odel-agnostic **E**xplanations). the class TextExplanainer is an implementation of this algorithm.
 
  <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/LIME.png" description="Figure 7. Taken from the original paper presenting the LIME algoritm [RSG](#RSG)" %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/LIME.png" description="Figure 7. Taken from the original paper presenting the LIME algoritm." %} 
   </center>
 
 ```python
@@ -1419,4 +1420,4 @@ te.show_prediction()
 
 
 ## References
-<a name="RSG">[RSG]</a>[Ribeiro, Marco Tulio, Sameer Singh, and Carlos Guestrin. "" Why should I trust you?" Explaining the predictions of any classifier." Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016.](https://arxiv.org/pdf/1602.04938.pdf)
+<a name="RSG">[RSG]</a> [Ribeiro, Marco Tulio, Sameer Singh, and Carlos Guestrin. "" Why should I trust you?" Explaining the predictions of any classifier." Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016.](https://arxiv.org/pdf/1602.04938.pdf)
