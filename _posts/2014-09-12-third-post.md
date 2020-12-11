@@ -1414,18 +1414,21 @@ the words versus bias, and the highlighted text shows the details of the contrib
     </table>
 
 <blockquote>
+ {'mean_KL_divergence': 0.02224054150605272, 'score': 1.0}
+  
 <p style="margin-bottom: 2.5em; margin-top:-0.5em;">
         <span style="background-color: hsl(120, 100.00%, 76.65%); opacity: 0.89" title="0.664">10000</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 60.00%); opacity: 1.00" title="1.432">people</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 61.52%); opacity: 0.99" title="1.355">died</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 82.31%); opacity: 0.86" title="0.446">yesterday</span><span style="opacity: 0.80">. </span>
 </p>
  </blockquote>
+ We see that the words that contribute the most in the classification are "died" and "people" (you can get the numerical value of 
+ the contribution of each word by hovering the words with your mouse). 
  
- We can show the weight of each word in the text as follows.
+ We can show the importance (the weight) of each word in the text as follows.
  
  ```python
  
  te.show_weights()
  ```
-
 We then get the following table.
  
  <table class="eli5-weights" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto; margin-bottom: 2em;">
@@ -1500,7 +1503,9 @@ We then get the following table.
         </tbody>
     </table>
  
-
+When using text data the difference between the "contribution" and the "weight" of a word should not be very important. Indeed, a word can either be present or 
+not (in a given position of the sentence), but it can't "twice as present" than another word. 
+It is therefore not so suprising that the weight (in the above table) and the contribution score (see the highlighted text above) are similar. 
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
 
