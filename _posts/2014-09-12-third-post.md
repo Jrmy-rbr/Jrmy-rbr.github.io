@@ -1415,12 +1415,17 @@ the words versus bias, and the highlighted text shows the details of the contrib
 
 <blockquote>
  {'mean_KL_divergence': 0.02224054150605272, 'score': 1.0}
-  
+  <br>
 <p style="margin-bottom: 2.5em; margin-top:-0.5em;">
         <span style="background-color: hsl(120, 100.00%, 76.65%); opacity: 0.89" title="0.664">10000</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 60.00%); opacity: 1.00" title="1.432">people</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 61.52%); opacity: 0.99" title="1.355">died</span><span style="opacity: 0.80"> </span><span style="background-color: hsl(120, 100.00%, 82.31%); opacity: 0.86" title="0.446">yesterday</span><span style="opacity: 0.80">. </span>
 </p>
  </blockquote>
- We see that the words that contribute the most in the classification are "died" and "people" (you can get the numerical value of 
+ Here, two things are present: Some metrics and a highlighted text.
+ The metrics are measure of how well the linear model approximate the complex model: the closer the "KL divergence" is to $$0$$ the better,
+ and the closer the "score" is to $$1$$ the better. Here the score are very close their best values, which indicates that 
+ the linear approxiation is locally pretty good, and that there good chamces that the model explanation can be trusted.
+ 
+ In the highlighted text we see that the words that contribute the most in the classification are "died" and "people" (you can get the numerical value of 
  the contribution of each word by hovering the words with your mouse). 
  
  We can show the importance (the weight) of each word in the text as follows.
@@ -1504,10 +1509,27 @@ We then get the following table.
     </table>
  
 When using text data the difference between the "contribution" and the "weight" of a word should not be very important. Indeed, a word can either be present or 
-not (in a given position of the sentence), but it can't "twice as present" than another word. 
-It is therefore not so suprising that the weight (in the above table) and the contribution score (see the highlighted text above) are similar. 
+not (at a given position of the sentence), but it can't "twice as present" than another word. 
+It is therefore not so suprising that the weights (in the above table) and the contribution scores (see the highlighted text above) are similar. 
+
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
+
+In this section I will show a way of combining two model that work on two different type of data, in such a way that 
+the combination of these models leads to a better model than each of the model separately. 
+In this particular case, we should not expect a big improvement over the BERT based model. Indeed, all the meta-features are extracted from the text,
+and since the BERT based model directly uses the text, it has therefore an implicit access to the meta-data features. Note that there are still some features
+that the BERT based model cannot see, like "capital_word_count" since the BERT layer only sees lower-case word and is therefore case insensitive. However,
+"capital_word_count" is not a very important feature for the meta-data classfiers and so it should not influence the end result a lot.
+
+On the other hand, there are situation where this combination of model can be useful. Typically if the meta-data features did not come from 
+the text itself, but represented the context in which the text has been extracted, then the BERT based model alone would not 
+have anyways to access these features from the text. 
+
+You should therefore read this section more as an illustration of what can be done, and how it can be done, rather than expect huge improvement 
+in the accuracy of the model.
+
+
 
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
 
