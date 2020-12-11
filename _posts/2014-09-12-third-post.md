@@ -1541,11 +1541,18 @@ method of scikit-learn.
 The training the stacking procedure has two steps:
 1. I use the two models I have to predict the probability of of being a "disaster tweet" for each 
 tweet of the training set, this gives for each of these tweets a tuple of 2 probabilities, which is essentially a point 
-in the two dimensional plane. This looks like the following:
-<center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/bla.png" description="Figure 2." %} 
-</center>
-2. 
+in the two dimensional plane. 
+2. I then use a thrid model that uses the probabilities fron the previous steps as training data
+
+Then for the predictions the model runs as follows.
+1. Using the two first models predict the probability of each tweets.
+2. Using the thrid model and using the probabilities predicted in the first step, predict the whether a tweet is about a disaster or not.
+
+Let me show you how the validattion data looks like with the prodiction of the third model.
+
+  <center> 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8." %} 
+  </center>
 
 
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
