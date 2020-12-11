@@ -1301,12 +1301,14 @@ Bert_clf.fit(X_train['text'],y_train)
 
 # if you don't have a saved model, then you can use the following
 BATCH_SIZE = 32
-EPOCHS = 20
+EPOCHS1 = 20
+EPOCHS2 = 5
 
 Bert_clf.fit(X_train['text'], 
              y_train, 
              validation_data=(X_val['text']), y_val),
-             epochs=EPOCHS,
+             epochs1=EPOCHS1,
+             epochs2=EPOCHS2,
              batch_size = BATCH_SIZE,
              shuffle=True,
              callbacks = [best_model]  
@@ -1349,9 +1351,14 @@ are limited. On the other hand, more complex model are more powerful but very ha
 complex models by simple ones, and then interpret the simple ones (see Figure 7 from [[RSG]](#RSG)). This explanation algortihm is called
 **LIME** (**L**ocal **I**nterpretable **M**odel-agnostic **E**xplanations). The class TextExplanainer of the library eli5 is an implementation of this algorithm.
 
- <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/LIME.png" description="Figure 7. Taken from the original paper presenting the LIME algoritm." %} 
-  </center>
+
+  <center> 
+  <figure class="image">
+    <img src="/assets/images/Kaggle:NLP-Twitter/LIME.png" alt="Figure 7. Taken from the original paper presenting the LIME algoritm." style="border-style: solid;
+  border-width: 1px;">
+    <figcaption>Figure 6.</figcaption>
+  </figure>
+</center>
 
 Here is an example of how to use the text explainer.
 
@@ -1527,7 +1534,7 @@ the text itself, but represented the context in which the text has been extracte
 have anyways to access these features from the text. 
 
 You should therefore read this section more as an illustration of what can be done, and how it can be done, rather than expect huge improvement 
-in the accuracy of the model.
+in the performance of the model.
 
 
 
