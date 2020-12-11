@@ -1353,6 +1353,8 @@ complex models by simple ones, and then interpret the simple ones (see Figure 7 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/LIME.png" description="Figure 7. Taken from the original paper presenting the LIME algoritm." %} 
   </center>
 
+Here is an example of how to use the text explainer.
+
 ```python
 # Explain what the model look at on a text
 
@@ -1365,6 +1367,9 @@ te.fit(doc, Bert_clf.predict_proba)
 print(te.metrics_)
 te.show_prediction()
 ```
+
+When runing this code, we get the following table and highlighted text as output. It shows show the contribution of 
+the words versus bias, and the highlighted text shows the details of the contribution of each word.
 
 <table class="eli5-weights" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto; margin-bottom: 2em;">
         <thead>
@@ -1414,10 +1419,15 @@ te.show_prediction()
 </p>
  </blockquote>
  
+ We can show the weight of each word in the text as follows.
+ 
  ```python
  
  te.show_weights()
  ```
+
+We then get the following table.
+ 
  <table class="eli5-weights" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto; margin-bottom: 2em;">
         <thead>
         <tr style="border: none;">
