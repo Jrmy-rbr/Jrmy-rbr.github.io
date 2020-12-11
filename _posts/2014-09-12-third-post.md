@@ -1356,7 +1356,7 @@ complex models by simple ones, and then interpret the simple ones (see Figure 7 
   <figure class="image">
     <img src="/assets/images/Kaggle:NLP-Twitter/LIME.png" alt="Figure 7. Taken from the original paper presenting the LIME algoritm." style="border-style: solid;
   border-width: 1px;">
-    <figcaption>Figure 6.</figcaption>
+    <figcaption>Figure 7. Taken from the original paper presenting the LIME algoritm.</figcaption>
   </figure>
 </center>
 
@@ -1536,6 +1536,16 @@ have anyways to access these features from the text.
 You should therefore read this section more as an illustration of what can be done, and how it can be done, rather than expect huge improvement 
 in the performance of the model.
 
+The way I combine the models together is insprired by the [stacking](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html) 
+method of scikit-learn. 
+The training the stacking procedure has two steps:
+1. I use the two models I have to predict the probability of of being a "disaster tweet" for each 
+tweet of the training set, this gives for each of these tweets a tuple of 2 probabilities, which is essentially a point 
+in the two dimensional plane. This looks like the following:
+<center> 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/bla.png" description="Figure 2." %} 
+</center>
+2. 
 
 
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
