@@ -1548,10 +1548,11 @@ Then for the predictions the model runs as follows.
 1. Using the two first models predict the probability of each tweets.
 2. Using the thrid model and using the probabilities predicted in the first step, predict the whether a tweet is about a disaster or not.
 
-Let me show you how the validattion data looks like with the prodiction of the third model.
+Let me show you how the validattion data looks like with the prediction of the third model.
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8." %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8. To each dot corresponds a tweet of the validation set. The position of the dot indicates the probability attributed by each of the two initial models (BERT and Forest) that the tweet speaks about a disaster. The color of the dot indicates the true classification of the dot (1=disaster, 0=not disaster). The background color indicates the probability 
+ that the final model attributes to each region of the graph. The bluer, the less likely (according to the model) the tweets in this region are to speak of a disaster." %} 
   </center>
 
 
