@@ -1554,6 +1554,20 @@ Let me show you how the validattion data looks like with the prediction of the t
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8. To each dot corresponds a tweet of the validation set. The position of the dot indicates the probability attributed by each of the two initial models (BERT and Forest) that the tweet speaks about a disaster. The color of the dot indicates the true classification of the dot (1=disaster, 0=not disaster). The background color indicates the probability 
  that the final model attributes to each region of the graph. The bluer, the less likely (according to the model) the tweets in this region are to speak of a disaster." %} 
   </center>
+  
+  In the above picture we see the final model mostly splits the space in two according to a vertical line in the middle (the white part of the background). 
+  This means that the final model will essentially follow what the BERT-based model predicts. The performance should therefore be very similar to the 
+  performance of the BERT-based model. Indeed when assessing the perfomance of the model we get the following,
+  
+ <blockquote> 
+  <div style="font-family: NewCM, Mono, sans serif;">
+  Training scores:
+ precision=0.87 recall=0.81 f1=0.84
+
+Validation scores:
+ precision=0.91 recall=0.75 f1=0.83
+ </div>
+</blockquote>
 
 
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
