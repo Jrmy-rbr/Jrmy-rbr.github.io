@@ -1561,10 +1561,10 @@ Let me show you how the validattion data looks like with the prediction of the t
   
  <blockquote> 
   <div style="font-family: NewCM, Mono, sans serif;">
-  Training scores:
- precision=0.87 recall=0.81 f1=0.84
-
-Validation scores:
+  Training scores:<br>
+ precision=0.87 recall=0.81 f1=0.84<br>
+<br>
+Validation scores:<br>
  precision=0.91 recall=0.75 f1=0.83
  </div>
 </blockquote>
