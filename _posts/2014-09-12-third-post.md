@@ -1554,10 +1554,11 @@ Let me show you how the validattion data looks like with the prediction of the t
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8. To each dot corresponds a tweet of the validation set. The position of the dot indicates the probability attributed by each of the two initial models (BERT and Forest) that the tweet speaks about a disaster. The color of the dot indicates the true classification of the dot (1=disaster, 0=not disaster). The background color indicates the probability 
  that the final model attributes to each region of the graph. The bluer, the less likely (according to the model) the tweets in this region are to speak of a disaster." %} 
   </center>
+  <br>
   
-  In the above picture we see the final model mostly splits the space in two according to a vertical line in the middle (the white part of the background). 
+  In the above figure we see that the final model mostly splits the space in two according to a vertical line in the middle (the white part of the background). 
   This means that the final model will essentially follow what the BERT-based model predicts. The performance should therefore be very similar to the 
-  performance of the BERT-based model. Indeed when assessing the perfomance of the model we get the following,
+  performance of the BERT-based model. Indeed when assessing the perfomance of the model we get similar results.
   
  <blockquote> 
   <div style="font-family: NewCM, Mono, sans serif;">
@@ -1571,6 +1572,17 @@ Validation scores:<br>
 
  
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
+
+A pipeline is a chain of processing steps for the data, the last step often being the machine learning model itself. In particular, we include 
+a series of steps called "transformers" before the model. They allow to process and prepare the data. The use of a series of transformers makes
+the code readable and less prone to errors. We have already seen an example of transformers in the feature exctraction section. As I have explained this section, 
+transformers are useful to avoid label leakage that would make the model look better than it really is. Pipelines are a natural way of 
+chaining these transformers and the model. Pipelines also simply the deployement of the model.
+
+The downside of using Pipelines, is that they can make the model explaination more convoluted. That is one of the reasons why in this post I have separately 
+talked about data preparation, the models, their explanations and interpretations, and only now about pipelines.
+
+
 
 ## Conclusion <a name='Conclusion'></a>
 
