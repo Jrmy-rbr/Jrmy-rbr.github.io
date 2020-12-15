@@ -1583,7 +1583,7 @@ The downside of using Pipelines, is that they can make the model explaination mo
 talked about data preparation, the models, their explanations and interpretations, and only now about pipelines.
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 9. " %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/drawing.svg" description="Figure 9. " %} 
   </center>
 
 I will start by defining all the transformers for the BERT model, and then for the meta-data based model (using the Random Forest).
