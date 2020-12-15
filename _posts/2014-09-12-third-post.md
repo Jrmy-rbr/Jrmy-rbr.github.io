@@ -1609,8 +1609,8 @@ def clean_text(X):
 Cleaner_text = skl.preprocessing.FunctionTransformer(clean_text)  # This is the Text Cleaner transformer
 ```
 
-In the meta-data based model I use a feature additioner transformer. This transformer adds feature to the entry data set as I explained in a previous section. 
-This transformer is more involve than the other and so I need to create a subclass of the base.TransformerMixin class from scikit-learn.
+In the meta-data based model I use a feature additioner transformer. This transformer adds feature to the entry data frame as I explained in a previous section. 
+This transformer is more involved than the previous one, so I need to create a subclass of the "base.TransformerMixin" class from scikit-learn.
 ```python
 # Transformer that will add features: "feature extraction"
 
