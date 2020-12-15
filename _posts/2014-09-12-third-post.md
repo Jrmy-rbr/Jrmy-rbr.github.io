@@ -1583,17 +1583,117 @@ The downside of using Pipelines, is that they can make the model explaination mo
 talked about data preparation, the models, their explanations and interpretations, and only now about pipelines.
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/drawing.svg" description="Figure 9. In this figure you can see the different component that 
-  compose the whole model. In green are the transformers. When a series of transformers are grouped into a pipeline they form a compound transformer. In blue you
-  have the estimators which in our case our estimators are classifiers. Grouping transformers with an estimator in a pipeline gives compound 
-  estimator. In the end we group the two compoud estimators together using the stacking inpired technics developed in the previous section." %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Model_Structure.svg" description="Figure 9. In this figure you can see the different component 
+  that compose the whole model. The transformers are in green. When a series of transformers are grouped into a pipeline they form a compound transformer. 
+  The estimators are in blue. In our case the estimators are classifiers. Grouping transformers with an estimator in a pipeline gives compound 
+  estimator. In the end we group the two compound estimators together using the stacking inpired technique developed in the previous section." %} 
   </center>
 
-I will start by defining all the transformers for the BERT model, and then for the meta-data based model (using the Random Forest). 
-I will then integrate this transformers into a pipeline to wich I will add the machine learning model itself. Finally I will combine 
-the two pipeline into a single one with the stacking method I have presented in a previous section.
+In the following I show the definition some of the transformers for the BERT model, and then for the meta-data based model (which uses the Random Forest 
+Classifier). Then, I show how to integrate this transformers into a pipeline to wich I add the machine learning model itself (The classifier). Finally, I show 
+how to combine the two pipelines into a single one with the stacking technique I have presented in a previous section. You will find all the details 
+in my [Jupyter Notebook]().
+
+Let me start by showing the definitions of some transformers. For example in Figure 9. you can see that the BERT based model is preceeded by 
+a Text Cleaner, which can be defined as follows.
+
+```python
+# Define the Text Cleaner
+def clean_text(X):
+    X = pd.Series(X)
+    X = X.copy()
+    
+    return X.apply(lambda s: clean(s))  # The function "clean" is the function we talked about in the begining of the post.
+    
+Cleaner_text = skl.preprocessing.FunctionTransformer(clean_text)  # This is the Text Cleaner transformer
+```
+
+In the meta-data based model I use a feature additioner transformer. This transformer adds feature to the entry data set as I explained in a previous section. 
+This transformer is more involve than the other and so I need to create a subclass of the base.TransformerMixin class from scikit-learn.
+```python
+# Transformer that will add features: "feature extraction"
+
+class AddFeaturesTransformer(skl.base.BaseEstimator, skl.base.TransformerMixin):
+    def __init__(self, column, ngram__n = 2, n_ngrams=100):
+        super().__init__()
+        self.n = ngram__n
+        self.n_ngrams = n_ngrams
+        self.mention_counter = CountMentionsInClass()
+        self.ngram_counter = CountTopNGramsInClass(ngram__n, n_ngrams)
+        self.column = column
+        
+    def fit(self, X, y, column = None):
+        X = pd.DataFrame(X) ; X = X.copy()
+        y = pd.Series(y) ; y = y.copy()
+        
+        if column is None: 
+            column=self.column
+        
+        if type(column) not in [int, str]:
+            raise TypeError("{} is not int or str".format(type(column)))
+        
+        if type(column)==int:
+            column = X.columns[column]
+            
+        self.mention_counter.fit(X, y, column=column)
+        self.ngram_counter.fit(X, y, column=column)
+        
+        return self
+    
+    def transform(self, X, column=None):
+        X = pd.DataFrame(X) ; X = X.copy()
+        
+        if column is None: 
+            column=self.column
+        
+        if type(column) not in [int, str]:
+            raise TypeError("{} is not int or str".format(type(column)))
+        
+        if type(column)==int:
+            column = X.columns[column]
+        
+        # count the number of hashtags
+        X['hastags_count'] = X[column].map(lambda text: sum([char=='#' for char in text]) )
+        # count all cap words
+        X['capital_words_count'] = X[column].map( lambda text: sum( [word==word.upper() for word in text.split()] ) )
+        # word_count
+        X['word_count'] = X[column].apply(lambda x: len(str(x).split()))
+        # unique_word_count
+        X['unique_word_count'] = X[column].apply(lambda x: len(set(str(x).split())))
+        # url_count
+        X['url_count'] = X[column].apply(lambda x: len([w for w in str(x).lower().split() if 'http' in w or 'https' in w]))
+        # mean_word_length
+        X['mean_word_length'] = X[column].apply(lambda x: np.mean([len(w) for w in str(x).split()]))
+        # char_count
+        X['char_count'] = X[column].apply(lambda x: len(str(x)))
+        # punctuation_count
+        X['punctuation_count'] = X[column].apply(lambda x: len([c for c in str(x) if c in string.punctuation]))
+        # mention_count
+        X['mention_count'] = X[column].apply(lambda x: len([c for c in str(x) if c == '@']))
+        # count mentions in target classes
+        X = self.mention_counter.transform(X, column=column)
+        # compute de difference between  mentions in disasters and mentions not in disasters
+        X["difference_mentions_count"] = X["count_mentions_in_disaster"] - X["count_mentions_in_ndisaster"]
+        # count ngrams in target classes
+        X = self.ngram_counter.transform(X, column=column)
+        # compute de difference between ngrams in disasters and mentions not in disasters
+        X[f"difference_{self.n}-grams_count"] = X_train[f"count_{self.n}-grams_in_disaster"] - X_train[f"count_{self.n}-grams_in_ndisaster"]
+        
+        return X
+    
+    def fit_transform(self, X, y, column=None):
+        
+        if column is None: 
+            column=self.column
+            
+        return super().fit_transform(X, y, column=column)
 
 
+
+
+Feature_additioner = AddFeaturesTransformer(column='text') # Here is the transformer
+
+```
 
 
 
