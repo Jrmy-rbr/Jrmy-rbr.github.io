@@ -1710,7 +1710,7 @@ Then, we can include this pipeline into another pipline.
 encode_scale = ColumnTransformer([('scaler',StandardScaler(), numerical_metaData_features),
                                   ('enc', OneHotEncoder(handle_unknown='ignore'), cat_metaData_features)]).fit(X_train,y_train)
 
-
+# Here is the final meta-data based classifier. It will later be combined to the BERT based classifier.
 metaData_clf = Pipeline([('preprocessor', preprocessor),
                          ('encode_scale', encode_scale),
                          ('rand_forest', RandomForestClassifier(max_depth=6, class_weight='balanced'))]
