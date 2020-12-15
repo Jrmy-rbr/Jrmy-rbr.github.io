@@ -1748,7 +1748,7 @@ This final model can be train as a normal model even though internally a lot of 
 final_clf.fit(X_train, y_train)
 ```
 
-Look at perfromance
+**Look at perfromance**
 
 ## Conclusion <a name='Conclusion'></a>
 
