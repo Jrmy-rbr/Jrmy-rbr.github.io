@@ -1583,12 +1583,17 @@ The downside of using Pipelines, is that they can make the model explaination mo
 talked about data preparation, the models, their explanations and interpretations, and only now about pipelines.
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/drawing.svg" description="Figure 9. " %} 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/drawing.svg" description="Figure 9. In this figure you can see the different component that 
+  compose the whole model. In green are the transformers. When a series of transformers are grouped into a pipeline they form a compound transformer. In blue you
+  have the estimators which in our case our estimators are classifiers. Grouping transformers with an estimator in a pipeline gives compound 
+  estimator. In the end we group the two compoud estimators together using the stacking inpired technics developed in the previous section." %} 
   </center>
 
 I will start by defining all the transformers for the BERT model, and then for the meta-data based model (using the Random Forest). 
 I will then integrate this transformers into a pipeline to wich I will add the machine learning model itself. Finally I will combine 
-the two pipeline into a single one with the stacking method.
+the two pipeline into a single one with the stacking method I have presented in a previous section.
+
+
 
 
 
