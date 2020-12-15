@@ -1583,11 +1583,12 @@ The downside of using Pipelines, is that they can make the model explaination mo
 talked about data preparation, the models, their explanations and interpretations, and only now about pipelines.
 
   <center> 
-    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Model_Structure.svg" description="Figure 9. In this figure you can see the different component 
+    {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Model_structure.svg" description="Figure 9. In this figure you can see the different component 
   that compose the whole model. The transformers are in green. When a series of transformers are grouped into a pipeline they form a compound transformer. 
   The estimators are in blue. In our case the estimators are classifiers. Grouping transformers with an estimator in a pipeline gives compound 
   estimator. In the end we group the two compound estimators together using the stacking inpired technique developed in the previous section." %} 
   </center>
+  <br>
 
 In the following I show the definition some of the transformers for the BERT model, and then for the meta-data based model (which uses the Random Forest 
 Classifier). Then, I show how to integrate this transformers into a pipeline to wich I add the machine learning model itself (The classifier). Finally, I show 
@@ -1704,7 +1705,7 @@ preprocessor = Pipeline([('nan_filler', Categorical_Nan_Filler),
                 ])
 ```
 
-Then, we can include this pipline into another pipline.
+Then, we can include this pipeline into another pipline.
 ```python
 encode_scale = ColumnTransformer([('scaler',StandardScaler(), numerical_metaData_features),
                                   ('enc', OneHotEncoder(handle_unknown='ignore'), cat_metaData_features)]).fit(X_train,y_train)
