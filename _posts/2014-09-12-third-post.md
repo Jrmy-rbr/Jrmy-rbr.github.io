@@ -1586,7 +1586,9 @@ talked about data preparation, the models, their explanations and interpretation
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/drawing.svg" description="Figure 9. " %} 
   </center>
 
-I will start by defining all the transformers for the BERT model, and then for the meta-data based model (using the Random Forest).
+I will start by defining all the transformers for the BERT model, and then for the meta-data based model (using the Random Forest). 
+I will then integrate this transformers into a pipeline to wich I will add the machine learning model itself. Finally I will combine 
+the two pipeline into a single one with the stacking method.
 
 
 
