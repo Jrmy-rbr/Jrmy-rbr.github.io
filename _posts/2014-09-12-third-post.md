@@ -1695,7 +1695,26 @@ Feature_additioner = AddFeaturesTransformer(column='text') # Here is the transfo
 
 ```
 
+Once the relevant transformers are defined, we can group them into a pipeline, for example we can group three transformers as follows.
+```python
+# Preprocessor pipeline
+preprocessor = Pipeline([('nan_filler', Categorical_Nan_Filler),
+                         ('cleaner_keywords', Cleaner_keywords),
+                         ('feature_additioner', Feature_additioner)
+                ])
+```
 
+Then, we can include this pipline into another pipline.
+```python
+encode_scale = ColumnTransformer([('scaler',StandardScaler(), numerical_metaData_features),
+                                  ('enc', OneHotEncoder(handle_unknown='ignore'), cat_metaData_features)]).fit(X_train,y_train)
+
+
+metaData_clf = Pipeline([('preprocessor', preprocessor),
+                         ('encode_scale', encode_scale),
+                         ('rand_forest', RandomForestClassifier(max_depth=6, class_weight='balanced'))]
+               )
+```
 
 ## Conclusion <a name='Conclusion'></a>
 
