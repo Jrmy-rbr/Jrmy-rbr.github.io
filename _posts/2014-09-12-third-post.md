@@ -1717,7 +1717,57 @@ metaData_clf = Pipeline([('preprocessor', preprocessor),
                )
 ```
 
+The BERT pipeline is defined as (see also Figure 9.),
+```python
+# Define the Bert model pipeline that takes a data frame as input
+
+Bert_model = KerasClassifier(build_bert_model)
+
+Cleaner_text = skl.preprocessing.FunctionTransformer(clean_text)
+
+
+Bert_clf = Pipeline([('cleaner_text', Cleaner_text),
+                     ('bert_model', Bert_model)          
+                    ])
+
+Bert_clf_with_col_select = Pipeline([('column_selector', Column_selector),('bert_clf',Bert_clf)])
+```
+
+
+In the end we can group these two pipeline using the stacking technique. To do so I have programmed my own stacking class (see code [here]()). Then 
+in order to group the two pipeline I simply need the following.
+```python
+# Define the final classifier
+
+final_clf = MyStackingClassifier(estimators=[('Bert_clf', Bert_clf_with_col_select), ('rnd_forest', metaData_clf)],
+                                final_estimator=RandomForestClassifier(max_depth=3, class_weight='balanced'))
+```
+
+This final model can be train as a normal model even though internally a lot of things will happen.
+```python
+final_clf.fit(X_train, y_train)
+```
+
+Look at perfromance
+
 ## Conclusion <a name='Conclusion'></a>
+
+- data cleaning
+- feature addition
+- models on these features
+- BERT model
+- Explaination of every model
+
+
+Open questions:
+
+- Improving the model:
+  - More lite weight
+  - use the embedding for each word of the tweet instead of one for the whole tweet.
+  - fix mislabeled data
+  
+- Adapt this project to class tweets (constructive comment, neutral, insult/offensive/garbage)
+
 
 
 ## References
