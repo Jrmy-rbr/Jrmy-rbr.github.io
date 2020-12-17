@@ -1573,28 +1573,28 @@ Validation scores:<br>
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
 
 A pipeline is a chain of processing steps for the data, the last step often being the machine learning model itself. In particular, we include 
-a series of steps called "transformers" before the model. They allow to process and prepare the data. The use of a series of transformers makes
-the code readable and less prone to errors. We have already seen an example of transformers in the feature exctraction section. As I have explained this section, 
+a series of steps called "transformers" before the model. They allow processing and preparing the data. The use of a series of transformers makes
+the code readable and less prone to errors. We have already seen an example of transformers in the feature extraction section. As I have explained this section, 
 transformers are useful to avoid label leakage that would make the model look better than it really is. Pipelines are a natural way of 
-chaining these transformers and the model. Pipelines also simply the deployement of the model.
+chaining these transformers and the model. Pipelines also simply the deployment of the model.
 
-The downside of using Pipelines, is that they can make the model explaination more convoluted. That is one of the reasons why in this post I have separately 
+The downside of using pipelines, is that they can make the model explanation more convoluted. That is one of the reasons why in this post I have separately 
 talked about data preparation, the models, their explanations and interpretations, and only now about pipelines.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Model_structure.svg" description="Figure 9. In this figure you can see the different component 
   that compose the whole model. The transformers are in green. When a series of transformers are grouped into a pipeline they form a compound transformer. 
-  The estimators are in blue. In our case the estimators are classifiers. Grouping transformers with an estimator in a pipeline gives compound 
-  estimator. In the end we group the two compound estimators together using the stacking inpired technique developed in the previous section." %} 
+  The estimators are in blue. In our case the estimators are classifiers. Grouping transformers with an estimator in a pipeline gives a compound 
+  estimator. In the end we group the two compound estimators together using the stacking inspired technique developed in the previous section." %} 
   </center>
   <br>
 
-In the following I show the definition some of the transformers for the BERT model, and then for the meta-data based model (which uses the Random Forest 
-Classifier). Then, I show how to integrate this transformers into a pipeline to wich I add the machine learning model itself (The classifier). Finally, I show 
+In the following I show the definition of some transformers for the BERT model, and then for the meta-data based model (which uses the Random Forest 
+Classifier). Then, I show how to integrate these transformers into a pipeline to which I add the machine learning model itself (The classifier). Finally, I show 
 how to combine the two pipelines into a single one with the stacking technique I have presented in a previous section. You will find all the details 
 in my [Jupyter Notebook]().
 
-Let me start by showing the definitions of some transformers. For example in Figure 9. you can see that the BERT based model is preceeded by 
+Let me start by showing the definitions of some transformers. For example in Figure 9. you can see that the BERT based model is preceded by 
 a Text Cleaner, which can be defined as follows.
 
 ```python
@@ -1608,7 +1608,7 @@ def clean_text(X):
 Cleaner_text = skl.preprocessing.FunctionTransformer(clean_text)  # This is the Text Cleaner transformer
 ```
 
-In the meta-data based model I use a feature additioner transformer. This transformer adds feature to the entry data frame as I explained in a previous section. 
+In the meta-data based model I use a feature additioner transformer. This transformer adds features to the entry data frame as I explained in a previous section. 
 This transformer is more involved than the previous one, so I need to create a subclass of the "base.TransformerMixin" class from scikit-learn.
 ```python
 # Transformer that will add features: "feature extraction"
@@ -1704,7 +1704,7 @@ preprocessor = Pipeline([('nan_filler', Categorical_Nan_Filler),
                 ])
 ```
 
-Then, we can include this pipeline into another pipline.
+Then, we can include this pipeline into another pipeline.
 ```python
 encode_scale = ColumnTransformer([('scaler',StandardScaler(), numerical_metaData_features),
                                   ('enc', OneHotEncoder(handle_unknown='ignore'), cat_metaData_features)]).fit(X_train,y_train)
@@ -1733,8 +1733,8 @@ Bert_clf_with_col_select = Pipeline([('column_selector', Column_selector),('bert
 ```
 
 
-In the end we can group these two pipeline using the stacking technique. To do so I have programmed my own stacking class (see code [here]()). Then 
-in order to group the two pipeline I simply need the following.
+In the end we can group these two pipeline using the stacking technique. To do so, I have programmed my own stacking class (see code [here]()). Then, 
+in order to group the two pipelines I simply need the following.
 ```python
 # Define the final classifier
 
@@ -1742,46 +1742,46 @@ final_clf = MyStackingClassifier(estimators=[('Bert_clf', Bert_clf_with_col_sele
                                 final_estimator=RandomForestClassifier(max_depth=3, class_weight='balanced'))
 ```
 
-This final model can be train as a normal model even though internally a lot of things will happen.
+This final model can be trained as a normal model even though internally a lot of things will happen.
 ```python
 final_clf.fit(X_train, y_train)
 ```
 
-**Look at perfromance**
+**Look at performance**
 
 ## Conclusion <a name='Conclusion'></a>
 
-Let me sumarise all we have seen in this post.
+Let me summarize all we have seen in this post.
 First, I have presented the data set, and how to clean it thanks to the vocabulary coverage with respect to 
 existing word embedding library like Word2Vec. I then showed that we can extract from the tweets some special features that can 
 be of interest. I then showed two simple models that use these newly created features to classify the tweets. I explained 
-what was features importance and that it can be used to select the best features among the one we created. I went a bit further 
-in the explaination of the model thanks to the shap library. This further allows to check that the model makes sense, and understand why 
-the model performs the classification the way it does. I then showed how to used the pretrained BERT model to class the tweets 
-directly without passing through feature we add by hand. The BERT layer acting as an automatic feature extractor. We then saw that
+what was features importance and that it can be used to select the best features among the one we created. Not only that, but I went a bit further 
+in the explanation of the model thanks to the shap library. This further allows to check that the model makes sense, and understand why 
+the model performs the classification the way it does. Then, I showed how to use the pretrained BERT model to classify the tweets 
+directly without passing through features we add by hand. The BERT layer acting as an automatic feature extractor. We then saw that
 even such a complicated model can be interpreted. In the end I showed that we can combine different models into a single one using 
 the stacking technique. Finally, I showed how to wrap everything into a pipeline.
 
-Is this all we can do in such a project? You might have already guess that the answer is no. In fact, it depends 
+Is this all we can do in such a project? You might have already guessed that the answer is no. In fact, it depends on
 whether you are satisfied with the results of the model. In this post I only presented several of the important step 
 in such a project. The goal being to present a broad scope of the tools that can be used and the big step 
 we take in a text classification project. But I did not explore in details the way of improving the model 
 once we reached this point. And as you can see the model gets a score of about $$83\%$$, which depending on the 
 application might or might not be enough. 
 
-Let me briefly tell you possible way to further improve the model. First, since the feature we added 
+Let me briefly tell you some possible ways to further improve the model. First, since the feature we added 
 are all implicitly present in the text, I would remove the meta-data based model and use only the BERT based model, unless 
-you want to add information about the context of the tweet. Then I would try see why the misclassified tweet are misclassified 
-by looking at the text explainer. Also we have seen that several of the tweets where the model makes mistakes 
-are either quite ambiguous or they have been mislabeled. This mislabelling affects both the traning and the evaluation. 
+you want to add information about the context of the tweet. Then I would try to see why the misclassified tweet are misclassified 
+by looking at the text explainer. Also, we have seen that several of the tweets where the model makes mistakes 
+are either quite ambiguous or they have been mislabeled. This mislabelling affects both the training and the evaluation. 
 So carefully relabelling the data set is a step that can help even though it's a tedious work. One other tedious work 
 could be to clean even more the tweets and maybe remove stop words which is something we have not done.
-The BERT model itself can be improvef if for example instead of generating a single vetor per tweet we generate 
-one vetor per word, and then let the top layer do the job. Another step that can indirectly improve the model 
-is to try and use different version of BERT. Some for example are lighter than others. Even though 
+The BERT model itself can be improved if, for example, instead of generating a single vector per tweet we generate 
+one vector for every word, and then let the top layer do the job. Another step that can indirectly improve the model 
+is to try and use different versions of BERT. Some are lighter than others. Even though 
 this is not likely to improve the accuracy of the model it will make it run and train faster.
 
-In the end I would like the modify this model, and train it on different set of data, in order to 
+In the end I would like to modify this model, and train it on a different set of data, in order to 
 write a small app that can classify tweets into one of three categories: constructive comment, neutral and insult/offensive.
 This will be the topic of a future post.
   
