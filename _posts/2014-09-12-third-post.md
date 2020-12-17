@@ -1772,18 +1772,20 @@ application might or might not be enough.
 
 Let me briefly tell you possible way to further improve the model. First, since the feature we added 
 are all implicitly present in the text, I would remove the meta-data based model and use only the BERT based model, unless 
-you want to add information about the context of the tweet. 
+you want to add information about the context of the tweet. Then I would try see why the misclassified tweet are misclassified 
+by looking at the text explainer. Also we have seen that several of the tweets where the model makes mistakes 
+are either quite ambiguous or they have been mislabeled. This mislabelling affects both the traning and the evaluation. 
+So carefully relabelling the data set is a step that can help even though it's a tedious work. One other tedious work 
+could be to clean even more the tweets and maybe remove stop words which is something we have not done.
+The BERT model itself can be improvef if for example instead of generating a single vetor per tweet we generate 
+one vetor per word, and then let the top layer do the job. Another step that can indirectly improve the model 
+is to try and use different version of BERT. Some for example are lighter than others. Even though 
+this is not likely to improve the accuracy of the model it will make it run and train faster.
 
-
-
-Open questions:
-
-- Improving the model:
-  - More lite weight
-  - use the embedding for each word of the tweet instead of one for the whole tweet.
-  - fix mislabeled data
+In the end I would like the modify this model, and train it on different set of data, in order to 
+write a small app that can class tweets into three categories: constructive comment, neutral and insult/offensive.
+This will be the topic of a future blog post.
   
-- Adapt this project to class tweets (constructive comment, neutral, insult/offensive/garbage)
 
 
 
