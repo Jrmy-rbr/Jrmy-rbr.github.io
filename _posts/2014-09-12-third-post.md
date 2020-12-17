@@ -1050,11 +1050,11 @@ In this section I will present how I used the BERT model to classify the tweets.
 the BERT model is a machine learning model that will map every tweet to a 768-dimensional vector. This 
 vector can be seen as an abstract representation of the meaning of the tweet. In particular, two semantically similar
 tweets should be represented by two vectors that are close to each other. In other words, the BERT model 
-automatically extracts the mening of the tweets. Extracting the meaning of the tweets is great, but we still 
-need to perform the classification of these tweets. To do so I add, on top of the BERT model, two dense layers.
+automatically extracts the meaning of the tweets. Extracting the meaning of the tweets is great, but we still 
+need to perform the classification of these tweets. To do so, I add, on top of the BERT model, two dense layers.
 
 The BERT model has been pretrained by researchers with a ton of data. This means that I only need to train the two dense layers 
-I add on top. This can be done with much less data. You can fing the pretrained BERT model [here](https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/).
+I add on top. This can be done with much fewer data. You can find the pretrained BERT model [here](https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/).
 
 
 ```python
@@ -1067,10 +1067,10 @@ except:
                             trainable=False)
                             
                      
-# write the function that creates the model based of the bert layer
+# write the function that creates the model based of the BERT layer
 def build_bert_model(max_seq_length=80):
 
-    # the BERT model takes as input 3 layer of lengths 80 each.
+    # the BERT model takes as input 3 layers of lengths 80 each.
     input_word_ids = K.layers.Input(shape=(max_seq_length,), dtype=tf.int32,
                                            name="input_word_ids")
     input_mask = K.layers.Input(shape=(max_seq_length,), dtype=tf.int32,
@@ -1093,15 +1093,14 @@ def build_bert_model(max_seq_length=80):
     return model
 
 
-# Creates a Model compatible with the scikit learn API
+# Creates a Model compatible with the scikit-learn API
 Bert_model = KerasClassifier(build_bert_model)   
  ```
  
  You'll notice that I use the class MyModel in the code. This is a custom version of tf.Keras.Model that allows me 
  to train the model the way I want. In particular, it allows me to check whether there exists a saved model, 
  in which case it simply loads it. Otherwise, it goes to the training of the two dense layers (and only them) I have added on top of the bert layer 
- by freezing the bert layer. Then it goes to fine tuning where I unfreeze the bert layer and train the whole model for a small 
- number of epoch.
+ by freezing the bert layer. Then it goes to fine-tuning where I unfreeze the bert layer and train the whole model for a few epochs.
  
  ```python
  class MyModel(K.Model):
@@ -1254,7 +1253,7 @@ Bert_model = KerasClassifier(build_bert_model)
  
 ```
 
-Note that when you train you model you can define a callback to, for example, save your model so that 
+Note that when you train your model you can define a callback to, for example, save your model so that 
 next time you can simply load the model instead of retraining everything.
 
 ```python
@@ -1270,7 +1269,7 @@ best_model = K.callbacks.ModelCheckpoint("./weights.best.hdf5",
 ```
 
 
-Finally, in order to have a fully functioning model, I add the cleaning function I have talked about in the beging of this post 
+Finally, in order to have a fully functioning model, I add the cleaning function I have talked about in the beginning of this post 
 as a transformer before my BERT based model,
 
 ```python
@@ -1293,7 +1292,7 @@ Bert_clf = Pipeline([('cleaner_text', Cleaner_text),
 
 You can then train the model. Training a model that is as big as the BERT model (in total I have 110,073,602 parameters in my model) 
 is computationally expensive, and it is therefore a good idea to 
-train the model using gpu acceleration. Personally I did it using [Google colaboratory](https://colab.research.google.com/).
+train the model using GPU acceleration. Personally I did it using [Google Colaboratory](https://colab.research.google.com/).
 
 ```python
 # if you have a saved model, this is enough
@@ -1314,7 +1313,7 @@ Bert_clf.fit(X_train['text'],
              callbacks = [best_model]  
            )  
 ```
-As for the previous models, once the model is trained, we can print its f1-score to assess its perfromance.
+As for the previous models, once the model is trained, we can print its f1-score to assess its performance.
 
 ```python
 y_train_pred = Bert_clf.predict(X_train['text'])
@@ -1342,28 +1341,28 @@ This model clearly beats the previous two models. But is it as interpretable as 
 
 Let us try to interpret the model. The issue here compared to the previous models, is that we don't have a fix number of identifiable features
 for which we can measure an "importance" or a "contribution score". Fortunately some smart people have already come up 
-wich solutions to explain model like this one. In particular, I will present a tool from eli5 (again) that allows to explain 
+with solutions to explain a model like this one. In particular, I will present a tool from eli5 (again) that allows to explain 
 models working on text data. The tool is simply called [TextExplainer](https://eli5.readthedocs.io/en/latest/tutorials/black-box-text-classifiers.html).
 
-Let me explain quicly what this tool does. For that let me state the obvious: There very simple models that can be 
-very easily explained, eg linear models are easily explained by their sets of coeficients. However, these simple models 
+Let me explain quickly what this tool does. For that let me state the obvious: There very simple models that can be 
+very easily explained, eg linear models are easily explained by their sets of coefficients. However, these simple models 
 are limited. On the other hand, more complex model are more powerful but very hard to interpret. The idea is then to locally approximate 
-complex models by simple ones, and then interpret the simple ones (see Figure 7 from [[RSG]](#RSG)). This explanation algortihm is called
+complex models by simple ones, and then interpret the simple ones (see Figure 7 from [[RSG]](#RSG)). This explanation algorithm is called
 **LIME** (**L**ocal **I**nterpretable **M**odel-agnostic **E**xplanations). The class TextExplanainer of the library eli5 is an implementation of this algorithm.
 
 
   <center> 
   <figure class="image">
-    <img src="/assets/images/Kaggle:NLP-Twitter/LIME.png" alt="Figure 7. Taken from the original paper presenting the LIME algoritm." style="border-style: solid;
+    <img src="/assets/images/Kaggle:NLP-Twitter/LIME.png" alt="Figure 7. Taken from the original paper presenting the LIME algorithm." style="border-style: solid;
   border-width: 1px;">
-    <figcaption>Figure 7. Taken from the original paper presenting the LIME algoritm.</figcaption>
+    <figcaption>Figure 7. Taken from the original paper presenting the LIME algorithm.</figcaption>
   </figure>
 </center>
 
 Here is an example of how to use the text explainer.
 
 ```python
-# Explain what the model look at on a text
+# Explain what the model looks at in a text
 
 # create and fit the text explainer
 te = TextExplainer(n_samples=300, position_dependent=True)
@@ -1375,7 +1374,7 @@ print(te.metrics_)
 te.show_prediction()
 ```
 
-When runing this code, we get the following table and highlighted text as output. It shows show the contribution of 
+When running this code, we get the following table and highlighted text as output. It shows the contribution of 
 the words versus bias, and the highlighted text shows the details of the contribution of each word.
 
 <table class="eli5-weights" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto; margin-bottom: 2em;">
@@ -1428,9 +1427,9 @@ the words versus bias, and the highlighted text shows the details of the contrib
 </p>
  </blockquote>
  Here, two things are present: Some metrics and a highlighted text.
- The metrics are measure of how well the linear model approximate the complex model: the closer the "KL divergence" is to $$0$$ the better,
- and the closer the "score" is to $$1$$ the better. Here the score are very close their best values, which indicates that 
- the linear approxiation is locally pretty good, and that there good chamces that the model explanation can be trusted.
+ The metrics are a measure of how well the linear model approximate the complex model: the closer the "KL divergence" is to $$0$$ the better,
+ and the closer the "score" is to $$1$$ the better. Here the score are very close to their best values, which indicates that 
+ the linear approximation is locally pretty good, and that there are good chances that the model explanation can be trusted.
  
  In the highlighted text we see that the words that contribute the most in the classification are "died" and "people" (you can get the numerical value of 
  the contribution of each word by hovering the words with your mouse). 
@@ -1517,7 +1516,7 @@ We then get the following table.
  
 When using text data the difference between the "contribution" and the "weight" of a word should not be very important. Indeed, a word can either be present or 
 not (at a given position of the sentence), but it can't "twice as present" than another word. 
-It is therefore not so suprising that the weights (in the above table) and the contribution scores (see the highlighted text above) are similar. 
+It is therefore not so surprising that the weights (in the above table) and the contribution scores (see the highlighted text above) are similar. 
 
 
 ## Combining the Bert model with meta-data based model <a name='Combine'></a>
@@ -1525,30 +1524,30 @@ It is therefore not so suprising that the weights (in the above table) and the c
 In this section I will show a way of combining two model that work on two different type of data, in such a way that 
 the combination of these models leads to a better model than each of the model separately. 
 In this particular case, we should not expect a big improvement over the BERT based model. Indeed, all the meta-features are extracted from the text,
-and since the BERT based model directly uses the text, it has therefore an implicit access to the meta-data features. Note that there are still some features
-that the BERT based model cannot see, like "capital_word_count" since the BERT layer only sees lower-case word and is therefore case insensitive. However,
-"capital_word_count" is not a very important feature for the meta-data classfiers and so it should not influence the end result a lot.
+and since the BERT based model directly uses the text, it has therefore implicit access to the meta-data features. Note that there are still some features
+that the BERT based model cannot see, like "capital_word_count" since the BERT layer only sees lower-case word and is therefore case-insensitive. However,
+"capital_word_count" is not a very important feature for the meta-data classifiers and so it should not influence the end result a lot.
 
-On the other hand, there are situation where this combination of model can be useful. Typically if the meta-data features did not come from 
+On the other hand, there are situations where this combination of model can be useful. Typically, if the meta-data features did not come from 
 the text itself, but represented the context in which the text has been extracted, then the BERT based model alone would not 
 have anyways to access these features from the text. 
 
 You should therefore read this section more as an illustration of what can be done, and how it can be done, rather than expect huge improvement 
 in the performance of the model.
 
-The way I combine the models together is insprired by the [stacking](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html) 
+The way I combine the models together is inspired by the [stacking](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html) 
 method of scikit-learn. 
-The training the stacking procedure has two steps:
-1. I use the two models I have to predict the probability of of being a "disaster tweet" for each 
+The training tof he stacking procedure has two steps:
+1. I use the two models I have to predict the probability of being a "disaster tweet" for each 
 tweet of the training set, this gives for each of these tweets a tuple of 2 probabilities, which is essentially a point 
-in the two dimensional plane. 
-2. I then use a thrid model that uses the probabilities fron the previous steps as training data
+in the two-dimensional plane. 
+2. I then use a third model that uses the probabilities fro the previous steps as training data
 
 Then for the predictions the model runs as follows.
-1. Using the two first models predict the probability of each tweets.
-2. Using the thrid model and using the probabilities predicted in the first step, predict the whether a tweet is about a disaster or not.
+1. Using the two first models predict the probability of each tweet.
+2. Using the third model and using the probabilities predicted in the first step, predict whether a tweet is about a disaster or not.
 
-Let me show you how the validattion data looks like with the prediction of the third model.
+Let me show you how the validation data looks like with the prediction of the third model.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8. To each dot corresponds a tweet of the validation set. The position of the dot indicates the probability attributed by each of the two initial models (BERT and Forest) that the tweet speaks about a disaster. The color of the dot indicates the true classification of the dot (1=disaster, 0=not disaster). The background color indicates the probability 
@@ -1558,7 +1557,7 @@ Let me show you how the validattion data looks like with the prediction of the t
   
   In the above figure we see that the final model mostly splits the space in two according to a vertical line in the middle (the white part of the background). 
   This means that the final model will essentially follow what the BERT-based model predicts. The performance should therefore be very similar to the 
-  performance of the BERT-based model. Indeed when assessing the perfomance of the model we get similar results.
+  performance of the BERT-based model. Indeed, when assessing the performance of the model we get similar results.
   
  <blockquote> 
   <div style="font-family: NewCM, Mono, sans serif;">
