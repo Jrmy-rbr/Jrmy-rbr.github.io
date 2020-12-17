@@ -1752,11 +1752,28 @@ final_clf.fit(X_train, y_train)
 
 ## Conclusion <a name='Conclusion'></a>
 
-- data cleaning
-- feature addition
-- models on these features
-- BERT model
-- Explaination of every model
+Let me sumarise all we have seen in this post.
+First, I have presented the data set, and how to clean it thanks to the vocabulary coverage with respect to 
+existing word embedding library like Word2Vec. I then showed that we can extract from the tweets some special features that can 
+be of interest. I then showed two simple models that use these newly created features to classify the tweets. I explained 
+what was features importance and that it can be used to select the best features among the one we created. I went a bit further 
+in the explaination of the model thanks to the shap library. This further allows to check that the model makes sense, and understand why 
+the model performs the classification the way it does. I then showed how to used the pretrained BERT model to class the tweets 
+directly without passing through feature we add by hand. The BERT layer acting as an automatic feature extractor. We then saw that
+even such a complicated model can be interpreted. In the end I showed that we can combine different models into a single one using 
+the stacking technique. Finally, I showed how to wrap everything into a pipeline.
+
+Is this all we can do in such a project? You might have already guess that the answer is no. In fact, it depends 
+whether you are satisfied with the results of the model. In this post I only presented several of the important step 
+in such a project. The goal being to present a broad scope of the tools that can be used and the big step 
+we take in a text classification project. But I did not explore in details the way of improving the model 
+once we reached this point. And as you can see the model gets a score of about $$83\%$$, which depending on the 
+application might or might not be enough. 
+
+Let me briefly tell you possible way to further improve the model. First, since the feature we added 
+are all implicitly present in the text, I would remove the meta-data based model and use only the BERT based model, unless 
+you want to add information about the context of the tweet. 
+
 
 
 Open questions:
