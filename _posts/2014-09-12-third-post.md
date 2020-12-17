@@ -249,42 +249,42 @@ You can find my cleaning function on my [own notebook]().
 
 We will now see that from the raw tweet one can extract some features that are not explicit in the text body (here the tweets). 
 This meta-data can be used for checking that the training set and the test set we have the same statistics. Indeed,
-if this weren't the case, then there are chances that the learning on the traning set poorly generalizes on the test set. On the 
-contrary, if they have similar statistics for several of these fetures then one can be more confident that the model 
-will give good resuts on the test set. It is therefore a good sanity check to do before even starting to work on the model.
+if this weren't the case, then there are chances that the learning on the training set poorly generalizes on the test set. On the 
+contrary, if they have similar statistics for several of these features then one can be more confident that the model 
+will give good results on the test set. It is therefore a good sanity check to do before even starting to work on the model.
 
-On the other hand, the statistics of these feature might be slightly different for the tweets that speak about disters compared to the ones that do not.
+On the other hand, the statistics of these feature might be slightly different for the tweets that speak about disasters compared to the ones that do not.
 If this is the case, then one could use this meta-data and leverage these differences in the statistics to develop a model classifying the tweets.
 
-I found this idea interesting and so, as a firt step, I tried to classifiy the tweets using the meta data only, and see how I can go with this. I will
+I found this idea interesting and so, as a first step, I tried to classify the tweets using the meta data only, and see how I can go with this. I will
 develop more about this the models I used for that in the next section. Let me now tell you what features I have extracted from the tweets. 
 Several of these features are presented in this [Kaggle notebook](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert), 
-and others have been added by myself. In total I have extracted 15 features:
+and others have been added by myself. In total, I have extracted 15 features:
 1. The number of hashtags of a tweet.
-2. The number of capipitalized words in a tweet
+2. The number of capitalized words in a tweet
 3. The number of words of a tweet
 4. The number of unique words of a tweet
-5. The number url of a tweet
+5. The number URLs of a tweet
 6. The mean word length of a tweet
 7. The number of characters of a tweet
 8. the number of punctuation characters of a tweet
 9. The number of mentions of a tweet
-10. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet taklking about a disater'.
+10. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet talking about a disaster'.
   The idea is that, some mentions might be particularly frequent in the tweets talking about disasters. One can think about 
   mention of newspapers' accounts etc.
-11. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet *not* taklking about a disater'.
+11. The number of mentions of a tweet that can be found in tweets of the training set labeled as 'tweet *not* talking about a disaster'.
     The idea is the same as above, but with the tweets that do not talk about a disaster.
 12. The difference between the last two features. 
-13. The number of [2-grams](https://www.wikiwand.com/en/N-gram) of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet taklking about a disater'
-14. The number of 2-grams of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet *not* taklking about a disater'.
+13. The number of [2-grams](https://www.wikiwand.com/en/N-gram) of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet talking about a disaster'
+14. The number of 2-grams of a tweet that are among the top 100 2-grams in tweets of the training set labeled as 'tweet *not* talking about a disaster'.
   The idea of this feature and the previous one is that some 2-grams can be more frequent in "disaster tweets" and other 2-gram more present in "none disaster tweets".
 15. The difference between the last two features
 
 <i class="fas fa-exclamation-triangle" style="font-size:2em;"></i> One needs to be very careful when writing the code that will extract these features: 
 Some of them (the features 10, 11, 13, and 14) use the labels ('target' feature of the data set) of the training set 
 in order to extract the relevant information. 
-You should allow your code to use the labels on the traning set **only**, **not** on the validation set. Not paying attention to 
-that can result in a label leakage (aka target leakage) which [wikipedia defines](https://www.wikiwand.com/en/Leakage_(machine_learning)) as follows:
+You should allow your code to use the labels on the training set **only**, **not** on the validation set. Not paying attention to 
+that can result in a label leakage (aka target leakage) which [Wikipedia defines](https://www.wikiwand.com/en/Leakage_(machine_learning)) as follows:
 
 > In statistics and machine learning, leakage (also data leakage, or target leakage) is the use of information in the model training process which would not be expected to be available at prediction time, causing the predictive scores (metrics) to overestimate the model's utility when run in a production environment.[1]
 Leakage is often subtle and indirect, making it hard to detect and eliminate. Leakage can cause modeler to select a suboptimal model, which otherwise could be outperformed by a leakage-free model.[1] 
@@ -297,12 +297,12 @@ X_train, X_val, y_train, y_val = train_test_split(data_set[['keyword','text', 't
 
 Then for the steps that use the labels of the training set one needs to make use of transformers like the ones provided by the library [scikit-learn](https://scikit-learn.org/stable/index.html). Let's see a code example of that:
 ```python
-# Create the transformer object of the classe CountMentionInClass(). 
-# This class is a customized version of a scikit-learn transformer that I have programed for 
+# Create the transformer object of the class CountMentionInClass(). 
+# This class is a customized version of a scikit-learn transformer that I have programmed for 
 # creating the above mentioned features 10 and 11.
 mentionCounter = CountMentionsInClass() 
 
-# Create and add the features 10 and 11 to the traning set X_train. 
+# Create and add the features 10 and 11 to the training set X_train. 
 # Note that the fit_transform() method uses the labels stored in y_train
 X_train = mentionCounter.fit_transform(X_train, y_train, column='text')
 
@@ -427,16 +427,16 @@ we get,
 </center>
 
 As you can see there are 18 columns. The first two were already present in the data set[^1], then follows the cleaned tweets, and finally the 15 added features.
-For the classification we will use the fisrt column and the 15 added feature, ie the only column I don't use are the tweets and their cleaned version.
+For the classification we will use the first column and the 15 added features, ie the only column I don't use are the tweets and their cleaned version.
 
-[^1]: Note that I revomed the location colum from the data set. This is because there are too many unique locations, which makes this column 
+[^1]: Note that I removed the location column from the data set. This is because there are too many unique locations, which makes this column 
 not useful for the classification.
 
 ### Random Forest
 
-The model I will present in here is based on a [random forsest](https://www.wikiwand.com/en/Random_forest) classifier. In particular I will use 
+The model I will present in here is based on a [random forest](https://www.wikiwand.com/en/Random_forest) classifier. In particular, I will use 
 the [random forest classifier from scikit-learn](https://scikit-learn.org/stable/modules/ensemble.html#forest), to which I add some data preparation
-steps for the features. Note that we have a lot of numerical features, and one categorcal feature, and we need to treat them separatly in the
+steps for the features. Note that we have a lot of numerical features, and one categorical feature, and we need to treat them separately in the
 data preparation steps. Let us then define the following:
 ```python
 # Categorical meta-data
@@ -456,23 +456,23 @@ This allows us to quickly refer to the categorical data or to the numerical data
 simple. We will rescale all the numerical feature, so that their standard deviation equals 1[^2]. For the categorical feature
 we need to encode them. For that, I will use the [OneHotEncoder](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing-categorical-features) from scikit-learn.
 
-[^2]: This step is not necesary for a tree based model like the Random Forest since they are not sensitive to scaling, 
-but it is a good habit to get so I choose to do it anyways. In all cases, I'll have to do that for the Logistic Regression in the next section.
+[^2]: This step is not necessary for a tree based model like the Random Forest since they are not sensitive to scaling, 
+but it is a good habit to get, so I choose to do it anyways. In all cases, I'll have to do that for the Logistic Regression in the next section.
 
 ```python
 # Define the scaling and the encoding
 enc_scale = ColumnTransformer([('scaler',StandardScaler(), numerical_metaData_features),
                                ('enc', OneHotEncoder(handle_unknown='ignore'), cat_metaData_features)]).fit(X_train,y_train)
 
-# Definie the Radom Forest model
+# Define the Random Forest model
 Model_Forest = RandomForestClassifier(n_estimators=900, max_depth=23, n_jobs=8, class_weight='balanced')
 
 # Train the model on the data after scaling and encoding.
-# In a next section we will see how to use pipelines in order to intgrate the model and the data preparation in a single object.
+# In a next section we will see how to use pipelines in order to integrate the model and the data preparation in a single object.
 Model_Forest.fit(enc_scale.transform(X_train), y_train)
 
 
-# Evaluate the model on the traning set and on the validation set.
+# Evaluate the model on the training set and on the validation set.
 y_train_pred = Model_Forest.predict(enc_scale.transform(X_train))
 y_val_pred = Model_Forest.predict(enc_scale.transform(X_val))
 
@@ -490,16 +490,16 @@ print("\nValidation scores:\n",
       "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_val, y_pred=y_val_pred))
       )
 ```
-By runing the above code we obtain the following output.
+By running the above code we obtain the following output.
 
 > <div style="font-family: NewCM, Mono, sans serif;">  Training scores:<br> precision=0.81 recall=0.91 f1=0.86<br><br> Validation scores:<br> precision=0.60 recall=0.74 f1=0.67</div>
 
-To have an idea of how well the model perfroms, one should look at the f1 score for the validation set, since it should tell us what would be the score on truely new data. 
-Printing the f1 score of the traning set can be useful: If it is too high compared to the score on the validation set, then the model might overfit the data. 
-Overfitting can hurt the performance of the data so it is important to detect it. Here, the training score is 0.86 while the validation score is 0.67. 
+To have an idea of how well the model performs, one should look at the f1 score for the validation set, since it should tell us what would be the score on truly new data. 
+Printing the f1 score of the training set can be useful: If it is too high compared to the score on the validation set, then the model might overfit the data. 
+Overfitting can hurt the performance of the data, so it is important to detect it. Here, the training score is 0.86 while the validation score is 0.67. 
 There is probably some overfitting here. I suspect that this is due to the added features 10, 11, 13, and 14, which by construction 
-"memorise" some text specific of the training set. It would be worth exploring this further to see weather the perfromance of the model can be improved.
-However, for the purpose of this blog post, I won't do that. Instead I'll move on to the model explanation, which can actually be part of the required work for 
+"memorize" some text specific of the training set. It would be worth exploring this further to see whether the performance of the model can be improved.
+However, for the purpose of this blog post, I won't do that. Instead, I'll move on to the model explanation, which can actually be part of the required work for 
 improving the model and reducing the overfitting. Indeed, Model explanation can is as a tool meant to diagnose issues with the model. 
 
 Besides, it can also be used to justify the "decision" made by the model for any given example provided as input. You might want to do that 
@@ -507,31 +507,31 @@ to convince yourself, or maybe to convince others, that the model is doing somet
 
 ### Model explanation
 
-In order to explain the model I will use the eli5 library, that is a library specialised into model explanation. Let's start 
+In order to explain the model I will use the eli5 library, that is a library specialized into model explanation. Let's start 
 with Feature Importance. Feature Importance is simply a measure of the importance of each feature for the model.
-Here, I will use the so called Permutation Importance. Permutation Importance compute the importance of a feature as follows.
-1. Apply the model on the validation set, and evaluate the perfromance of the model.
+Here, I will use what is called Permutation Importance. Permutation Importance compute the importance of a feature as follows.
+1. Apply the model on the validation set, and evaluate the performance of the model.
 2. - Pick a column of the validation set (X_val), *randomly* permute the values of the column. 
-   - Apply the model on the validation set (on which the column has been permuted), and evaluate the new perfromance of the model.
+   - Apply the model on the validation set (on which the column has been permuted), and evaluate the new performance of the model.
    - Permute the column back to recover the original validation set.
 3. Perform step 2 for all the columns of the validation set.
 
-Once this is done, you can see by how much the performance has change after the permutation of a column compare to the initial perfromance 
+Once this is done, you can see by how much the performance has change after the permutation of a column compare to the initial performance 
 on the original set. This difference is the permutation importance of the column.
 
-Intuitively, *randomly* permuting a column basically erases all the corelations between the values of this column and the values of the target (stored in y_val). 
+Intuitively, *randomly* permuting a column basically erases all the correlations between the values of this column and the values of the target (stored in y_val). 
 In terms of information, it is as if you erased the information contained in the column. We then expect that, the more a feature (column) is important for the model, the more the model performance drops after the permutation of this feature.
 
-The operation I have describe above is automatically performed by the PermutationImportance class of the library eli5.
+The operation I have described above is automatically performed by the PermutationImportance class of the library eli5.
 
 ```python
-##### First redefine and train the Random Forest model in a way that will be accepted by the PermutationImportance calss.
+##### First redefine and train the Random Forest model in a way that will be accepted by the PermutationImportance class.
 
 # copy X_train into X
 X = X_train[cat_metaData_features+numerical_metaData_features].copy()
 X[cat_metaData_features] = OrdinalEncoder().fit_transform(X[cat_metaData_features])
 
-# The model is the same as before, but integrated into a pipeline. It is fitted on the same traning set X_train (X is used as a proxy for X_train).
+# The model is the same as before, but integrated into a pipeline. It is fitted on the same training set X_train (X is used as a proxy for X_train).
 model_metadata = make_pipeline(enc_scale, Model_Forest).fit(X[cat_metaData_features+numerical_metaData_features], y_train)
 
 
@@ -758,11 +758,11 @@ After running the above code we get the following table.
 </table>
 
 We see that for this model, the three most important features are "mean_word_length", "keyword", "difference_2-grams_count". 
-The weights associated to each feature is the amount by which the perfromance of the model drops.
+The weights associated to each feature is the amount by which the performance of the model drops.
 
-The above tells use how important each feature is for the model, by looking at the whole training set. There are at least two pieces 
-of information on which it says nothing: It does not allow to explain the predictions of the model for individual sample of the data set, and 
-does not tell in which direction a given feature influances the prediction, it only says whether or not it will have a big influence.
+The above tells us how important each feature is for the model, by looking at the whole training set. There are at least two pieces 
+of information on which it says nothing: It does not allow to explain the predictions of the model for an individual sample of the data set, and 
+does not tell in which direction a given feature influences the prediction, it only says whether it will have a big influence.
 Eli5 gives some methods to explain the model with these two extra pieces of information. However, because of the one hot encoding,
 our model is not supported by these explainers. 
 
@@ -771,13 +771,13 @@ gives for every sample of the data set a "contribution score" for each feature. 
 by computing what is called the [Shapley value](https://www.wikiwand.com/en/Shapley_value) 
 for each feature of a given sample. The Shapley value 
 is a concept that has been developed in the context of game theory. So a priori 
-it has very little to do with model explanation. The Shapeley value would deserve a blog post on its own,
+it has very little to do with model explanation. The Shapley value would deserve a blog post on its own,
 but in short, the Shapley value is the solution to how to share profit among collaborator based on
 a notion of "merit". The notion of merit can be given a precise definition in this game theoretic
-framework, but it roughly says that if an individual contributes more he should get larger share of the profit.
+framework, but it roughly says that if an individual contributes more he should get a larger share of the profit.
 We can already see some analogy with a "contribution score" of a feature. But you might wonder
-what is the "profit" in our context? It's acually the difference between the predicted probability 
-given by our model on a given example and a base value which can be thaugh of the probability 
+what is the "profit" in our context? It's actually the difference between the predicted probability 
+given by our model on a given example and a base value which can be thought of the probability 
 the model would predict if it were not given any features. Let us see an example for the following sample,
 ```python
 X_val.iloc[5].loc['text']
@@ -795,11 +795,11 @@ Without diving into how to use the shap library, here is the output we get,
 
 You see that each feature is assigned to a score (positive or negative) depending on the value taken by this feature. The 
 sum of all the Shapley values should be equal to the difference between the base value and the predicted probability. When a score is 
-negative (in blue) it tends to decrease the predicted probability, and vice versa. As expected, we can see that the featues with the largest (in absolute value)
-Shapley value often correspond to the most important features according to the permutation importance: For example, "mean_word_length " has 
-the second largest Shapley value, and it also has the second highest permutation importance. Of course the shapeley values will change for each 
-sample, since each of them has different feature values. To make sure that there really is a correcpondance between permutation importance and
-the Shapley values, one would need to compute the Shapley values of many samples, and then check that the correspondance holds on average over these samples.
+negative (in blue) it tends to decrease the predicted probability, and vice versa. As expected, we can see that the features with the largest (in absolute value)
+Shapley value often correspond to the most important features according to the permutation importance: For example, "mean_word_length" has 
+the second largest Shapley value, and it also has the second highest permutation importance. Of course the Shapley values will change for each 
+sample, since each of them has different feature values. To make sure that there really is a correspondence between permutation importance and
+the Shapley values, one would need to compute the Shapley values of many samples, and then check that the correspondence holds on average over these samples.
 
 
 ### Logistic Regression
@@ -810,13 +810,13 @@ simply show the f1 score of this new model.
 
 > <div style="font-family: NewCM, Mono, sans serif;">Training scores:<br> precision=0.79 recall=0.83 f1=0.81 <br><br> Validation scores:<br> precision=0.69 recall=0.75 f1=0.72 </div>
 
-All the remark made in the previous section apply here too. The main difference is that this model seems a little bit 
+All the remark made in the previous section apply here too. The main difference is that this model seems a bit 
 better, and seems to overfit a little less. One thing that is important though, is that for this model the scaling of the numerical values 
 in the data preparation step is more important, so it is crucial not forget this step when using logistic regression.
 
 ### Model explanation
 
-Again, everything we have seen about model explanation for the random forest model also applies here. Let's see 
+Again, everything we have seen about the model explanation for the random forest model also applies here. Let's see 
 what we get when computing the permutation importance for the new model: 
 
 <table class="eli5-weights eli5-feature-importances" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto;">
@@ -1041,7 +1041,7 @@ Once the Shapley values are calculated, we get the following,
 </center>
   
 Here again we can see that the features with high contribution (positive or negative) often are the one 
-with a high permutation importance: For example, here it is true for "word_count" anf "char_count".
+with a high permutation importance: For example, here it is true for "word_count" and "char_count".
 
 
 ## Classification using the pretrained Bert model  <a name='Bert'></a>
@@ -1783,8 +1783,8 @@ is to try and use different version of BERT. Some for example are lighter than o
 this is not likely to improve the accuracy of the model it will make it run and train faster.
 
 In the end I would like the modify this model, and train it on different set of data, in order to 
-write a small app that can class tweets into three categories: constructive comment, neutral and insult/offensive.
-This will be the topic of a future blog post.
+write a small app that can classify tweets into one of three categories: constructive comment, neutral and insult/offensive.
+This will be the topic of a future post.
   
 
 
