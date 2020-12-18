@@ -17,7 +17,7 @@ are labeled according to whether or not they speak about disasters. The goal of 
 model that automatically classifies tweets into the category "it speaks about a disaster" or 
 "it does not speak about a disaster".
 
-To do that I will use the pretrained BERT model, created by Google, that allows to extract the meaning of words (embedding).
+To do that I will use the pretrained BERT model, created by Google, that allows to extract the meaning of words.
 What it does is that it transforms words into a 768-dimensional vector, such that the vectors of words with similar 
 meaning are somewhat close to each other. On top of this BERT layer, I will add two dense layers
 that are there to learn the classification task. I'll explain the training procedure, and the interest of using 
