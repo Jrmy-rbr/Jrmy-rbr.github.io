@@ -1,6 +1,6 @@
 ---
 title: "Tweets: Disaster or Not"
-subtitle: A Natural Language Processing (NLP) project using the pretrained bert model
+subtitle: A Natural Language Processing (NLP) project using the pretrained BERT model
 author: Jeremy Ribeiro
 layout: post
 icon: fa-briefcase
@@ -17,9 +17,9 @@ are labeled according to whether or not they speak about disasters. The goal of 
 model that automatically classifies tweets into the category "it speaks about a disaster" or 
 "it does not speak about a disaster".
 
-To do that I will use the pretrained bert model, created by Google, that allows to extract the meaning of words (embedding).
+To do that I will use the pretrained BERT model, created by Google, that allows to extract the meaning of words (embedding).
 What it does is that it transforms words into a 768-dimensional vector, such that the vectors of words with similar 
-meaning are somewhat close to each other. On top of this bert layer, I will add two dense layers
+meaning are somewhat close to each other. On top of this BERT layer, I will add two dense layers
 that are there to learn the classification task. I'll explain the training procedure, and the interest of using 
 a pretrained layer.
 
@@ -28,7 +28,7 @@ trying to create features form the tweets, and then learning from these features
 are features of the tweets that are not explicit in the tweets, like the mean word length of a tweet for 
 example. For this reason I will call the features meta-data in the following.
 
-I will later explain how to combine the bert based model and the meta-data based classifiers to try to improve 
+I will later explain how to combine the BERT based model and the meta-data based classifiers to try to improve 
 the overall performance of the model. To do so, I will briefly explain a few approaches and 
 develop a little more of the "Stacking" strategy I have used.
 
@@ -41,8 +41,8 @@ before it is used in the machine learning models.
 ## Table of content
 1. [Data & metrics](#Data)
 2. [Classification using meta-data only](#meta-data_clf)
-3. [Classification using the pretrained Bert model](#Bert)
-4. [Combining the bert model with meta-data based model](#Combine)
+3. [Classification using the pretrained BERT model](#Bert)
+4. [Combining the BERT model with meta-data based model](#Combine)
 5. [Inegrate the whole model into pipeline](#Pipeline)
 6. [Conclusion](#Conclusion)
 
@@ -1044,7 +1044,7 @@ Here again we can see that the features with high contribution (positive or nega
 with a high permutation importance: For example, here it is true for "word_count" and "char_count".
 
 
-## Classification using the pretrained Bert model  <a name='Bert'></a>
+## Classification using the pretrained BERT model  <a name='Bert'></a>
 
 In this section I will present how I used the BERT model to classify the tweets. As I mentioned earlier,
 the BERT model is a machine learning model that will map every tweet to a 768-dimensional vector. This 
@@ -1099,8 +1099,8 @@ Bert_model = KerasClassifier(build_bert_model)
  
  You'll notice that I use the class MyModel in the code. This is a custom version of tf.Keras.Model that allows me 
  to train the model the way I want. In particular, it allows me to check whether there exists a saved model, 
- in which case it simply loads it. Otherwise, it goes to the training of the two dense layers (and only them) I have added on top of the bert layer 
- by freezing the bert layer. Then it goes to fine-tuning where I unfreeze the bert layer and train the whole model for a few epochs.
+ in which case it simply loads it. Otherwise, it goes to the training of the two dense layers (and only them) I have added on top of the BERT layer 
+ by freezing the BERT layer. Then it goes to fine-tuning where I unfreeze the BERT layer and train the whole model for a few epochs.
  
  ```python
  class MyModel(K.Model):
@@ -1109,8 +1109,8 @@ Bert_model = KerasClassifier(build_bert_model)
     - fit() method: modified so that, if there is
         a saved model, then load it. Otherwise, train the model in two steps:
 
-        1. Freeze the Bert layer and train only the top layer over 'epochs1' epochs
-        2. Unfreeze the Bert layer, and fine-tune the whole model over 'epochs2' epochs
+        1. Freeze the BERT layer and train only the top layer over 'epochs1' epochs
+        2. Unfreeze the BERT layer, and fine-tune the whole model over 'epochs2' epochs
 
         In the case where the model is trained, the fit method returns the two histories
 
@@ -1273,7 +1273,7 @@ Finally, in order to have a fully functioning model, I add the cleaning function
 as a transformer before my BERT based model,
 
 ```python
-# Bert classifier pipeline
+# BERT classifier pipeline
 
 def clean_text(X):
     X = pd.Series(X)
@@ -1519,7 +1519,7 @@ not (at a given position of the sentence), but it can't "twice as present" than 
 It is therefore not so surprising that the weights (in the above table) and the contribution scores (see the highlighted text above) are similar. 
 
 
-## Combining the Bert model with meta-data based model <a name='Combine'></a>
+## Combining the BERT model with meta-data based model <a name='Combine'></a>
 
 In this section I will show a way of combining two model that work on two different type of data, in such a way that 
 the combination of these models leads to a better model than each of the model separately. 
@@ -1718,7 +1718,7 @@ metaData_clf = Pipeline([('preprocessor', preprocessor),
 
 The BERT pipeline is defined as (see also Figure 9.),
 ```python
-# Define the Bert model pipeline that takes a data frame as input
+# Define the BERT model pipeline that takes a data frame as input
 
 Bert_model = KerasClassifier(build_bert_model)
 
