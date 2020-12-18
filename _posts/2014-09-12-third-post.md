@@ -1677,7 +1677,7 @@ class AddFeaturesTransformer(skl.base.BaseEstimator, skl.base.TransformerMixin):
         # count ngrams in target classes
         X = self.ngram_counter.transform(X, column=column)
         # compute de difference between ngrams in disasters and mentions not in disasters
-        X[f"difference_{self.n}-grams_count"] = X_train[f"count_{self.n}-grams_in_disaster"] - X_train[f"count_{self.n}-grams_in_ndisaster"]
+        X[f"difference_{self.n}-grams_count"] = X[f"count_{self.n}-grams_in_disaster"] - X[f"count_{self.n}-grams_in_ndisaster"]
         
         return X
     
