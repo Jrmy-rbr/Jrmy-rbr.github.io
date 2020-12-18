@@ -1747,7 +1747,72 @@ This final model can be trained as a normal model even though internally a lot o
 final_clf.fit(X_train, y_train)
 ```
 
-**Look at performance**
+We can look at the final score of the model:
+```python
+y_val_pred = final_clf.predict(X_val2)
+
+# validation score
+print("\nValidation scores:\n",
+      "precision={:.2f}".format(skl.metrics.precision_score(y_true=y_val, y_pred=y_val_pred)),
+      "recall={:.2f}".format(skl.metrics.recall_score(y_true=y_val, y_pred=y_val_pred)),
+      "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_val, y_pred=y_val_pred))
+      )
+```
+<blockquote>
+  Validation scores:<br>
+ precision=0.87 recall=0.79 f1=0.83
+</blockquote>
+
+The score is essentially the same as for the BERT model alone. As expected there was no improvement due to 
+the combination of the models. Now, let us see what are the tweets the model got wrong.
+```python
+# Look at the tweets where the model was wrong
+
+indices = [i for i in range(len(y_val2)) if y_val_pred[i] != y_val2.iloc[i]]
+
+end = 20
+
+for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indices):
+    print(f'pred = {y_val_pred[idx]}', f'true = {y_val2.iloc[idx]}  ', tweet)
+```
+<blockquote>
+pred = 0 true = 1   @todd_calfee so @mattburgener wanted to see that info on blight u got
+pred = 0 true = 1   I WAS PEACEFULLY SITTING IN MY ROOM AND I HEARD THIS LOUD BANG OF SOMETHING FALLING
+pred = 0 true = 1   TodayÛªs storm will pass; let tomorrowÛªs light greet you with a kiss. Bask in this loving warmth; let your soul return to bliss.
+pred = 0 true = 1   @TheHammers_ @tonycottee1986 alsowhat if some of the 1st team players got injured?Then Bilic would get slated for playing themhe can't win
+pred = 0 true = 1   #hot  Funtenna: hijacking computers to send data as sound waves [Black Hat 2015] http://t.co/J2aQs5loxu #prebreak #best
+pred = 1 true = 0   Haley Lu Richardson Fights for Water in The Last Survivors (Review) http://t.co/oObSCFOKtQ
+pred = 0 true = 1   My precious olive tree lost this battle...another crazy windstorm in #yyc! @weathernetwork http://t.co/N00DVXEga2
+pred = 0 true = 1   I can probably skip on these basic life maintenance things for a few days. (cut to burning buildings people screaming in the streets)
+pred = 0 true = 1   US Navy Sidelines 3 Newest Subs - http://t.co/guvTIzyCHE: DefenseNews.comUS Navy Sidelines 3 Newest SubsD... http://t.co/SY2WhXT0K5 #navy
+pred = 1 true = 0   One thing you can be sure of. There will never be bush fires in Scotland as the ground is always soaking wet????
+pred = 0 true = 1   @SophieWisey I couldn't. #mudslide
+pred = 0 true = 1   Still rioting in a couple of hours left until I have to be up for class.
+pred = 0 true = 1   The Dress Memes Have Officially Exploded On The Internet http://t.co/3drSmxw3cr
+pred = 0 true = 1   Damn that sinkhole on sunset????
+pred = 0 true = 1   627% but if they had lower striked than 16 I would have gone even further OTM. This could really fall off a cliff.
+pred = 0 true = 1   Going back to Gainesville will be the death of me
+pred = 1 true = 0   #landslide while on a trip in #skardu https://t.co/nqNWkTRhsA
+pred = 0 true = 1   Imagine a room with walls that are lava lamps.
+pred = 0 true = 1   Is it seclusion when a class is evacuated and a child is left alone in the class to force compliance?  #MoreVoices
+pred = 0 true = 1   You can never escape me. Bullets don't harm me. Nothing harms me. But I know pain. I know pain. Sometimes I share it. With someone like you.
+</blockquote>
+
+We have here the 20 first tweets of the validation set where the model was "wrong" according to their target label. Let us have a look to the 
+three first of them:
+1. For the first tweet it is hard to say without more context, but I personally think this should not be considered as a disastrous tweet. Still, 
+the label of this tweet is $$1$$ which means that whoever made the data set considered that this tweet was talking about a disaster.
+2. The second tweet talk about a loud noise of some object falling on the floor. Without more context this is hardly a disaster, but once again 
+it is labeled as a disaster for some reason.
+3. The third seems looks like lyrics of a song, which again, despite the presence of the word "storm", should not be classified as 
+a disaster but is labeled as such.
+
+I'll let you make your own opinion on the other examples, but it seems to me that for the majority of them, the labeling is either wrong
+or the tweet is sufficiently vague and context dependent so that it could be both about a disaster or not. This leads me to think 
+that there is a substantial fraction of the tweets that have been mislabeled. Note that this mislabeling not only affects the evaluation 
+of the model, but also its training. If the fraction of mislabeled tweets is sufficiently high 
+this might prevent any model to get a better score than some limit score. To remedy this problem, 
+one would need to go through the whole data set to relabel the tweets properly.
 
 ## Conclusion <a name='Conclusion'></a>
 
