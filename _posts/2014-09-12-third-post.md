@@ -166,9 +166,9 @@ possible outcome of a model.
   </center>
   <br>
   We can define what 
-  the recall and precision are using this example. The recall (or recall score) is the fraction of green dots that are in the 
-  circle (ie correctly classified): In this example it would be $$100\%$$ since all the green dots are in the 
-  circle. The precision is the fraction of dots in the circle that are green: Here it would be less than $$50\%$$ since most of the dots in the 
+  the recall and precision are using the example of Figure 3. The recall (or recall score) is the fraction of green dots that are in the 
+  circle (ie correctly classified): In Figure 3. it would be $$100\%$$ since all the green dots are in the 
+  circle. The precision is the fraction of dots in the circle that are green: In Figure 3. it would be less than $$50\%$$ since most of the dots in the 
   circle are red. 
   
   <center>
@@ -176,7 +176,7 @@ possible outcome of a model.
   figure the recall less than 50%, while the precision is 100%" %} 
   </center>
   <br>
-  Ideally, we would like a model to have a high recall **and** a high precision. In order to deal 
+  Ideally, we would like a model to have a high recall **and** a high precision. In order to deal with
   a unique number, one can aggregate these two metrics into a single one. The f1 score is such an aggregation of 
   the recall and the precision. In particular the f1 score is defined as being the harmonic mean of the recall and the precision, ie
   if we call the recall $$R$$ and the precision $$P$$, then the f1 score is defined as,
@@ -201,8 +201,8 @@ possible outcome of a model.
   $$f1 = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
   
   Moreover, the f1 score is not very sensitive to imbalanced data 
-  (one class of the classification being more represented in the data than the other, like in Figure 1.). 
-  Some metrics are quite sensitive to an imbalanced data set, like the [accuracy](https://www.wikiwand.com/en/Accuracy_and_precision#/In_binary_classification).
+  (one class of the classification being more represented in the data than the other, like in Figure 1.), 
+  as opposed to some other metrics, like the [accuracy](https://www.wikiwand.com/en/Accuracy_and_precision#/In_binary_classification).
   
 ### Cleaning process
 
@@ -221,24 +221,24 @@ becomes
 >  .  @ norwaymfa  # bahrain police had previously died in a road accident they we are not killed by explosion url 
 
 In these two examples, we see that all capital letter have been set to lower case fonts, punctuation has been separated from 
-words, contraction (eg. can't, shouldn't...) are expanded (cannot, should not...), the '@' symbol and the '#' symbol are also 
-separated from words. Moreover, our modification should include some common typo corrections, split some word glued together
+the words, contraction (eg. can't, shouldn't...) are expanded (cannot, should not...), the '@' symbol and the '#' symbol are also 
+separated from the words. Moreover, our modification should include some common typo corrections, split some word glued together
 (eg 'autoaccidents' -> 'auto accidents'), etc.
 
 But how do we know what transformation to make, which typos to correct, and which "glued words" to split?
 
-The strategy here is to use an embedding model (like GloVe or FastText) or a list of vocabulary that already exists, and see how many words in 
-the tweets can be found in the embedding or the vocabulary list. For the following we define the text coverage and the vocabulary coverage as follows:
+The strategy here is to use an embedding model (like GloVe or FastText) or a vocabulary list that already exists, and see how many words in 
+the tweets can be found in the embedding or the vocabulary list. Let me now define the "text coverage" and the "vocabulary coverage" as follows:
 - vocabulary coverage: It is the fraction of **unique** words of the text (the tweets) that can be found in the embedding or vocabulary list.
 - text coverage: It is the fraction of (**not necessarily unique**) words of the text (the tweets) that can be found in the embedding or vocabulary list.
 
 For example, let us say that we look at the following text: "The first President of the United States is GeorgeWashington". 
-The 8 unique words in this text are (we lower case all word for simplicity): "the", "first", "president", "of", "united", "states", "is", "georgewashington"
+The 8 unique words in this text are (we lower case all word for simplicity): "the", "first", "president", "of", "united", "states", "is", "georgewashington".
 Let us assume that the vocabulary list we use contains the following words: "the", "first", "president", "of", "united", "states", "is", "george", "washington". Among the 8 unique words of the text, 7 can be found in the vocabulary list, since "georgewashingtion" is not in this list. Therefore, 
 the vocabulary coverage in this example is $$7/8 = 0.875$$. On the other hand, there are 9 words in the text (since the word "the" is repeated), and 8 of them 
 are in the vocabulary list, so the text coverage is $$8/9 \approx 0.89$$.
 
-The goal of the cleaning procedure will be to transform the text so that the text and the vocabulary coverage become as close as possible to 1. In the above example, one only needs to split "georgewashington" into "george washington" in order to make both the text coverage and vocabulary coverage equal to 1. To do so, 
+The goal of the cleaning procedure will be to transform the text so that the text and the vocabulary coverage become as close as possible to $$1$$. In the above example, one only needs to split "georgewashington" into "george washington" in order to make both the text coverage and vocabulary coverage equal to $$1$$. To do so, 
 we need to find all the words in the text that are not in the vocabulary list, sort them from the most frequent to the least frequent, and make the necessary changes in the cleaning function so that the text coverage and vocabulary coverage increase. You can find some code about this cleaning process in the section 4 of [this notebook on Kaggle](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert).
 
 Personally, I merely reuse the cleaning function created by the author of the above mentioned notebook on Kaggle. I modified this function so that it runs faster 
@@ -248,16 +248,16 @@ You can find my cleaning function on my [own notebook]().
 ### Feature extraction: adding meta-data
 
 We will now see that from the raw tweet one can extract some features that are not explicit in the text body (here the tweets). 
-This meta-data can be used for checking that the training set and the test set we have the same statistics. Indeed,
+This meta-data can be used for checking that the training set and the test set have the same statistics. Indeed,
 if this weren't the case, then there are chances that the learning on the training set poorly generalizes on the test set. On the 
 contrary, if they have similar statistics for several of these features then one can be more confident that the model 
 will give good results on the test set. It is therefore a good sanity check to do before even starting to work on the model.
 
-On the other hand, the statistics of these feature might be slightly different for the tweets that speak about disasters compared to the ones that do not.
+On the other hand, the statistics of these features might be slightly different for the tweets that speak about disasters compared to the ones that do not.
 If this is the case, then one could use this meta-data and leverage these differences in the statistics to develop a model classifying the tweets.
 
-I found this idea interesting and so, as a first step, I tried to classify the tweets using the meta data only, and see how I can go with this. I will
-develop more about this the models I used for that in the next section. Let me now tell you what features I have extracted from the tweets. 
+I found this idea interesting and so, let us first try to classify the tweets using the meta data only, and see how I can go with this. I will
+develop more about the models I used for that in the next section. Let me now tell you what features I have extracted from the tweets. 
 Several of these features are presented in this [Kaggle notebook](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert), 
 and others have been added by myself. In total, I have extracted 15 features:
 1. The number of hashtags of a tweet.
@@ -311,8 +311,8 @@ X_train = mentionCounter.fit_transform(X_train, y_train, column='text')
 X_val = mentionCounter.transform(X_val, column='text')
 ```
 The code for the definition of the CountMentionInClass class can be found in the MyClasses.py file [here]().
-By splitting the data set before adding the features, and by using transformers as shown above, allows to reduce the risk 
-of a label leakage. It has the additional advantage that code written like this can 
+Splitting the data set before adding the features, and by using transformers as shown above, allows to reduce the risk 
+of a label leakage. It has the additional advantage that the code written like this can 
 easily be included into a pipeline as we will see later in this post.
 
 
@@ -325,7 +325,7 @@ important for the model. Then I will present a method that allows to interpret a
 ie we will try to answer the following question: Given a tweet, why did the model "decided" to classify it the way it did?
 
 In both cases we will use X_train (shape=(5709, 18)), y_train as training data, and we will use 
-X_val (shape=(1904, 18)), y_val for to assess the model. We will consider that all 
+X_val (shape=(1904, 18)), y_val for assessing the model. We will consider that all 
 the meta-data features have already been added to this training data. By running the following
 ```python
 X_val.head(3)
@@ -429,8 +429,7 @@ we get,
 As you can see there are 18 columns. The first two were already present in the data set[^1], then follows the cleaned tweets, and finally the 15 added features.
 For the classification we will use the first column and the 15 added features, ie the only column I don't use are the tweets and their cleaned version.
 
-[^1]: Note that I removed the location column from the data set. This is because there are too many unique locations, which makes this column 
-not useful for the classification.
+[^1]: Note that I removed the location column from the data set. This is because there are too many unique locations, which makes this column not useful for the classification.
 
 ### Random Forest
 
@@ -1758,7 +1757,7 @@ print("\nValidation scores:\n",
       "f1={:.2f}".format(skl.metrics.f1_score(y_true=y_val, y_pred=y_val_pred))
       )
 ```
-<blockquote>
+<blockquote style="font-family: NewCM, Mono, sans serif;">
   Validation scores:<br>
  precision=0.87 recall=0.79 f1=0.83
 </blockquote>
@@ -1775,7 +1774,7 @@ end = 20
 for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indices):
     print(f'pred = {y_val_pred[idx]}', f'true = {y_val2.iloc[idx]}  ', tweet)
 ```
-<blockquote>
+<blockquote style="font-family: NewCM, Mono, sans serif;">
 pred = 0 true = 1   @todd_calfee so @mattburgener wanted to see that info on blight u got<br>
 pred = 0 true = 1   I WAS PEACEFULLY SITTING IN MY ROOM AND I HEARD THIS LOUD BANG OF SOMETHING FALLING<br>
 pred = 0 true = 1   TodayÛªs storm will pass; let tomorrowÛªs light greet you with a kiss. Bask in this loving warmth; let your soul return to bliss.<br>
@@ -1818,7 +1817,7 @@ one would need to go through the whole data set to relabel the tweets properly.
 
 Let me summarize all we have seen in this post.
 First, I have presented the data set, and how to clean it thanks to the vocabulary coverage with respect to 
-existing word embedding library like Word2Vec. I then showed that we can extract from the tweets some special features that can 
+existing vocabulary list. I then showed that we can extract from the tweets some special features that can 
 be of interest. I then showed two simple models that use these newly created features to classify the tweets. I explained 
 what was features importance and that it can be used to select the best features among the one we created. Not only that, but I went a bit further 
 in the explanation of the model thanks to the shap library. This further allows to check that the model makes sense, and understand why 
