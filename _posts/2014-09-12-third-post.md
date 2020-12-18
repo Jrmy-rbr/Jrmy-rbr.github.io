@@ -497,8 +497,8 @@ Printing the f1 score of the training set can be useful: If it is too high compa
 Overfitting can hurt the performance of the data, so it is important to detect it. Here, the training score is 0.86 while the validation score is 0.67. 
 There is probably some overfitting here. I suspect that this is due to the added features 10, 11, 13, and 14, which by construction 
 "memorize" some text specific of the training set. It would be worth exploring this further to see whether the performance of the model can be improved.
-However, for the purpose of this blog post, I won't do that. Instead, I'll move on to the model explanation, which can actually be part of the required work for 
-improving the model and reducing the overfitting. Indeed, Model explanation can is as a tool meant to diagnose issues with the model. 
+However, for the purpose of this post, I won't do that. Instead, I'll move on to the model explanation, which can actually be part of the required work for 
+improving the model and reducing the overfitting. Indeed, Model explanation is a tool meant to diagnose issues with the model. 
 
 Besides, it can also be used to justify the "decision" made by the model for any given example provided as input. You might want to do that 
 to convince yourself, or maybe to convince others, that the model is doing something that makes sense, and that it can therefore be trusted.
@@ -758,7 +758,7 @@ After running the above code we get the following table.
 We see that for this model, the three most important features are "mean_word_length", "keyword", "difference_2-grams_count". 
 The weights associated to each feature is the amount by which the performance of the model drops.
 
-The above tells us how important each feature is for the model, by looking at the whole training set. There are at least two pieces 
+The above tells us how important each feature is for the model, by looking at the whole validation set. There are at least two pieces 
 of information on which it says nothing: It does not allow to explain the predictions of the model for an individual sample of the data set, and 
 does not tell in which direction a given feature influences the prediction, it only says whether it will have a big influence.
 Eli5 gives some methods to explain the model with these two extra pieces of information. However, because of the one hot encoding,
@@ -772,8 +772,8 @@ is a concept that has been developed in the context of game theory. So a priori
 it has very little to do with model explanation. The Shapley value would deserve a blog post on its own,
 but in short, the Shapley value is the solution to how to share profit among collaborator based on
 a notion of "merit". The notion of merit can be given a precise definition in this game theoretic
-framework, but it roughly says that if an individual contributes more he should get a larger share of the profit.
-We can already see some analogy with a "contribution score" of a feature. But you might wonder
+framework: It roughly says that if an individual contributes more he should get a larger share of the profit.
+We can already see some analogy with what we intuitively think a "contribution score" of a feature should do. But you might wonder
 what is the "profit" in our context? It's actually the difference between the predicted probability 
 given by our model on a given example and a base value which can be thought of the probability 
 the model would predict if it were not given any features. Let us see an example for the following sample,
@@ -793,7 +793,7 @@ Without diving into how to use the shap library, here is the output we get,
 
 You see that each feature is assigned to a score (positive or negative) depending on the value taken by this feature. The 
 sum of all the Shapley values should be equal to the difference between the base value and the predicted probability. When a score is 
-negative (in blue) it tends to decrease the predicted probability, and vice versa. As expected, we can see that the features with the largest (in absolute value)
+negative (in blue) it tends to decrease the predicted probability, and vice versa. As expected, we can see that the features with the largest (positive or negative)
 Shapley value often correspond to the most important features according to the permutation importance: For example, "mean_word_length" has 
 the second largest Shapley value, and it also has the second highest permutation importance. Of course the Shapley values will change for each 
 sample, since each of them has different feature values. To make sure that there really is a correspondence between permutation importance and
@@ -810,7 +810,7 @@ simply show the f1 score of this new model.
 
 All the remark made in the previous section apply here too. The main difference is that this model seems a bit 
 better, and seems to overfit a little less. One thing that is important though, is that for this model the scaling of the numerical values 
-in the data preparation step is more important, so it is crucial not forget this step when using logistic regression.
+in the data preparation step is more important, so it is crucial not to forget this step when using logistic regression.
 
 ### Model explanation
 
@@ -1044,7 +1044,7 @@ with a high permutation importance: For example, here it is true for "word_count
 
 ## Classification using the pretrained BERT model  <a name='Bert'></a>
 
-In this section I will present how I used the BERT model to classify the tweets. As I mentioned earlier,
+In this section I will present how to use the BERT model to classify the tweets. As I mentioned earlier,
 the BERT model is a machine learning model that will map every tweet to a 768-dimensional vector. This 
 vector can be seen as an abstract representation of the meaning of the tweet. In particular, two semantically similar
 tweets should be represented by two vectors that are close to each other. In other words, the BERT model 
@@ -1342,7 +1342,7 @@ for which we can measure an "importance" or a "contribution score". Fortunately 
 with solutions to explain a model like this one. In particular, I will present a tool from eli5 (again) that allows to explain 
 models working on text data. The tool is simply called [TextExplainer](https://eli5.readthedocs.io/en/latest/tutorials/black-box-text-classifiers.html).
 
-Let me explain quickly what this tool does. For that let me state the obvious: There very simple models that can be 
+Let me explain quickly what this tool does. For that let me state the obvious: There are very simple models that can be 
 very easily explained, eg linear models are easily explained by their sets of coefficients. However, these simple models 
 are limited. On the other hand, more complex model are more powerful but very hard to interpret. The idea is then to locally approximate 
 complex models by simple ones, and then interpret the simple ones (see Figure 7 from [[RSG]](#RSG)). This explanation algorithm is called
