@@ -455,8 +455,7 @@ This allows us to quickly refer to the categorical data or to the numerical data
 simple. We will rescale all the numerical feature, so that their standard deviation equals 1[^2]. For the categorical feature
 we need to encode them. For that, I will use the [OneHotEncoder](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing-categorical-features) from scikit-learn.
 
-[^2]: This step is not necessary for a tree based model like the Random Forest since they are not sensitive to scaling, 
-but it is a good habit to get, so I choose to do it anyways. In all cases, I'll have to do that for the Logistic Regression in the next section.
+[^2]: This step is not necessary for a tree based model like the Random Forest since they are not sensitive to scaling, but it is a good habit to get, so I choose to do it anyways. In all cases, I'll have to do that for the Logistic Regression in the next section.
 
 ```python
 # Define the scaling and the encoding
