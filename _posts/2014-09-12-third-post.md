@@ -1780,7 +1780,7 @@ for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indic
 By running the above code we essentially get (up to formatting) the following:
 
 | prediction | true | tweet |
-|:-------|:--------|:---------------|
+|:-------:|:--------:|:---------------|
 | 0 | 1 |  @todd_calfee so @mattburgener wanted to see that info on blight u got |
 | 0 | 1 |  I WAS PEACEFULLY SITTING IN MY ROOM AND I HEARD THIS LOUD BANG OF SOMETHING FALLING |
 | 0 | 1 |  TodayÛªs storm will pass; let tomorrowÛªs light greet you with a kiss. Bask in this loving warmth; let your soul return to bliss.|
