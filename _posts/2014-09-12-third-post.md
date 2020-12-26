@@ -1777,7 +1777,6 @@ end = 20
 for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indices):
     print(f'pred = {y_val_pred[idx]}', f'true = {y_val2.iloc[idx]}  ', tweet)
 ```
-<blockquote style="font-family: NewCM, Mono, sans serif;">
  | pred | true | tweet |
 |:-------|:--------|:---------------|
 |pred = 0 | true = 1 |  @todd_calfee so @mattburgener wanted to see that info on blight u got |
@@ -1800,7 +1799,6 @@ for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indic
 |pred = 0 | true = 1 |  Imagine a room with walls that are lava lamps. |
 |pred = 0 | true = 1 |  Is it seclusion when a class is evacuated and a child is left alone in the class to force compliance?  #MoreVoices |
 |pred = 0 | true = 1 |  You can never escape me. Bullets don't harm me. Nothing harms me. But I know pain. I know pain. Sometimes I share it. With someone like you. |
-</blockquote>
 
 We have here the 20 first tweets of the validation set where the model was "wrong" according to their target label. Let us have a look to the 
 three first of them:
