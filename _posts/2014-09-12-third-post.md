@@ -1777,13 +1777,9 @@ end = 20
 for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indices):
     print(f'pred = {y_val_pred[idx]}', f'true = {y_val2.iloc[idx]}  ', tweet)
 ```
+From the above code we get the following
 
-| 1 | 2 |
-|:--|:-:|
-| 2 | 3 |
-
-
- | pred | true | tweet |
+| prediction | true | tweet |
 |:-------|:--------|:---------------|
 |pred = 0 | true = 1 |  @todd_calfee so @mattburgener wanted to see that info on blight u got |
 |pred = 0 | true = 1 |  I WAS PEACEFULLY SITTING IN MY ROOM AND I HEARD THIS LOUD BANG OF SOMETHING FALLING |
