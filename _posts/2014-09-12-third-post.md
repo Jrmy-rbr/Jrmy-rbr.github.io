@@ -1337,7 +1337,7 @@ This model clearly beats the previous two models. But is it as interpretable as 
 
 ### Model explanation
 
-Let us try to interpret the model. The issue here compared to the previous models, is that we don't have a fix number of identifiable features
+Let us try to interpret the model. The issue here compared to the previous models, is that we don't have a fixed number of identifiable features
 for which we can measure an "importance" or a "contribution score". Fortunately some smart people have already come up 
 with solutions to explain a model like this one. In particular, I will present a tool from eli5 (again) that allows to explain 
 models working on text data. The tool is simply called [TextExplainer](https://eli5.readthedocs.io/en/latest/tutorials/black-box-text-classifiers.html).
@@ -1513,7 +1513,7 @@ We then get the following table.
     </table>
  
 When using text data the difference between the "contribution" and the "weight" of a word should not be very important. Indeed, a word can either be present or 
-not (at a given position of the sentence), but it can't "twice as present" than another word. 
+not (at a given position of the sentence), but it cannot be "twice as present" than another word. 
 It is therefore not so surprising that the weights (in the above table) and the contribution scores (see the highlighted text above) are similar. 
 
 
@@ -1528,28 +1528,28 @@ that the BERT based model cannot see, like "capital_word_count" since the BERT l
 
 On the other hand, there are situations where this combination of model can be useful. Typically, if the meta-data features did not come from 
 the text itself, but represented the context in which the text has been extracted, then the BERT based model alone would not 
-have anyways to access these features from the text. 
+have any ways to access these features from the text. 
 
-You should therefore read this section more as an illustration of what can be done, and how it can be done, rather than expect huge improvement 
+You should therefore read this section more as an illustration of what can be done, and how it can be done, rather than expect a huge improvement 
 in the performance of the model.
 
 The way I combine the models together is inspired by the [stacking](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html) 
 method of scikit-learn. 
-The training tof he stacking procedure has two steps:
+The training of the stacking procedure has two steps:
 1. I use the two models I have to predict the probability of being a "disaster tweet" for each 
 tweet of the training set, this gives for each of these tweets a tuple of 2 probabilities, which is essentially a point 
 in the two-dimensional plane. 
-2. I then use a third model that uses the probabilities fro the previous steps as training data
+2. I then use a third model that uses the probabilities from the previous steps as training data
 
 Then for the predictions the model runs as follows.
 1. Using the two first models predict the probability of each tweet.
-2. Using the third model and using the probabilities predicted in the first step, predict whether a tweet is about a disaster or not.
+2. Using the third model and using the probabilities predicted in the first step, predict whether a tweet is talking about a disaster or not.
 
 Let me show you how the validation data looks like with the prediction of the third model.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8. To each dot corresponds a tweet of the validation set. The position of the dot indicates the probability attributed by each of the two initial models (BERT and Forest) that the tweet speaks about a disaster. The color of the dot indicates the true classification of the dot (1=disaster, 0=not disaster). The background color indicates the probability 
- that the final model attributes to each region of the graph. The bluer, the less likely (according to the model) the tweets in this region are to speak of a disaster." %} 
+ that the final model attributes to each region of the graph. The bluer, the less likely (according to the model) the tweets in this region are to speak about a disaster." %} 
   </center>
   <br>
   
@@ -1574,7 +1574,7 @@ A pipeline is a chain of processing steps for the data, the last step often bein
 a series of steps called "transformers" before the model. They allow processing and preparing the data. The use of a series of transformers makes
 the code readable and less prone to errors. We have already seen an example of transformers in the feature extraction section. As I have explained this section, 
 transformers are useful to avoid label leakage that would make the model look better than it really is. Pipelines are a natural way of 
-chaining these transformers and the model. Pipelines also simply the deployment of the model.
+chaining these transformers and the model. Pipelines also simplify the deployment of the model.
 
 The downside of using pipelines, is that they can make the model explanation more convoluted. That is one of the reasons why in this post I have separately 
 talked about data preparation, the models, their explanations and interpretations, and only now about pipelines.
@@ -1607,7 +1607,7 @@ Cleaner_text = skl.preprocessing.FunctionTransformer(clean_text)  # This is the 
 ```
 
 In the meta-data based model I use a feature additioner transformer. This transformer adds features to the entry data frame as I explained in a previous section. 
-This transformer is more involved than the previous one, so I need to create a subclass of the "base.TransformerMixin" class from scikit-learn.
+This transformer is more involved than the previous text cleaner, so I need to create a subclass of the "base.TransformerMixin" class from scikit-learn.
 ```python
 # Transformer that will add features: "feature extraction"
 
@@ -1800,9 +1800,9 @@ We have here the 20 first tweets of the validation set where the model was "wron
 three first of them:
 1. For the first tweet it is hard to say without more context, but I personally think this should not be considered as a disastrous tweet. Still, 
 the label of this tweet is $$1$$ which means that whoever made the data set considered that this tweet was talking about a disaster.
-2. The second tweet talk about a loud noise of some object falling on the floor. Without more context this is hardly a disaster, but once again 
+2. The second tweet talk about a loud noise of some object falling on the floor. Without more context this does not sound like a disaster, but once again 
 it is labeled as a disaster for some reason.
-3. The third seems looks like lyrics of a song, which again, despite the presence of the word "storm", should not be classified as 
+3. The third looks like the lyrics of a song, which again, despite the presence of the word "storm", should not be classified as 
 a disaster but is labeled as such.
 
 I'll let you make your own opinion on the other examples, but it seems to me that for the majority of them, the labeling is either wrong
@@ -1818,33 +1818,32 @@ Let me summarize all we have seen in this post.
 First, I have presented the data set, and how to clean it thanks to the vocabulary coverage with respect to 
 existing vocabulary list. I then showed that we can extract from the tweets some special features that can 
 be of interest. I then showed two simple models that use these newly created features to classify the tweets. I explained 
-what was features importance and that it can be used to select the best features among the one we created. Not only that, but I went a bit further 
+what was features importance and that it can be used to select the best features among the ones I created. Not only that, but I went a bit further 
 in the explanation of the model thanks to the shap library. This further allows to check that the model makes sense, and understand why 
 the model performs the classification the way it does. Then, I showed how to use the pretrained BERT model to classify the tweets 
-directly without passing through features we add by hand. The BERT layer acting as an automatic feature extractor. We then saw that
+directly without passing through features added by hand: The features are automitacally extracted by the BERT layer. We then saw that
 even such a complicated model can be interpreted. In the end I showed that we can combine different models into a single one using 
 the stacking technique. Finally, I showed how to wrap everything into a pipeline.
 
 Is this all we can do in such a project? You might have already guessed that the answer is no. In fact, it depends on
-whether you are satisfied with the results of the model. In this post I only presented several of the important step 
-in such a project. The goal being to present a broad scope of the tools that can be used and the big step 
+whether you are satisfied with the results of the model. In this post I only presented several of the important steps 
+of such a project. The goal being to present a broad scope of the tools that can be used and the big steps 
 we take in a text classification project. But I did not explore in details the way of improving the model 
 once we reached this point. And as you can see the model gets a score of about $$83\%$$, which depending on the 
 application might or might not be enough. 
 
-Let me briefly tell you some possible ways to further improve the model. First, since the feature we added 
+Let me briefly tell you some possible ways one can further improve the model. First, since the feature I added 
 are all implicitly present in the text, I would remove the meta-data based model and use only the BERT based model, unless 
-you want to add information about the context of the tweet. Then I would try to see why the misclassified tweet are misclassified 
+you want to add information about the context of the tweets. Then I would try to see why the misclassified tweet are misclassified 
 by looking at the text explainer. Also, we have seen that several of the tweets where the model makes mistakes 
 are either quite ambiguous or they have been mislabeled. This mislabelling affects both the training and the evaluation. 
 So carefully relabelling the data set is a step that can help even though it's a tedious work. One other tedious work 
-could be to clean even more the tweets and maybe remove stop words which is something we have not done.
-The BERT model itself can be improved if, for example, instead of generating a single vector per tweet we generate 
-one vector for every word, and then let the top layer do the job. Another step that can indirectly improve the model 
-is to try and use different versions of BERT. Some are lighter than others. Even though 
-this is not likely to improve the accuracy of the model it will make it run and train faster.
+could be to clean even more the tweets and maybe remove stop words which is something I have not done.
+Another step that can indirectly improve the model is to try and use different versions of BERT. 
+There are versions that are lighter than others. Even though this is not likely to improve the accuracy 
+of the model it will make it run and train faster.
 
-In the end I would like to modify this model, and train it on a different set of data, in order to 
+In the future, I would like to modify this model, and train it on a different set of data, in order to 
 write a small app that can classify tweets into one of three categories: constructive comment, neutral and insult/offensive.
 This will be the topic of a future post.
   
