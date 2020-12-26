@@ -1777,6 +1777,12 @@ end = 20
 for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indices):
     print(f'pred = {y_val_pred[idx]}', f'true = {y_val2.iloc[idx]}  ', tweet)
 ```
+
+| 1 | 2 |
+|:--|:-:|
+| 2 | 3 |
+
+
  | pred | true | tweet |
 |:-------|:--------|:---------------|
 |pred = 0 | true = 1 |  @todd_calfee so @mattburgener wanted to see that info on blight u got |
@@ -1787,7 +1793,7 @@ for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indic
 |pred = 1 | true = 0 |  Haley Lu Richardson Fights for Water in The Last Survivors (Review) http://t.co/oObSCFOKtQ |
 |pred = 0 | true = 1 |  My precious olive tree lost this battle...another crazy windstorm in #yyc! @weathernetwork http://t.co/N00DVXEga2 |
 |pred = 0 | true = 1 |  I can probably skip on these basic life maintenance things for a few days. (cut to burning buildings people screaming in the streets) |
-|pred = 0 | true = 1 |  US Navy Sidelines 3 Newest Subs - http://t.co/guvTIzyCHE: DefenseNews.comUS Navy Sidelines 3 Newest SubsD... http://t.co/SY2WhXT0K5 |#navy |
+|pred = 0 | true = 1 |  US Navy Sidelines 3 Newest Subs - http://t.co/guvTIzyCHE: DefenseNews.comUS Navy Sidelines 3 Newest SubsD... http://t.co/SY2WhXT0K5 #navy |
 |pred = 1 | true = 0 |  One thing you can be sure of. There will never be bush fires in Scotland as the ground is always soaking wet???? |
 |pred = 0 | true = 1 |  @SophieWisey I couldn't. #mudslide |
 |pred = 0 | true = 1 |  Still rioting in a couple of hours left until I have to be up for class. |
