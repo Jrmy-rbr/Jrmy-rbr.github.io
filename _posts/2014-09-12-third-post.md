@@ -1779,27 +1779,27 @@ for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indic
 ```
 <blockquote style="font-family: NewCM, Mono, sans serif;">
  | pred | true | tweet |
-|-------|--------|---------------|
-pred = 0 true = 1   @todd_calfee so @mattburgener wanted to see that info on blight u got<br>
-pred = 0 true = 1   I WAS PEACEFULLY SITTING IN MY ROOM AND I HEARD THIS LOUD BANG OF SOMETHING FALLING<br>
-pred = 0 true = 1   TodayÛªs storm will pass; let tomorrowÛªs light greet you with a kiss. Bask in this loving warmth; let your soul return to bliss.<br>
-pred = 0 true = 1   @TheHammers_ @tonycottee1986 alsowhat if some of the 1st team players got injured?Then Bilic would get slated for playing themhe can't win<br>
-pred = 0 true = 1   #hot  Funtenna: hijacking computers to send data as sound waves [Black Hat 2015] http://t.co/J2aQs5loxu #prebreak #best<br>
-pred = 1 true = 0   Haley Lu Richardson Fights for Water in The Last Survivors (Review) http://t.co/oObSCFOKtQ<br>
-pred = 0 true = 1   My precious olive tree lost this battle...another crazy windstorm in #yyc! @weathernetwork http://t.co/N00DVXEga2<br>
-pred = 0 true = 1   I can probably skip on these basic life maintenance things for a few days. (cut to burning buildings people screaming in the streets)<br>
-pred = 0 true = 1   US Navy Sidelines 3 Newest Subs - http://t.co/guvTIzyCHE: DefenseNews.comUS Navy Sidelines 3 Newest SubsD... http://t.co/SY2WhXT0K5 #navy<br>
-pred = 1 true = 0   One thing you can be sure of. There will never be bush fires in Scotland as the ground is always soaking wet????<br>
-pred = 0 true = 1   @SophieWisey I couldn't. #mudslide<br>
-pred = 0 true = 1   Still rioting in a couple of hours left until I have to be up for class.<br>
-pred = 0 true = 1   The Dress Memes Have Officially Exploded On The Internet http://t.co/3drSmxw3cr<br>
-pred = 0 true = 1   Damn that sinkhole on sunset????<br>
-pred = 0 true = 1   627% but if they had lower striked than 16 I would have gone even further OTM. This could really fall off a cliff.<br>
-pred = 0 true = 1   Going back to Gainesville will be the death of me<br>
-pred = 1 true = 0   #landslide while on a trip in #skardu https://t.co/nqNWkTRhsA<br>
-pred = 0 true = 1   Imagine a room with walls that are lava lamps.<br>
-pred = 0 true = 1   Is it seclusion when a class is evacuated and a child is left alone in the class to force compliance?  #MoreVoices<br>
-pred = 0 true = 1   You can never escape me. Bullets don't harm me. Nothing harms me. But I know pain. I know pain. Sometimes I share it. With someone like you.<br>
+|:-------|:--------|:---------------|
+|pred = 0 | true = 1 |  @todd_calfee so @mattburgener wanted to see that info on blight u got |
+|pred = 0 | true = 1 |  I WAS PEACEFULLY SITTING IN MY ROOM AND I HEARD THIS LOUD BANG OF SOMETHING FALLING |
+|pred = 0 | true = 1 |  TodayÛªs storm will pass; let tomorrowÛªs light greet you with a kiss. Bask in this loving warmth; let your soul return to bliss.|
+|pred = 0 | true = 1 |  @TheHammers_ @tonycottee1986 alsowhat if some of the 1st team players got injured?Then Bilic would get slated for playing themhe can't win |
+|pred = 0 | true = 1 |  #hot  Funtenna: hijacking computers to send data as sound waves [Black Hat 2015] http://t.co/J2aQs5loxu #prebreak #best|
+|pred = 1 | true = 0 |  Haley Lu Richardson Fights for Water in The Last Survivors (Review) http://t.co/oObSCFOKtQ |
+|pred = 0 | true = 1 |  My precious olive tree lost this battle...another crazy windstorm in #yyc! @weathernetwork http://t.co/N00DVXEga2 |
+|pred = 0 | true = 1 |  I can probably skip on these basic life maintenance things for a few days. (cut to burning buildings people screaming in the streets) |
+|pred = 0 | true = 1 |  US Navy Sidelines 3 Newest Subs - http://t.co/guvTIzyCHE: DefenseNews.comUS Navy Sidelines 3 Newest SubsD... http://t.co/SY2WhXT0K5 |#navy |
+|pred = 1 | true = 0 |  One thing you can be sure of. There will never be bush fires in Scotland as the ground is always soaking wet???? |
+|pred = 0 | true = 1 |  @SophieWisey I couldn't. #mudslide |
+|pred = 0 | true = 1 |  Still rioting in a couple of hours left until I have to be up for class. |
+|pred = 0 | true = 1 |  The Dress Memes Have Officially Exploded On The Internet http://t.co/3drSmxw3cr |
+|pred = 0 | true = 1 |  Damn that sinkhole on sunset???? |
+|pred = 0 | true = 1 |  627% but if they had lower striked than 16 I would have gone even further OTM. This could really fall off a cliff. |
+|pred = 0 | true = 1 |  Going back to Gainesville will be the death of me |
+|pred = 1 | true = 0 |  #landslide while on a trip in #skardu https://t.co/nqNWkTRhsA |
+|pred = 0 | true = 1 |  Imagine a room with walls that are lava lamps. |
+|pred = 0 | true = 1 |  Is it seclusion when a class is evacuated and a child is left alone in the class to force compliance?  #MoreVoices |
+|pred = 0 | true = 1 |  You can never escape me. Bullets don't harm me. Nothing harms me. But I know pain. I know pain. Sometimes I share it. With someone like you. |
 </blockquote>
 
 We have here the 20 first tweets of the validation set where the model was "wrong" according to their target label. Let us have a look to the 
