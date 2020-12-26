@@ -120,7 +120,7 @@ From which we get the following output:
 As you can see the data contains 5 columns, and one of them is the target label: The target label is equal to $$1$$ whenever 
 the tweet is about a disaster, and is equal to $$0$$ otherwise. We already see that in some columns that there are some NaN values
 that we will have to take care during the cleaning phase of the data. To make sure that 
-the NaN values are only in the columns 'keyword' and 'location' we can simply count all the NaNs for each column, and we get the following.
+the NaN values are only in the columns 'keyword' and 'location' we can simply count all the NaNs for each column, and we get the following:
 
  | Feature | number of NaN |
  |:--------|:-------------:|
@@ -289,7 +289,7 @@ that can result in a label leakage (aka target leakage) which [Wikipedia defines
 > In statistics and machine learning, leakage (also data leakage, or target leakage) is the use of information in the model training process which would not be expected to be available at prediction time, causing the predictive scores (metrics) to overestimate the model's utility when run in a production environment.[1]
 Leakage is often subtle and indirect, making it hard to detect and eliminate. Leakage can cause modeler to select a suboptimal model, which otherwise could be outperformed by a leakage-free model.[1] 
 
-In order to avoid this issue, one needs to split the data set into a training set and a validation set *before* adding any features.
+In order to avoid this issue, one needs to split the data set into a training set and a validation set *before* adding any features:
 ```python
 X_train, X_val, y_train, y_val = train_test_split(data_set[['keyword','text', 'text_cleaned']], 
                                                   data_set['target_corrected'])
@@ -453,7 +453,7 @@ txt_feature = ['text_cleaned']
 
 This allows us to quickly refer to the categorical data or to the numerical data. Here, the data preparation will be extremely 
 simple. We will rescale all the numerical feature, so that their standard deviation equals 1[^2]. For the categorical feature
-we need to encode them. For that, I will use the [OneHotEncoder](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing-categorical-features) from scikit-learn.
+we need to encode them. For that, I will use the [OneHotEncoder](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing-categorical-features) from scikit-learn:
 
 [^2]: This step is not necessary for a tree based model like the Random Forest since they are not sensitive to scaling, but it is a good habit to get, so I choose to do it anyways. In all cases, I'll have to do that for the Logistic Regression in the next section.
 
@@ -520,7 +520,7 @@ on the original set. This difference is the permutation importance of the column
 Intuitively, *randomly* permuting a column basically erases all the correlations between the values of this column and the values of the target (stored in y_val). 
 In terms of information, it is as if you erased the information contained in the column. We then expect that, the more a feature (column) is important for the model, the more the model performance drops after the permutation of this feature.
 
-The operation I have described above is automatically performed by the PermutationImportance class of the library eli5.
+The operation I have described above is automatically performed by the PermutationImportance class of the library eli5:
 
 ```python
 ##### First redefine and train the Random Forest model in a way that will be accepted by the PermutationImportance class.
@@ -1054,6 +1054,7 @@ need to perform the classification of these tweets. To do so, I add, on top of t
 The BERT model has been pretrained by researchers with a ton of data. This means that I only need to train the two dense layers 
 I add on top. This can be done with much fewer data. You can find the pretrained BERT model [here](https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/).
 
+Let's now see how to use the BERT model in Python:
 
 ```python
 # Load the pretrained layer in bert_layer
@@ -1099,6 +1100,7 @@ Bert_model = KerasClassifier(build_bert_model)
  to train the model the way I want. In particular, it allows me to check whether there exists a saved model, 
  in which case it simply loads it. Otherwise, it goes to the training of the two dense layers (and only them) I have added on top of the BERT layer 
  by freezing the BERT layer. Then it goes to fine-tuning where I unfreeze the BERT layer and train the whole model for a few epochs.
+ In the following code block is the class that implements the class MyModel that I have coded:
  
  ```python
  class MyModel(K.Model):
@@ -1252,7 +1254,7 @@ Bert_model = KerasClassifier(build_bert_model)
 ```
 
 Note that when you train your model you can define a callback to, for example, save your model so that 
-next time you can simply load the model instead of retraining everything.
+next time you can simply load the model instead of retraining everything:
 
 ```python
 # This is the callback used to save the best model during training. 
@@ -1292,6 +1294,8 @@ You can then train the model. Training a model that is as big as the BERT model 
 is computationally expensive, and it is therefore a good idea to 
 train the model using GPU acceleration. Personally I did it using [Google Colaboratory](https://colab.research.google.com/).
 
+The training can be perfromed by executing the following code:
+
 ```python
 # if you have a saved model, this is enough
 Bert_clf.fit(X_train['text'],y_train)
@@ -1311,7 +1315,7 @@ Bert_clf.fit(X_train['text'],
              callbacks = [best_model]  
            )  
 ```
-As for the previous models, once the model is trained, we can print its f1-score to assess its performance.
+As for the previous models, once the model is trained, we can print its f1-score to assess its performance:
 
 ```python
 y_train_pred = Bert_clf.predict(X_train['text'])
@@ -1432,13 +1436,13 @@ the words versus bias, and the highlighted text shows the details of the contrib
  In the highlighted text we see that the words that contribute the most in the classification are "died" and "people" (you can get the numerical value of 
  the contribution of each word by hovering the words with your mouse). 
  
- We can show the importance (the weight) of each word in the text as follows.
+ We can show the importance (the weight) of each word in the text as follows:
  
  ```python
  
  te.show_weights()
  ```
-We then get the following table.
+We then get the following table:
  
  <table class="eli5-weights" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto; margin-bottom: 2em;">
         <thead>
@@ -1545,7 +1549,7 @@ Then for the predictions the model runs as follows.
 1. Using the two first models predict the probability of each tweet.
 2. Using the third model and using the probabilities predicted in the first step, predict whether a tweet is talking about a disaster or not.
 
-Let me show you how the validation data looks like with the prediction of the third model.
+Let me show you how the validation data looks like with the prediction of the third model:
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/Bert_vs_Forest_final.png" description="Figure 8. To each dot corresponds a tweet of the validation set. The position of the dot indicates the probability attributed by each of the two initial models (BERT and Forest) that the tweet speaks about a disaster. The color of the dot indicates the true classification of the dot (1=disaster, 0=not disaster). The background color indicates the probability 
@@ -1555,7 +1559,7 @@ Let me show you how the validation data looks like with the prediction of the th
   
   In the above figure we see that the final model mostly splits the space in two according to a vertical line in the middle (the white part of the background). 
   This means that the final model will essentially follow what the BERT-based model predicts. The performance should therefore be very similar to the 
-  performance of the BERT-based model. Indeed, when assessing the performance of the model we get similar results.
+  performance of the BERT-based model. Indeed, when assessing the performance of the model we get similar results:
   
  <blockquote> 
   <div style="font-family: NewCM, Mono, sans serif;">
@@ -1693,7 +1697,7 @@ Feature_additioner = AddFeaturesTransformer(column='text') # Here is the transfo
 
 ```
 
-Once the relevant transformers are defined, we can group them into a pipeline, for example we can group three transformers as follows.
+Once the relevant transformers are defined, we can group them into a pipeline, for example we can group three transformers as follows:
 ```python
 # Preprocessor pipeline
 preprocessor = Pipeline([('nan_filler', Categorical_Nan_Filler),
@@ -1714,7 +1718,7 @@ metaData_clf = Pipeline([('preprocessor', preprocessor),
                )
 ```
 
-The BERT pipeline is defined as (see also Figure 9.),
+The BERT pipeline is defined as follows (see also Figure 9.):
 ```python
 # Define the BERT model pipeline that takes a data frame as input
 
@@ -1732,7 +1736,7 @@ Bert_clf_with_col_select = Pipeline([('column_selector', Column_selector),('bert
 
 
 In the end we can group these two pipeline using the stacking technique. To do so, I have programmed my own stacking class (see code [here]()). Then, 
-in order to group the two pipelines I simply need the following.
+in order to group the two pipelines I simply need the following:
 ```python
 # Define the final classifier
 
@@ -1740,7 +1744,7 @@ final_clf = MyStackingClassifier(estimators=[('Bert_clf', Bert_clf_with_col_sele
                                 final_estimator=RandomForestClassifier(max_depth=3, class_weight='balanced'))
 ```
 
-This final model can be trained as a normal model even though internally a lot of things will happen.
+This final model can be trained as a normal model even though internally a lot of things will happen:
 ```python
 final_clf.fit(X_train, y_train)
 ```
@@ -1762,7 +1766,7 @@ print("\nValidation scores:\n",
 </blockquote>
 
 The score is essentially the same as for the BERT model alone. As expected there was no improvement due to 
-the combination of the models. Now, let us see what are the tweets the model got wrong.
+the combination of the models. Now, let us see what are the tweets the model got wrong:
 ```python
 # Look at the tweets where the model was wrong
 
@@ -1774,6 +1778,8 @@ for tweet, idx in zip(X_val2['text'].loc[y_val_pred != y_val2].iloc[:end], indic
     print(f'pred = {y_val_pred[idx]}', f'true = {y_val2.iloc[idx]}  ', tweet)
 ```
 <blockquote style="font-family: NewCM, Mono, sans serif;">
+ | pred | true | tweet |
+|-------|--------|---------------|
 pred = 0 true = 1   @todd_calfee so @mattburgener wanted to see that info on blight u got<br>
 pred = 0 true = 1   I WAS PEACEFULLY SITTING IN MY ROOM AND I HEARD THIS LOUD BANG OF SOMETHING FALLING<br>
 pred = 0 true = 1   TodayÛªs storm will pass; let tomorrowÛªs light greet you with a kiss. Bask in this loving warmth; let your soul return to bliss.<br>
