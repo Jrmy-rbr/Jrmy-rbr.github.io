@@ -1557,8 +1557,8 @@ Let me show you how the validation data looks like with the prediction of the th
   </center>
   <br>
   
-  In the above figure we see that the final model mostly splits the space in two according to a vertical line in the middle (the white part of the background). 
-  This means that the final model will essentially follow what the BERT-based model predicts. The performance should therefore be very similar to the 
+  In the above figure we see that the final model mostly splits the space in two according to line in the middle (the white part of the background). 
+  This split essentially preserves the prediction of the BERT-based model predicts. The performance should therefore be very similar to the 
   performance of the BERT-based model. Indeed, when assessing the performance of the model we get similar results:
   
  <blockquote> 
