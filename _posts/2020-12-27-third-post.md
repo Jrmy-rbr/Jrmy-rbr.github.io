@@ -6,9 +6,12 @@ layout: post
 icon: fa-briefcase
 icon-style: fas
 published: true
-hidden: true
+hidden: false
 
 ---
+
+All the code I have used for this project can be found in [this Jupyter Notebook](https://github.com/Jrmy-rbr/Text-Classification-with-BERT).
+
 
 In this blog post I will present a [Kaggle](https://www.kaggle.com/) based [NLP](https://www.wikiwand.com/en/Natural_language_processing)
 project (see the project on Kaggle [https://www.kaggle.com/c/nlp-getting-started/overview](https://www.kaggle.com/c/nlp-getting-started/overview)). The project is the following.
@@ -249,7 +252,7 @@ we need to find all the words in the text that are not in the vocabulary list, s
 
 Personally, I merely reuse the cleaning function created by the author of the above mentioned notebook on Kaggle. I modified this function so that it runs faster 
 and so that it generalizes more easily to other text data set. I do so by using the power of regular expressions more extensively. 
-You can find my cleaning function on my [own notebook]().
+You can find my cleaning function on my [own notebook](https://github.com/Jrmy-rbr/Text-Classification-with-BERT/blob/main/NLP_Twitter_final.ipynb).
 
 ### Feature extraction: adding meta-data
 
@@ -316,7 +319,7 @@ X_train = mentionCounter.fit_transform(X_train, y_train, column='text')
 # Note that the transform() method does not use any label.
 X_val = mentionCounter.transform(X_val, column='text')
 ```
-The code for the definition of the CountMentionInClass class can be found in the MyClasses.py file [here]().
+The code for the definition of the CountMentionInClass class can be found in the MyClasses.py file [here](https://github.com/Jrmy-rbr/Text-Classification-with-BERT).
 Splitting the data set before adding the features, and by using transformers as shown above, allows to reduce the risk 
 of a label leakage. It has the additional advantage that the code written like this can 
 easily be included into a pipeline as we will see later in this post.
