@@ -213,7 +213,7 @@ possible outcome of a model.
 ### Cleaning process
 
 I will now explain how to perform the cleaning process of the tweets. Indeed, text data, and in particular tweets, are too 
-messy to be used as is in a model. We need to "standardize" as much as possible the text that will be use as input 
+messy to be used as is in a model. We need to "standardize" as much as possible the text that will be used as input 
 to the model. For example, the following tweet,
 > only had a car for not even a week and got in a fucking car accident .. Mfs can't fucking drive . 
 
@@ -239,9 +239,9 @@ the tweets can be found in the embedding or the vocabulary list. Let me now defi
 - text coverage: It is the fraction of (**not necessarily unique**) words of the text (the tweets) that can be found in the embedding or vocabulary list.
 
 For example, let us say that we look at the following text: "The first President of the United States is GeorgeWashington". 
-The 8 unique words in this text are (we lower case all word for simplicity): "the", "first", "president", "of", "united", "states", "is", "georgewashington".
+The 8 unique words in this text are (we lower case all the words for simplicity): "the", "first", "president", "of", "united", "states", "is", "georgewashington".
 Let us assume that the vocabulary list we use contains the following words: "the", "first", "president", "of", "united", "states", "is", "george", "washington". Among the 8 unique words of the text, 7 can be found in the vocabulary list, since "georgewashingtion" is not in this list. Therefore, 
-the vocabulary coverage in this example is $$7/8 = 0.875$$. On the other hand, there are 9 words in the text (since the word "the" is repeated), and 8 of them 
+the vocabulary coverage in this example is $$7/8 = 0.875$$. On the other hand, there are 9 words in the text (since the word "the" appears twice), and 8 of them 
 are in the vocabulary list, so the text coverage is $$8/9 \approx 0.89$$.
 
 The goal of the cleaning procedure will be to transform the text so that the text and the vocabulary coverage become as close as possible to $$1$$. In the above example, one only needs to split "georgewashington" into "george washington" in order to make both the text coverage and vocabulary coverage equal to $$1$$. To do so, 
@@ -262,7 +262,7 @@ will give good results on the test set. It is therefore a good sanity check to d
 On the other hand, the statistics of these features might be slightly different for the tweets that speak about disasters compared to the ones that do not.
 If this is the case, then one could use this meta-data and leverage these differences in the statistics to develop a model classifying the tweets.
 
-I found this idea interesting and so, let us first try to classify the tweets using the meta data only, and see how I can go with this. I will
+I find this idea interesting so let us first try to classify the tweets using the meta data only. I will
 develop more about the models I used for that in the next section. Let me now tell you what features I have extracted from the tweets. 
 Several of these features are presented in this [Kaggle notebook](https://www.kaggle.com/gunesevitan/nlp-with-disaster-tweets-eda-cleaning-and-bert), 
 and others have been added by myself. In total, I have extracted 15 features:
@@ -295,7 +295,7 @@ that can result in a label leakage (aka target leakage) which [Wikipedia defines
 > In statistics and machine learning, leakage (also data leakage, or target leakage) is the use of information in the model training process which would not be expected to be available at prediction time, causing the predictive scores (metrics) to overestimate the model's utility when run in a production environment.[1]
 Leakage is often subtle and indirect, making it hard to detect and eliminate. Leakage can cause modeler to select a suboptimal model, which otherwise could be outperformed by a leakage-free model.[1] 
 
-In order to avoid this issue, one needs to split the data set into a training set and a validation set *before* adding any features:
+In order to avoid this issue, one needs to split the data set into a training set and a validation set *before* adding any feature:
 ```python
 X_train, X_val, y_train, y_val = train_test_split(data_set[['keyword','text', 'text_cleaned']], 
                                                   data_set['target_corrected'])
@@ -765,7 +765,7 @@ We see that for this model, the three most important features are "mean_word_len
 The weights associated to each feature is the amount by which the performance of the model drops.
 
 The above tells us how important each feature is for the model, by looking at the whole validation set. There are at least two pieces 
-of information on which it says nothing: It does not allow to explain the predictions of the model for an individual sample of the data set, and 
+of information about which it says nothing: It does not allow to explain the predictions of the model for an individual sample of the data set, and 
 does not tell in which direction a given feature influences the prediction, it only says whether it will have a big influence.
 Eli5 gives some methods to explain the model with these two extra pieces of information. However, because of the one hot encoding,
 our model is not supported by these explainers. 
@@ -816,7 +816,7 @@ simply show the f1 score of this new model.
 
 All the remark made in the previous section apply here too. The main difference is that this model seems a bit 
 better, and seems to overfit a little less. One thing that is important though, is that for this model the scaling of the numerical values 
-in the data preparation step is more important, so it is crucial not to forget this step when using logistic regression.
+in the data preparation step is more important, so it is crucial not to forget to rescale the numerical features when using logistic regression.
 
 ### Model explanation
 
@@ -1529,7 +1529,7 @@ It is therefore not so surprising that the weights (in the above table) and the 
 
 ## Combining the BERT model with meta-data based model <a name='Combine'></a>
 
-In this section I will show a way of combining two model that work on two different type of data, in such a way that 
+In this section I will show a way of combining two models that work on two different types of data, in such a way that 
 the combination of these models leads to a better model than each of the model separately. 
 In this particular case, we should not expect a big improvement over the BERT based model. Indeed, all the meta-features are extracted from the text,
 and since the BERT based model directly uses the text, it has therefore implicit access to the meta-data features. Note that there are still some features
@@ -1563,7 +1563,7 @@ Let me show you how the validation data looks like with the prediction of the th
   </center>
   <br>
   
-  In the above figure we see that the final model mostly splits the space in two according to line in the middle (the white part of the background). 
+  In the above figure we see that the final model mostly splits the space in two according to a line in the middle (the white part of the background). 
   This split essentially preserves the prediction of the BERT-based model predicts. The performance should therefore be very similar to the 
   performance of the BERT-based model. And when assessing the performance of the model we indeed get similar results as the BERT-based model:
   
@@ -1580,9 +1580,11 @@ Validation scores:<br>
  
 ## Integrate the whole model into a pipeline <a name='Pipeline'></a>
 
-A pipeline is a chain of processing steps for the data, the last step often being the machine learning model itself. In particular, we include 
+A pipeline is a chain of processing steps for the data, the last step often being the machine learning model. When the last step is the machine learning model,
+we call this step the "estimator". In our case, the estimator is a "classifier", since the goal of the model is to classify things. 
+When an estimator is not a classifier, it is in general a "regressor". In particular, we include 
 a series of steps called "transformers" before the model. They allow processing and preparing the data. The use of a series of transformers makes
-the code readable and less prone to errors. We have already seen an example of transformers in the feature extraction section. As I have explained this section, 
+the code readable and less prone to errors. We have already seen an example of transformers in the feature extraction section. As I have explained in this section, 
 transformers are useful to avoid label leakage that would make the model look better than it really is. Pipelines are a natural way of 
 chaining these transformers and the model. Pipelines also simplify the deployment of the model.
 
@@ -1598,7 +1600,7 @@ talked about data preparation, the models, their explanations and interpretation
   <br>
 
 In the following I show the definition of some transformers for the BERT model, and then for the meta-data based model (which uses the Random Forest 
-Classifier). Then, I show how to integrate these transformers into a pipeline to which I add the machine learning model itself (The classifier). Finally, I show 
+Classifier). Then, I show how to integrate these transformers into a pipeline to which I add the machine learning model itself (the classifier). Finally, I show 
 how to combine the two pipelines into a single one with the stacking technique I have presented in a previous section. You will find all the details 
 in my [Jupyter Notebook]().
 
@@ -1855,7 +1857,7 @@ Another step that can indirectly improve the model is to try and use different v
 There are versions that are lighter than others. Even though this is not likely to improve the accuracy 
 of the model it will make it run and train faster.
 
-In the future, I would like to modify this model, and train it on a different set of data, in order to 
+In the future, I plan to modify this model, and train it on a different set of data, in order to 
 write a small app that can classify tweets into one of three categories: constructive comment, neutral and insult/offensive.
 This will be the topic of a future post.
   
