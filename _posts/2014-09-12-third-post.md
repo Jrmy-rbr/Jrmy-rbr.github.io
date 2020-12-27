@@ -18,13 +18,13 @@ model that automatically classifies tweets into the category "it speaks about a 
 "it does not speak about a disaster".
 
 To do that I will use the pretrained BERT model, created by Google, that allows to extract the meaning of words.
-What it does is that it transforms words into a 768-dimensional vectors, such that the vectors of words with similar 
+What it does is that it transforms words into 768-dimensional vectors, such that the vectors of words with similar 
 meaning are somewhat close to each other. On top of this BERT layer, I will add two dense layers
 that are there to learn the classification task. I'll explain the training procedure, and the interest of using 
 a pretrained layer.
 
 I will also use more traditional machine learning algorithms and methods to perform this task by first 
-trying to create features form the tweets, and then learning from these features. These features 
+trying to create features form the tweets, and then machine learning from these features. These features 
 are features of the tweets that are not explicit in the tweets, like the mean word length of a tweet for 
 example. For this reason I will call the features meta-data in the following.
 
@@ -35,7 +35,7 @@ develop a little more about the "stacking" strategy I use.
 I am using the occasion of this post to also explain some strategies and libraries one can use 
 to try to understand what the model is doing, and why it classifies tweets the way it does.
 
-But first things first. Let me start with presenting the data, and how one can clean the data
+But first things first. Let me start by presenting the data to you, and how one can clean the data
 before it is used in the machine learning models.
 
 ## Table of content
@@ -50,7 +50,7 @@ before it is used in the machine learning models.
 ## Data & metrics<a name='Data'></a>
 
 I use the [data](https://www.kaggle.com/c/nlp-getting-started/data) provided by Kaggle.
-To have an idea of what the data looks like, let's run the following in python.
+After downloding the data, and in order to have an idea of what the data looks like, let's run the following in python.
 
 ```python
 data_set = pd.read_csv('./train.csv')
@@ -130,8 +130,8 @@ the NaN values are only in the columns 'keyword' and 'location' we can simply co
  |text     |     0         |
  |target   |     0         |
 
-The shape of the data set is (7613,5). This means that the data set contains 7613 samples. For each of them we have 4 features and the target column.
-Let us check how many of those samples are in each class:
+The shape of the data set is (7613,5). This means that the data set contains 7613 samples (the tweets). For each of them we have 4 features and the target column.
+Let us check how many of those samples are in each class ("class" here refers to the target value):
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/count_sample_inclass.png" description="Figure 1." %} 
@@ -148,21 +148,21 @@ In order to assess the quality of the model, we need to choose a metric. The Kag
 suggests using the so called f1 score. Let us see what is this score and why it is a good metric.
 
 The f1 score is an aggregation of two other metrics called the recall and the precision.
-To explain these metrics are let us look at the following figure.
+To explain what these metrics are let us look at the following figure.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/case_description.svg" description="Figure 2." %} 
   </center>
   <br>
-The figure represents all the tweets of the data set: Each dot represents a tweet. When green, the dot represents
-a tweet talking about a disaster, otherwise it is red. The goal of the model is to automatically find the 
-tweets talking about a disaster, ie it should find the green dots. The following figure represents a
+The figure schematically represents all the tweets of the data set: Each dot represents a tweet. When green, the dot represents
+a tweet talking about a disaster, otherwise it is red. The goal of the model is to automatically recognize the 
+tweets talking about a disaster by "reading" them, ie it should be able to find the green dots. The following figure represents the
 possible outcome of a model.
 
   <center> 
     {% include image.html url="/assets/images/Kaggle:NLP-Twitter/high_recall.svg" description="Figure 3.
   The dots inside the 'circle' represent the tweets that have been classified by the model as 'tweet talking about disaster'.
-  Here the model correctly classified all the green dots, but there are many dots inside the circle are red." %} 
+  Here the model correctly classified all the green dots, but there are many dots inside the circle that are red." %} 
   </center>
   <br>
   We can define what 
@@ -200,9 +200,15 @@ possible outcome of a model.
   
   $$f1 = \frac{R+P}{2}-\frac{(R-P)^2}{2(R+P)}.$$
   
+  This allows the f1 score to better represent the quality of a model: Having a very good precision but 
+  a poor recall will be more penalized than by merely using the arithmetic mean.
+  
   Moreover, the f1 score is not very sensitive to imbalanced data 
   (one class of the classification being more represented in the data than the other, like in Figure 1.), 
   as opposed to some other metrics, like the [accuracy](https://www.wikiwand.com/en/Accuracy_and_precision#/In_binary_classification).
+  This is yet another advantage when dealing with imbalanced data, as we are doing here.
+  
+  Now that we understand the metric that we will use to assess the model, let's move on to the cleaning procedure of the data set.
   
 ### Cleaning process
 
