@@ -53,7 +53,7 @@ before it is used in the machine learning models.
 ## Data & metrics<a name='Data'></a>
 
 I use the [data](https://www.kaggle.com/c/nlp-getting-started/data) provided by Kaggle.
-After downloding the data, and in order to have an idea of what the data looks like, let's run the following in python.
+After downloading the data, and in order to have an idea of what the data looks like, let's run the following in python.
 
 ```python
 data_set = pd.read_csv('./train.csv')
