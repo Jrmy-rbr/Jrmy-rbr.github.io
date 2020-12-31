@@ -1,5 +1,5 @@
 ---
-title: "Tweets: Disaster or Not"
+title: "Detecting Disasters on Twitter!"
 subtitle: A Natural Language Processing (NLP) project using the pretrained BERT model
 author: Jeremy Ribeiro
 layout: post
