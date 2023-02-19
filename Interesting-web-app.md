@@ -15,7 +15,7 @@ Here is a list of interesting web apps I've found while spending time on the int
 - Compare the cars' CO2 emissions (including electric cars) depending on the country where the car is used, and other parameters: [Climobil](https://climobil.connecting-project.lu/)
 - Get some weather-related information on a nice map, like the temperatures, windspeed, air pressure, and a lot more: [Ventusky](https://www.ventusky.com/)
 
-### Some open source project I like
+### Some open-source projects I like
 
 - If you feel that youtube's algorithm makes you watch uninteresting and time-hogging videos, try out [Tournesol.app](https://tournesol.app/). You can use their [Firefox](https://addons.mozilla.org/en-US/firefox/addon/tournesol-extension/) or [Chrome](https://chrome.google.com/webstore/detail/tournesol-extension/nidimbejmadpggdgooppinedbggeacla) extensions to get other recommendations directly on YouTube's home page. You can also help them by comparing videos on their [website](https://tournesol.app/).
 
