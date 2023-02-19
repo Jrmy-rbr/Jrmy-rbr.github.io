@@ -12,8 +12,8 @@ Here is a list of interesting web apps I've found while spending time on the int
 ### Environment related
 
 - Check the CO2 that each country's electric production system emits: [Electricity Maps](https://app.electricitymaps.com/map)
-- Compare the cars' CO2 emissions (including electric cars) depending on the country where the car is used, and other parameters: [Climobil]
-- Get some weather-related information on a nice map, like the temperatures, windspeed, air pressure, and a lot more: [Ventusky](https://www.ventusky.com/)](https://www.ventusky.com/)
+- Compare the cars' CO2 emissions (including electric cars) depending on the country where the car is used, and other parameters: [Climobil](https://climobil.connecting-project.lu/)
+- Get some weather-related information on a nice map, like the temperatures, windspeed, air pressure, and a lot more: [Ventusky](https://www.ventusky.com/)
 
 ### Some open source project I like
 
