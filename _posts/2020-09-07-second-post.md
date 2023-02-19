@@ -1,5 +1,5 @@
 ---
-title: Uncertainty when forcasting s-curves
+title: Uncertainty when forecasting s-curves
 author: Jeremy
 layout: post
 published: true
