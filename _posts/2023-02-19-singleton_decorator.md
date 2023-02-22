@@ -242,5 +242,5 @@ def singleton(klass=None, /, *, is_final = True):
 
 
 That's it! This is (almost) everything there is to know about this decorator. 
-There is still  some small edge cases but I'll keep that for a follow-up post. But don't worry, 
+There are still some small edge cases but I'll keep that for a follow-up post. But don't worry, 
 it does not fundamentally affect the global logic of the implementation I've just described.
