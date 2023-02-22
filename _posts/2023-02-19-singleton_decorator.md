@@ -8,7 +8,7 @@ published: true
 hidden: true
 ---
 
-While coding in Python, I wanted to make a certain class become a singleton class, ie a class that can only have one instance. So I've looked around, and found some singleton decorators. For the most part, my decorated classes worked fine, but on some occasions, they did not behave as usual classes would. And the reason was that the singleton classes created with the decorator weren't classes, but callable objects that return an object of the class on which the singleton decorator was called.
+While coding in Python, I wanted to make a certain class become a singleton class, ie a class that can only have one instance. So I've looked around, and found some singleton decorators. For the most part, it worked fine, but on some occasions, the classes a created with them did not behave as usual classes would. And the reason was that the singleton classes created with these decorators weren't classes, but callable objects that return an object of the class on which the singleton decorator was called.
 
 I then wondered... What would it take for me to write a singleton decorator that makes classes that behave like normal classes (besides being a singleton)?
 Lead by curiosity, I started to draft such a singleton decorator. One of my main goals with this side project was for me to learn more about Python. In particular, I wanted to know more about how the internals of classes worked, how we can change classes' behaviors etc. It ended up being a functional singleton decorator, that any Python programmer can use if they want to (see GitHub repo [here](https://github.com/Jrmy-rbr/singleton-class-decorator)).
