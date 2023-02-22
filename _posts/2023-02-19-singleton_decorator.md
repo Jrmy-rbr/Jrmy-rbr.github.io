@@ -8,9 +8,9 @@ published: true
 hidden: true
 ---
 
-While coding in Python, I wanted to make a certain class become a singleton class, ie a class that can have only one instance. So I've looked around, and found some singleton decorators. For the most part, my decorated classes worked fine, but on some occasions, they did not behave as usual classes would. And the reason was that the singleton classes created with the decorator weren't classes, but callable objects that return an object of the class on which the singleton decorator was called.
+While coding in Python, I wanted to make a certain class become a singleton class, ie a class that can only have one instance. So I've looked around, and found some singleton decorators. For the most part, it worked fine, but on some occasions, the classes a created with them did not behave as usual classes would. And the reason was that the singleton classes created with these decorators weren't classes, but callable objects that return an object of the class on which the singleton decorator was called.
 
-I then wondered... What would it take for me to write a singleton decorator that behaves like a normal class (besides being a singleton)?
+I then wondered... What would it take for me to write a singleton decorator that makes classes that behave like normal classes (besides being a singleton)?
 Lead by curiosity, I started to draft such a singleton decorator. One of my main goals with this side project was for me to learn more about Python. In particular, I wanted to know more about how the internals of classes worked, how we can change classes' behaviors etc. It ended up being a functional singleton decorator, that any Python programmer can use if they want to (see GitHub repo [here](https://github.com/Jrmy-rbr/singleton-class-decorator)).
 
 
@@ -27,11 +27,11 @@ class SingletonClass:
             cls.instance = super().__new__(cls)
         return cls.instance
 
-    def some_methds(self): 
+    def some_method(self): 
         ...
 ```
 
-My singleton decorator essentially does this: It overwrites the `__new__` function of its input class. Reading this, you may think that an easy implementation of it would then be,
+My singleton decorator essentially does this: It overwrites the `__new__` function of its input class. Reading this, you may think that an easy implementation of such a decorator would then be,
 ```python
 def singleton(klass):
     # This is the function that will overwirete the `__new__` function of the input `klass`
@@ -47,7 +47,7 @@ def singleton(klass):
 However, with this solution, if the user wants to create a child class `ChildClass` from the initial singleton class, not only the child class will be a singleton class (and the user has no control over this), but worse, the instance of the child class and its parent class will be the same:
 
 ```python
-# this is the singleton has written above
+# this is the singleton decorator has written above
 @singleton
 class SingletonClass:
     ...
@@ -68,7 +68,7 @@ And this is basically what I have done. I've used a meta-class called `MakeSingl
 
 ## The MakeSingleton meta-class
 
-Before implementing the `MakeSingleton` meta-class I had to choose how I wanted to handle "singletoness" of child classes. I need to choose whether the child classes of a singleton class should also be singletons. I decided to let the user of the singleton decorator decide what they want.
+Before implementing the `MakeSingleton` meta-class I had to choose how I wanted to handle "singletoness" of child classes. I needed to choose whether the child classes of a singleton class should also be singletons. I decided to let the user of the singleton decorator decide what they want.
 In particular, child classes of singleton classes are not singletons by default, unless one uses the singleton decorator on them:
 ```python
 # definition of the Parent with the singleton
@@ -120,7 +120,7 @@ class MakeSingleton(type):
         # Make the singleton class if make_singleton
         if make_singleton:
             classdict["_old_new"] = old_class.__new__ if "__new__" not in classdict else classdict["__new__"]
-            classdict["__new__"] = new
+            classdict["__new__"] = new_overwrite # as defined before
             return type.__new__(cls, name, bases, classdict)
 
         # if not make_singleton, simply forward the __new__/_old_new class of the old_class to the new one.
@@ -188,7 +188,7 @@ see this as a sort of [Currying](https://en.wikipedia.org/wiki/Currying) of the 
 
 The above implementation of the singleton decorator would work for many classes. But there are some classes for which using it would cause an error. These classes are classes that use another meta-class for their creation. Examples of such classes are pydantic classes. To remedy this, I create the meta-classes `MakeSingleton` and `MakeFinalSingleton` as child classes of the meta-class initially used to create the input `klass` to the singleton decorator. 
 
-To do this I define the `__new__` functions of the `MakeSingleton` and `MakeFinalSingleton` as *separate* functions. I then create `MakeSingleton` and `MakeFinalSinglton` as classes that use these `__new__` functions, and that use `type(klass)` as their parent class, where `klass` is the input class to the singleton decorator. Note that `type(klass)` returns the meta-class used to create `klass`.
+To do this I define the `__new__` functions of the `MakeSingleton` and `MakeFinalSingleton` as **separate** functions. I then create `MakeSingleton` and `MakeFinalSingleton` as classes that use these `__new__` functions, and that use `type(klass)` as their parent class, where `klass` is the input class to the singleton decorator. Note that `type(klass)` returns the meta-class used to create `klass`.
 
 ```python
 # this is the function that will be used as a `__new__` method for `MakeSingleton`
@@ -198,7 +198,7 @@ def make_singleton__new__(meta_cls, name, bases, classdict, make_singleton: bool
     # Make the singleton class if make_singleton
     if make_singleton:
         classdict["_old_new"] = old_class.__new__ if "__new__" not in classdict else classdict["__new__"]
-        classdict["__new__"] = new
+        classdict["__new__"] = new_overwrite
         return type(meta_cls).__new__(meta_cls, name, bases, classdict)
 
     # if not make_singleton, simply forward the __new__/_old_new class from the old_class to the new one.
@@ -242,6 +242,5 @@ def singleton(klass=None, /, *, is_final = True):
 
 
 That's it! This is (almost) everything there is to know about this decorator. 
-There is still a tiny edge case due to how Python seems to work, but I'll keep that for a follow-up post where I'll 
-talk specifically about this Python weirdness, and how it affects the implementation of the decoration. But don't worry, 
-it does not affect the global logic of the implementation I've just described.
+There is still  some small edge cases but I'll keep that for a follow-up post. But don't worry, 
+it does not fundamentally affect the global logic of the implementation I've just described.
