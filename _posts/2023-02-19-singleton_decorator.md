@@ -8,7 +8,7 @@ published: true
 hidden: true
 ---
 
-While coding in Python, I wanted to make a certain class become a singleton class, ie a class that can only have one instance. So I've looked around, and found some singleton decorators. For the most part, they worked fine, but on some occasions, the classes I created with them did not behave as usual classes would. And the reason was that the singleton classes created with these decorators weren't classes, but callable objects that return an object of the class on which the singleton decorator was called.
+While coding in Python, I wanted to make a class become a singleton class, ie a class that can only have one instance. So I've looked around, and found some singleton decorators. For the most part, they worked fine, but on some occasions, the classes I created with them did not behave as usual classes would. And the reason was that the singleton classes created with these decorators weren't classes, but callable objects that return an object of the class on which the singleton decorator was called.
 
 I then wondered... What would it take for me to write a singleton decorator that makes classes that behave like normal classes (besides being a singleton)?
 Lead by curiosity, I started to draft such a singleton decorator. One of my main goals with this side project was for me to learn more about Python. In particular, I wanted to know more about how the internals of classes worked, how we can change classes' behaviors etc. It ended up being a functional singleton decorator, that any Python programmer can use if they want to (see GitHub repo [here](https://github.com/Jrmy-rbr/singleton-class-decorator)).
@@ -61,8 +61,8 @@ assert SingletonClass() is ChildClass()
 
 There are several ways for solving this issue. 
 For example, one could simply forbid inheritance for singleton classes. 
-It would work but it is not satisfactory in my opinion, because in this case singleton classes would behave somewhat differently than ordinary classes (they'd not support inheritance). Also, I do believe that this solution requires the use of [meta-classes](https://www.geeksforgeeks.org/python-metaclasses/). 
-And if I'm going to use meta-classes I might as well use them for something a bit more sophisticated than just forbidding inheritance.
+It would work but it is not satisfactory in my opinion. Indeed, a singleton classes would behave somewhat differently than ordinary classes (they'd not support inheritance). Also, I do believe that this solution requires the use of [meta-classes](https://www.geeksforgeeks.org/python-metaclasses/). 
+And if I were going to use meta-classes I would as well use them for something a bit more sophisticated than just forbidding inheritance.
 
 And this is basically what I have done. I've used a meta-class called `MakeSingleton` that takes care of overwriting the `__new__` method of the input class of my singleton decorator. 
 
@@ -108,7 +108,7 @@ I have chosen to forbid inheritance by default as I believe it's a bit safer if,
 there is an edge case I did not consider in my implementation that causes a bug in child classes. Forbidding inheritance by default prevents the user from mistakenly using a singleton class as a parent class. The user has to make a conscious choice to do so.
 
 
-Let's now see what the `MakeSingleton`` class looks like:
+Let's now see what the `MakeSingleton` class looks like:
 
 ```python
 # This is a slightly simplified version of the actual `MakeSingleton` meta-class.
@@ -188,7 +188,7 @@ see this as a sort of [Currying](https://en.wikipedia.org/wiki/Currying) of the 
 
 The above implementation of the singleton decorator would work for many classes. But there are some classes for which using it would cause an error. These classes are classes that use another meta-class for their creation. Examples of such classes are pydantic classes. To remedy this, I create the meta-classes `MakeSingleton` and `MakeFinalSingleton` as child classes of the meta-class initially used to create the input `klass` to the singleton decorator. 
 
-To do this I define the `__new__` functions of the `MakeSingleton` and `MakeFinalSingleton` as **separate** functions. I then create `MakeSingleton` and `MakeFinalSingleton` as classes that use these `__new__` functions, and that use `type(klass)` as their parent class, where `klass` is the input class to the singleton decorator. Note that `type(klass)` returns the meta-class used to create `klass`.
+To do this I define the `__new__` functions of the `MakeSingleton` and `MakeFinalSingleton` as **separate** functions. I then create `MakeSingleton` and `MakeFinalSingleton` as classes that use these `__new__` functions, and that use `type(klass)` as their parent class, where `klass` is the input class to the singleton decorator. Note that `type(klass)` returns the meta-class that has been used to create `klass`.
 
 ```python
 # this is the function that will be used as a `__new__` method for `MakeSingleton`
