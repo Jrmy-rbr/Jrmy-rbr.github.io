@@ -6,22 +6,40 @@ order: 2
 
 <p>Here you'll find a selection of my data science projects. </p>
 
-  <div class="row">
-    <div class="4u 12u$(mobile)">
-      
-      <div class="item">
-        <a href="2020/12/27/third-post.html" class="image fit"><img src="{{ 'assets/images/pic02.svg' | relative_url }}" alt="Ipsum Feugiat" /></a>
-        <header>
-          <h2>Detecting disasters on Twitter.</h2>
-          <h3>Presentation of Text classification project using the pre-trained BERT model from Google. I present the data, its cleaning, the metrics,
-          the use of some "traditional" ML algorithm through scikit-learn. I also present different ways of explaining a model. I then move on to
-          a BERT-based model through tf.keras, and techniques to interpret it (using eli5.lime.TextExplainer). I then continue by presenting a 
-            "stacking" inpired technique to combine several models. Finally, I wrap up everything into pipelines in order 
-            to have a complex model ready to use.</h3>
-        </header>
-      </div>
-      
-<!--
+<div class="row">
+  <div class="4u 12u$(mobile)">
+
+    <div class="item" overflow="auto">
+      <a href="2020/12/27/third-post.html" class="image fit"><img src="{{ 'assets/images/pic02.svg' | relative_url }}"
+          alt="Ipsum Feugiat" /></a>
+      <header>
+        <h2>Detecting disasters on Twitter.</h2>
+        <h3>Presentation of Text classification project using the pre-trained BERT model from Google. I present the
+          data, its cleaning, the metrics,
+          the use of some "traditional" ML algorithm through scikit-learn. I also present different ways of explaining a
+          model. I then move on to
+          a BERT-based model through tf.keras, and techniques to interpret it (using eli5.lime.TextExplainer). I then
+          continue by presenting a
+          "stacking" inpired technique to combine several models. Finally, I wrap up everything into pipelines in order
+          to have a complex model ready to use.</h3>
+      </header>
+    </div>
+
+    <div class="item" overflow="auto">
+      <a href="2023/04/28/singleton_decorator.html" class="image fit"><img
+          src="{{ 'assets/images/singleton_image.svg' | relative_url }}"
+          alt="code snipet using a singleton decorator" /></a>
+      <header>
+        <h2>Singleton Class Decorator</h2>
+        <h3>Here is a post presenting a singleton decorator that I made in Python. What is special about this decorator?
+          Well, it makes a class become a singleton class of course, but contrary to some other singleton decorators, my
+          decorator
+          aims at doing so while keeping all other class behaviors unchanged (think of inheritance, type checking etc.)
+        </h3>
+      </header>
+    </div>
+
+    <!--
       <div class="item">
         <a href="#" class="image fit"><img src="{{ 'assets/images/pic03.jpg' | relative_url }}" alt="Rhoncus Semper" /></a>
         <header>
